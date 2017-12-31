@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->integer('institution_id')->unsigned()->nullable();
+            $table->boolean('is_superadmin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
