@@ -18,6 +18,8 @@ class UsersTableSeeder extends Seeder
         	'email' => 'wildan.arrahman@gmail.com',
         	'is_superadmin' => 1,
         	'password' => bcrypt('w1lldone'),
+        	'created_at' => \Carbon\Carbon::now(),
+        	'updated_at' => \Carbon\Carbon::now(),
         ]);
     }
 }
