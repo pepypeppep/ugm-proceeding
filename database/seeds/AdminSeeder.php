@@ -17,6 +17,7 @@ class AdminSeeder extends Seeder
         	'name' => 'Wildan Ainurrahman',
         	'email' => 'wildan.arrahman@gmail.com',
         	'is_superadmin' => 1,
+            'institution_id' => 1,
         	'password' => bcrypt('w1lldone'),
         	'created_at' => \Carbon\Carbon::now(),
         	'updated_at' => \Carbon\Carbon::now(),
