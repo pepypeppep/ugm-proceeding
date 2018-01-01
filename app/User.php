@@ -32,5 +32,9 @@ class User extends Authenticatable
     {
         return $this->is_superadmin;
     }
+
+    public function institution(){
+        return $this->belongsTo('App\Institution');
+    }
     
 }
