@@ -17,4 +17,9 @@ class UserController extends Controller
 
 		return new UsersCollection($users);
     }
+
+    public function show(User $user)
+    {
+    	return new UsersResource($user);
+    }
 }
