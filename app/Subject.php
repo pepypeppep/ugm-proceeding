@@ -10,5 +10,5 @@ class Subject extends Model
     	return $this->belongsToMany('App\Proceeding');
     }
 
-    
+    protected $guarded = ['id'];
 }

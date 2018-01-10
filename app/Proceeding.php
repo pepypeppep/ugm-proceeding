@@ -17,12 +17,12 @@ class Proceeding extends Model
     	return $this->hasManyThrough('App\Author', 'App\Article');
     }
 
-    public function proceeding_subject(){
-    	return $this->hasMany('App\ProceedingSubject');
-    }
-
     public function subject(){
     	return $this->belongsToMany('App\Subject');
+    }
+
+    public function editor(){
+        return $this->hasMany('App\Editor');
     }
 
     protected $dates = ['deleted_at'];

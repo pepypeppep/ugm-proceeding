@@ -22,4 +22,5 @@ class Article extends Model
     }
 
     protected $dates = ['deleted_at'];
+    protected $guarded = ['id'];
 }
