@@ -15,8 +15,9 @@ class CreateArticleIdentifiersTable extends Migration
     {
         Schema::create('article_identifiers', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('article_id')->unsigned();
             $table->string('type', 10);
-            $table->string('id', 50);
+            $table->string('code', 50);
             $table->timestamps();
         });
     }
