@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Proceeding extends Model
 {
 	use SoftDeletes;
-    
+
+    /*
+    * RELATION SECTION
+    */
     public function article(){
     	return $this->hasMany('App\Article');
     }
@@ -25,5 +28,15 @@ class Proceeding extends Model
         return $this->hasMany('App\Editor');
     }
 
-    protected $dates = ['deleted_at'];
+    /*
+    * CUSTOM ATTRIBUTE SECTION
+    */
+
+    // set status attribute based on published at value
+    public function getStatusAttribute(){
+        return empty($this->published_at) ? 'draft' : 'published';
+    }
+        
+
+    protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
 }
