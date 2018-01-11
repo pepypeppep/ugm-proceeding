@@ -20,10 +20,7 @@ class Proceedings extends Resource
             'front_cover' => $this->front_cover,
             'back_cover' => $this->back_cover,
             'status' => $this->status,
-            'identifier' => [
-                'type' => 'isbn',
-                'id' => $this->isbn,
-            ],
+            'isbn' => $this->isbn,
             'organizer' => $this->organizer,
             'editors' => optional($this->editor)->pluck(['name']),
             'date' => [
@@ -32,7 +29,6 @@ class Proceedings extends Resource
                 'published' => $this->published_at,
             ],
             'total_articles' => $this->article()->count(),
-            'articles' => $this->article
         ];
     }
 
