@@ -24,8 +24,6 @@ class ProceedingSeeder extends Seeder
         			$a->article_identifier()
 	        			->save(factory(App\ArticleIdentifier::class)->make());
 	        	});
-        	$p->editor()
-        		->createMany(factory(App\Editor::class, rand(2,3))->make()->toArray());
     		$p->subject()->attach([$subject->random(), $subject->random()]);
         });
     }

@@ -21,10 +21,9 @@ class Proceedings extends Resource
             'front_cover' => $this->front_cover,
             'back_cover' => $this->back_cover,
             'status' => $this->status,
-            'isbn' => $this->isbn,
+            'identifiers' => $this->identifiers,
             'organizer' => $this->organizer,
             'subjects' => $this->subject->pluck('name'),
-            'editors' => optional($this->editor)->pluck(['name']),
             'date' => [
                 'conference_start' => $this->conference_start->format('j F y'),
                 'conference_end' => $this->conference_end->format('j F y'),

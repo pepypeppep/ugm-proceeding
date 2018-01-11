@@ -24,10 +24,6 @@ class Proceeding extends Model
     	return $this->belongsToMany('App\Subject');
     }
 
-    public function editor(){
-        return $this->hasMany('App\Editor');
-    }
-
     /*
     * CUSTOM ATTRIBUTE SECTION
     */
@@ -36,6 +32,27 @@ class Proceeding extends Model
     public function getStatusAttribute(){
         return empty($this->published_at) ? 'draft' : 'published';
     }
+
+    public function getIdentifiersAttribute(){
+        $identifiers = collect(array());
+
+        if (!empty($this->issn)) {
+            $identifiers->push([
+                'type' => 'issn',
+                'id' => $this->issn,
+            ]);
+        }
+
+        if (!empty($this->isbn)) {
+            $identifiers->push([
+                'type' => 'isbn',
+                'id' => $this->isbn,
+            ]);
+        }
+
+        return $identifiers;
+    }
+        
         
 
     protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
