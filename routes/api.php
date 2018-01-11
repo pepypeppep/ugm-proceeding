@@ -22,3 +22,5 @@ Route::post('/login', 'Api\LoginController@store');
 
 Route::get('/proceedings', 'Api\ProceedingController@index');
 Route::get('/proceedings/view', 'Api\ProceedingController@show');
+
+Route::get('/articles', 'Api\ArticleController@index');
