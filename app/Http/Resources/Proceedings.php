@@ -29,6 +29,7 @@ class Proceedings extends Resource
                 'published' => $this->published_at,
             ],
             'total_articles' => $this->article()->count(),
+            'articles' => Articles::collection($this->whenLoaded('article')),
         ];
     }
 
