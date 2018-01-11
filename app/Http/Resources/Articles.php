@@ -17,7 +17,7 @@ class Articles extends Resource
         return [
             'title' => $this->title,
             'abstract' => $this->abstract,
-            'keywords' => $this->keyword,
+            'keywords' => $this->keywords,
             'start_page' => $this->start_page,
             'end_page' => $this->end_page,
             'views' => $this->view,

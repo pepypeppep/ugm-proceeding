@@ -14,4 +14,9 @@ class ProceedingController extends Controller
     {
     	return new ProceedingsCollection(Proceeding::paginate(10));
     }
+
+    public function show(Proceeding $proceeding)
+    {
+    	return new Proceedings($proceeding->load('article'));
+    }
 }
