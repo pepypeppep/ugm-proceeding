@@ -21,6 +21,8 @@ class CreateProceedingsTable extends Migration
             $table->string('back_cover', 250)->nullable();
             $table->string('isbn', 13)->nullable();
             $table->string('organizer', 100)->nullable();
+            $table->text('introduction')->nullable();
+            $table->string('location')->nullable();
             $table->date('conference_start')->nullable();
             $table->date('conference_end')->nullable();
             $table->timestamp('published_at')->nullable();

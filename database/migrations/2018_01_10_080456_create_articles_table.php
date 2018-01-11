@@ -24,6 +24,7 @@ class CreateArticlesTable extends Migration
             $table->integer('views')->default(0)->nullable();
             $table->integer('downloads')->default(0)->nullable();
             $table->integer('cites')->default(0)->nullable();
+            $table->string('file', 250)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
