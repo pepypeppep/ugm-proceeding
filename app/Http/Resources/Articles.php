@@ -23,7 +23,7 @@ class Articles extends Resource
             'views' => $this->view,
             'downloads' => $this->downloads,
             'cites' => $this->cites,
-            'identifier' => $this->article_identifier()->get(['type', 'code']),
+            'identifiers' => $this->article_identifier()->get(['type', 'code']),
             'authors' => $this->whenLoaded('author'),
             'date_added' => $this->created_at->format('j F Y'),
         ];
