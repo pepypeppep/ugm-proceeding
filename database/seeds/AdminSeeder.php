@@ -13,9 +13,9 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-        	'id' => 1,
-        	'name' => 'Wildan Ainurrahman',
-        	'email' => 'wildan.arrahman@gmail.com',
+        	'id' => 2,
+        	'name' => 'UGM Proceeding',
+        	'email' => 'ugm.proceeding@mail.com',
         	'is_superadmin' => 1,
             'institution_id' => 1,
         	'password' => bcrypt('w1lldone'),
