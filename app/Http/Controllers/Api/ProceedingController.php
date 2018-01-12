@@ -10,11 +10,7 @@ use App\Proceeding;
 
 class ProceedingController extends Controller
 {
-    public function index()
-    {
-    	return new ProceedingsCollection(Proceeding::paginate(10));
-    }
-    /**
+	/**
      * @SWG\Get(
      *   path="/proceedings",
      *   summary="List all proceedings",
@@ -40,6 +36,11 @@ class ProceedingController extends Controller
      * )
      *
      */
+    public function index()
+    {
+    	return new ProceedingsCollection(Proceeding::paginate(10));
+    }
+    
 
     public function show(Proceeding $proceeding)
     {

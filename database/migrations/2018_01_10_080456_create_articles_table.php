@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->integer('proceeding_id')->unsigned();
             $table->string('title', 300);
-            $table->string('abstract', 800)->nullable();
+            $table->text('abstract')->nullable();
             $table->string('keywords', 100)->nullable();
             $table->integer('start_page')->nullable();
             $table->integer('end_page')->nullable();

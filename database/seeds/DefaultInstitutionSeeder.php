@@ -18,8 +18,14 @@ class DefaultInstitutionSeeder extends Seeder
         	'updated_at' => \Carbon\Carbon::now(),
         ]);
         DB::table('institutions')->insert([
-        	'id' => 2,
-        	'name' => 'Fakultas Teknologi Pertanian',
+            'id' => 2,
+            'name' => 'Fakultas Teknologi Pertanian',
+            'created_at' => \Carbon\Carbon::now(),
+            'updated_at' => \Carbon\Carbon::now(),
+        ]);
+        DB::table('institutions')->insert([
+        	'id' => 3,
+        	'name' => 'Fakultas Teknik',
         	'created_at' => \Carbon\Carbon::now(),
         	'updated_at' => \Carbon\Carbon::now(),
         ]);
