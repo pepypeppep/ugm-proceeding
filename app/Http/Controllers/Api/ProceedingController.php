@@ -76,6 +76,32 @@ class ProceedingController extends Controller
 
         $proceeding->update($data);
 
-        return new ProceedingsResource($proceeding);;
+        return new ProceedingsResource($proceeding);
+    }
+
+    public function updateSubjects(Proceeding $proceeding)
+    {
+        $data = request()->validate([
+            'subject.*' => 'required|int|exists:subjects,id'
+        ]);
+
+        $proceeding->subject()->sync($data['subject']);
+
+        return new ProceedingsResource($proceeding);
+    }
+
+    public function updateCovers(Proceeding $proceeding)
+    {
+        request()->validate([
+            'front_cover' => 'required|image',
+            'back_cover' => 'image',
+        ]);
+
+        $path = request()->map(function ($item, $key)
+        {
+            return request()->file($key)->store('proceedings/'.$proceeding->id);;
+        });
+
+        return $path;
     }
 }
