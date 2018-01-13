@@ -6,42 +6,27 @@
     },
     "basePath": "/api",
     "paths": {
-        "/proceedings": {
+        "/proceedings/": {
             "get": {
-                "summary": "List all proceedings",
-                "operationId": "getProceedings",
-                "parameters": [
-                    {
-                        "name": "customerId",
-                        "in": "path",
-                        "description": "Target customer.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "filter",
-                        "in": "query",
-                        "description": "Filter results based on query string value.",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "active",
-                            "expired",
-                            "scheduled"
-                        ]
-                    }
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Get all proceedings",
+                "description": "Return collection of proceedings",
+                "operationId": "getAllProceedings",
+                "produces": [
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
-                    },
-                    "406": {
-                        "description": "not acceptable"
-                    },
-                    "500": {
-                        "description": "internal server error"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
         }
     },

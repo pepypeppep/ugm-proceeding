@@ -24,3 +24,5 @@ Route::get('/proceedings', 'Api\ProceedingController@index');
 Route::get('/proceedings/{proceeding}', 'Api\ProceedingController@show');
 
 Route::get('/articles', 'Api\ArticleController@index');
+
+Route::get('/query', 'Api\ProceedingController@query');

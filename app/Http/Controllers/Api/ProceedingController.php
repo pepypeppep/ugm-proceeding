@@ -7,34 +7,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Proceedings;
 use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
+use App\Repositories\Api\ProceedingsRepo;
 
 class ProceedingController extends Controller
 {
 	/**
      * @SWG\Get(
-     *   path="/proceedings",
-     *   summary="List all proceedings",
-     *   operationId="getProceedings",
-     *   @SWG\Parameter(
-     *     name="customerId",
-     *     in="path",
-     *     description="Target customer.",
-     *     required=false,
-     *     type="integer"
-     *   ),
-     *   @SWG\Parameter(
-     *     name="filter",
-     *     in="query",
-     *     description="Filter results based on query string value.",
-     *     required=false,
-     *     enum={"active", "expired", "scheduled"},
-     *     type="string"
-     *   ),
-     *   @SWG\Response(response=200, description="successful operation"),
-     *   @SWG\Response(response=406, description="not acceptable"),
-     *   @SWG\Response(response=500, description="internal server error")
+     *     path="/proceedings/",
+     *     summary="Get all proceedings",
+     *     description="Return collection of proceedings",
+     *     operationId="getAllProceedings",
+     *     tags={"proceedings"},
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *     )
      * )
-     *
      */
     public function index()
     {
@@ -45,5 +34,21 @@ class ProceedingController extends Controller
     public function show(Proceeding $proceeding)
     {
     	return new Proceedings($proceeding->load('article'));
+    }
+
+    public function query(ProceedingsRepo $repo)
+    {
+        $request = request()->validate([
+            'name' => 'string',
+            'alias' => 'string',
+            'date' => 'string',
+            'subject' => 'integer',
+            'sort' => [
+                'string', 
+                'regex:(asc|desc)',
+            ],
+        ]);
+
+        return $repo->getAll($request);
     }
 }
