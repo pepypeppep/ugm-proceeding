@@ -92,16 +92,17 @@ class ProceedingController extends Controller
 
     public function updateCovers(Proceeding $proceeding)
     {
-        request()->validate([
+        $data = request()->validate([
             'front_cover' => 'required|image',
             'back_cover' => 'image',
         ]);
 
-        $path = request()->map(function ($item, $key)
+        collect($data)->map(function ($item, $key) use ($proceeding)
         {
-            return request()->file($key)->store('proceedings/'.$proceeding->id);;
+            $path = request()->file($key)->store('proceedings/'.$proceeding->id);
+            $proceeding->update([$key => $path]);
         });
 
-        return $path;
+        return new ProceedingsResource($proceeding);
     }
 }

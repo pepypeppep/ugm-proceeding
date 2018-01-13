@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Proceeding extends Model
 {
@@ -56,4 +57,21 @@ class Proceeding extends Model
 
         return $identifiers;
     }
+
+    public function getFrontCoverUrlAttribute(){
+        if (!empty($this->front_cover)) {
+            return Storage::url($this->front_cover);
+        }
+
+        return null;
+    }
+
+    public function getBackCoverUrlAttribute(){
+        if (!empty($this->back_cover)) {
+            return Storage::url($this->back_cover);
+        }
+
+        return null;
+    }
+        
 }
