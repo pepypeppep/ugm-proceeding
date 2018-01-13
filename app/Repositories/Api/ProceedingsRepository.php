@@ -22,6 +22,7 @@ class ProceedingsRepository extends Repository
 	* @var array('field' => 'query operator')
 	*/
 	protected $fields = [
+		'keyword' => 'like',
 		'name' => 'like',
 		'alias' => 'like',
 		'date' => 'like',
@@ -40,4 +41,5 @@ class ProceedingsRepository extends Repository
 	{
 		return $this->filterSort($queries)->with('subject')->paginate('10')->appends(request()->except('page'));
 	}
+
 }

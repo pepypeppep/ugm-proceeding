@@ -9,6 +9,10 @@ class Proceeding extends Model
 {
 	use SoftDeletes;
 
+    protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
+
+    protected $guarded = ['id'];
+
     /*
     * RELATION SECTION
     */
@@ -52,8 +56,4 @@ class Proceeding extends Model
 
         return $identifiers;
     }
-        
-        
-
-    protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
 }

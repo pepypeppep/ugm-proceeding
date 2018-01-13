@@ -15,6 +15,7 @@ class Proceedings extends Resource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'alias' => $this->alias,
             'introduction' => $this->introduction,
