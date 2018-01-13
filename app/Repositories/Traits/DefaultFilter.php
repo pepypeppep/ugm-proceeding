@@ -3,7 +3,7 @@
 namespace App\Repositories\Traits;
 
 /**
-* 
+* Default filtering and sorting method
 */
 trait DefaultFilter
 {

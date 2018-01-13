@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Proceedings;
 use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
-use App\Repositories\Api\ProceedingsRepo;
+use App\Repositories\Api\ProceedingsRepository as Repository;
 
 class ProceedingController extends Controller
 {
@@ -25,20 +25,9 @@ class ProceedingController extends Controller
      *     )
      * )
      */
-    public function index()
+    public function index(Repository $repository)
     {
-    	return new ProceedingsCollection(Proceeding::paginate(10));
-    }
-    
-
-    public function show(Proceeding $proceeding)
-    {
-    	return new Proceedings($proceeding->load('article'));
-    }
-
-    public function query(ProceedingsRepo $repo)
-    {
-        $request = request()->validate([
+        $queries = request()->validate([
             'name' => 'string',
             'alias' => 'string',
             'date' => 'string',
@@ -49,6 +38,12 @@ class ProceedingController extends Controller
             ],
         ]);
 
-        return $repo->getAll($request);
+    	return new ProceedingsCollection($repository->getAll($queries));
+    }
+    
+
+    public function show(Proceeding $proceeding)
+    {
+    	return new Proceedings($proceeding->load('article'));
     }
 }

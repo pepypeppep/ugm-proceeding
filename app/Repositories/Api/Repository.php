@@ -9,10 +9,24 @@ use App\Repositories\Traits\DefaultFilter;
 */
 class Repository
 {
+	/**
+	* Default filter and sorting method
+	*/
 	use DefaultFilter;
 
+	/**
+	* Filter and search field
+	*/
 	protected $fields = [];
+
+	/**
+	* Repository's related model
+	*/
 	protected $model;
+
+	/**
+	* Search query
+	*/
 	protected $query = [];
 
 	function __construct()
@@ -23,12 +37,12 @@ class Repository
 	public function filterSort($query)
 	{
 		$this->query = $query;
-		$this->generateQuery()->generateSort();
+		$this->generateFilters()->generateSorts();
 
 		return $this->model;
 	}
 
-	public function generateQuery()
+	public function generateFilters()
 	{
 		collect($this->fields)->map(function ($item, $key)
 		{
@@ -42,7 +56,7 @@ class Repository
 		return $this;
 	}
 
-	public function generateSort()
+	public function generateSorts()
 	{
 		if (!empty($this->query['sort'])) {
 			$sort = explode('.', $this->query['sort']);
