@@ -4,6 +4,36 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
+/**
+ * @SWG\Definition(
+ *      type="object",
+ *      @SWG\Property(
+ *          property="name",
+ *          type="string",
+ *          example="Proceeding of International Conference on Science and Technology"      
+ *      ),
+ *      @SWG\Property(
+ *          property="alias",
+ *          type="string",
+ *          example="ICST 2017"      
+ *      ),
+ *      @SWG\Property(
+ *          property="organizer",
+ *          type="string",
+ *          example="BPP UGM"      
+ *      ),
+ *      @SWG\Property(
+ *          property="conference_start",
+ *          type="date",
+ *          example="2017-06-23"      
+ *      ),
+ *      @SWG\Property(
+ *          property="conference_end",
+ *          type="date",
+ *          example="2017-06-24"      
+ *      ),
+ * )
+ */
 class Proceedings extends Resource
 {
     /**
