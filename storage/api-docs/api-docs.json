@@ -6,44 +6,274 @@
     },
     "basePath": "/api",
     "paths": {
-        "/proceedings": {
+        "/proceedings/": {
             "get": {
-                "summary": "List all proceedings",
-                "operationId": "getProceedings",
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Get all proceedings",
+                "description": "Return collection of proceedings",
+                "operationId": "getAllProceedings",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/proceedings/{proceedingsId}": {
+            "get": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Find proceeding by Id",
+                "description": "Returns a single proceeding with articles",
+                "operationId": "getProceedingById",
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
-                        "name": "customerId",
+                        "name": "proceedingsId",
                         "in": "path",
-                        "description": "Target customer.",
-                        "required": false,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "filter",
-                        "in": "query",
-                        "description": "Filter results based on query string value.",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "active",
-                            "expired",
-                            "scheduled"
-                        ]
+                        "description": "ID of proceeding to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "successful operation"
                     },
-                    "406": {
-                        "description": "not acceptable"
+                    "400": {
+                        "description": "Invalid ID supplied"
                     },
-                    "500": {
-                        "description": "internal server error"
+                    "404": {
+                        "description": "Proceeding not found"
                     }
                 }
             }
+        },
+        "/proceedings": {
+            "post": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Add new proceeding",
+                "description": "",
+                "operationId": "addProceeding",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Proceeding object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Proceedings"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/proceedings/{proceedingId}": {
+            "put": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Update existing proceeding",
+                "description": "",
+                "operationId": "updateProceeding",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "proceedingId",
+                        "in": "path",
+                        "description": "ID of proceeding to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Proceeding object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "Proceeding of International Conference on Southeast Asia 2017"
+                                },
+                                "alias": {
+                                    "type": "string",
+                                    "example": "ICSEAS 2017"
+                                },
+                                "organizer": {
+                                    "type": "string",
+                                    "example": "BPP UGM"
+                                },
+                                "conference_start": {
+                                    "type": "date",
+                                    "example": "2017-10-26"
+                                },
+                                "conference_end": {
+                                    "type": "date",
+                                    "example": "2017-10-27"
+                                },
+                                "introduction": {
+                                    "type": "date",
+                                    "example": "How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."
+                                },
+                                "isbn": {
+                                    "type": "integer",
+                                    "example": "9783161484100"
+                                },
+                                "issn": {
+                                    "type": "integer",
+                                    "example": "201493630"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/proceedings/{proceedingId}/covers": {
+            "post": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Upload proceeding covers",
+                "description": "",
+                "operationId": "uploadCovers",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "proceedingId",
+                        "in": "path",
+                        "description": "ID of Proceeding to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "front_cover",
+                        "in": "formData",
+                        "description": "Front cover image",
+                        "required": true,
+                        "type": "file"
+                    },
+                    {
+                        "name": "back_cover",
+                        "in": "formData",
+                        "description": "Back cover image",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
         }
     },
-    "definitions": {}
+    "definitions": {
+        "Proceedings": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Proceeding of International Conference on Science and Technology"
+                },
+                "alias": {
+                    "type": "string",
+                    "example": "ICST 2017"
+                },
+                "organizer": {
+                    "type": "string",
+                    "example": "BPP UGM"
+                },
+                "conference_start": {
+                    "type": "date",
+                    "example": "2017-06-23"
+                },
+                "conference_end": {
+                    "type": "date",
+                    "example": "2017-06-24"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "tags": [
+        {
+            "name": "proceedings",
+            "description": "All proceeding operations"
+        },
+        {
+            "name": "store",
+            "description": "Access to Petstore orders"
+        },
+        {
+            "name": "user",
+            "description": "Operations about user",
+            "externalDocs": {
+                "description": "Find out more about our store",
+                "url": "http://swagger.io"
+            }
+        }
+    ]
 }

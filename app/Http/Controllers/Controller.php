@@ -20,4 +20,32 @@ class Controller extends BaseController
      *   )
      * )
      */
+
+    /**
+     * @SWG\SecurityScheme(
+     *   securityDefinition="Bearer",
+     *   type="apiKey",
+     *   name="Authorization",
+     *   in="header",
+     * )
+     */
+
+    /**
+     * @SWG\Tag(
+     *   name="proceedings",
+     *   description="All proceeding operations",
+     * )
+     * @SWG\Tag(
+     *   name="store",
+     *   description="Access to Petstore orders"
+     * )
+     * @SWG\Tag(
+     *   name="user",
+     *   description="Operations about user",
+     *   @SWG\ExternalDocumentation(
+     *     description="Find out more about our store",
+     *     url="http://swagger.io"
+     *   )
+     * )
+     */
 }

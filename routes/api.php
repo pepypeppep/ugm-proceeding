@@ -20,7 +20,17 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function(){
 
 Route::post('/login', 'Api\LoginController@store');
 
-Route::get('/proceedings', 'Api\ProceedingController@index');
-Route::get('/proceedings/{proceeding}', 'Api\ProceedingController@show');
+Route::group(['prefix' => 'proceedings'], function(){
+	Route::get('/', 'Api\ProceedingController@index');
+	Route::get('/{proceeding}', 'Api\ProceedingController@show');
+	
+	Route::middleware(['auth:api'])->group(function ()
+	{
+		Route::post('/', 'Api\ProceedingController@store');
+		Route::put('/{proceeding}', 'Api\ProceedingController@update');
+		Route::put('/{proceeding}/subjects', 'Api\ProceedingController@updateSubjects');
+		Route::post('/{proceeding}/covers', 'Api\ProceedingController@updateCovers');
+	});
+});
 
 Route::get('/articles', 'Api\ArticleController@index');
