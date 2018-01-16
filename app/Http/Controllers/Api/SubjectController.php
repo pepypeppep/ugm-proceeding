@@ -12,9 +12,9 @@ use App\Repositories\Api\SubjectsRepository as Repository;
 
 class SubjectController extends Controller
 {
-    public function index()
+    public function index(Repository $repository)
     {
-    	return Subjects::collection(Subject::get());
+    	return Subjects::collection($repository->getAll());
     }
 
     public function show(Repository $repository)
@@ -23,7 +23,7 @@ class SubjectController extends Controller
             'name' => 'string',
         ]);
 
-    	return new Subjects($repository->getAll($queries));
+    	return new Subjects($repository->getAll($queries)->first());
     }
     
 } 
