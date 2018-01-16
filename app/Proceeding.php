@@ -14,9 +14,9 @@ class Proceeding extends Model
 
     protected $guarded = ['id'];
 
-    /*
-    * RELATION SECTION
-    */
+    /**
+     * RELATIONS SECTION
+     */
     public function article(){
     	return $this->hasMany('App\Article');
     }
@@ -29,10 +29,14 @@ class Proceeding extends Model
     	return $this->belongsToMany('App\Subject');
     }
 
+    public function owner(){
+        return $this->belongsToMany('App\User', 'proceeding_user', 'proceeding_id', 'user_id');
+    }
+
     /*
     * CUSTOM ATTRIBUTE SECTION
     */
-
+   
     // set status attribute based on published at value
     public function getStatusAttribute(){
         return empty($this->published_at) ? 'draft' : 'published';

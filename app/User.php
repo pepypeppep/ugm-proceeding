@@ -28,13 +28,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Check if user is superadmin or not
+     * @return boolean
+     */
     public function isSuperadmin()
     {
         return $this->is_superadmin;
     }
 
+    /*
+    RELATION SECTION
+     */
+    
     public function institution(){
         return $this->belongsTo('App\Institution');
+    }
+
+    public function proceeding(){
+        return $this->belongsToMany('App\Proceeding');
     }
     
 }
