@@ -37,11 +37,18 @@ class Proceeding extends Model
     * CUSTOM ATTRIBUTE SECTION
     */
    
-    // set status attribute based on published at value
+    /**
+     * Generate attribute based on published_at value
+     * @return string [draft/published]
+     */
     public function getStatusAttribute(){
         return empty($this->published_at) ? 'draft' : 'published';
     }
 
+    /**
+     * Generate the identifiers
+     * @return array 
+     */
     public function getIdentifiersAttribute(){
         $identifiers = collect(array());
 
@@ -62,6 +69,10 @@ class Proceeding extends Model
         return $identifiers;
     }
 
+    /**
+     * Generate url for front cover
+     * @return string 
+     */
     public function getFrontCoverUrlAttribute(){
         if (!empty($this->front_cover)) {
             return Storage::url($this->front_cover);
@@ -70,6 +81,10 @@ class Proceeding extends Model
         return null;
     }
 
+    /**
+     * Generate url for back cover
+     * @return string 
+     */
     public function getBackCoverUrlAttribute(){
         if (!empty($this->back_cover)) {
             return Storage::url($this->back_cover);
