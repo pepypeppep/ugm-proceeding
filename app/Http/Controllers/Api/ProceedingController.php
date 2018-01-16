@@ -147,7 +147,7 @@ class ProceedingController extends Controller
      *              @SWG\Property(property="conference_end", type="date", example="2017-10-27"),
      *              @SWG\Property(property="introduction", type="date", example="How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."),
      *              @SWG\Property(property="isbn", type="integer", example="9783161484100"),
-     *              @SWG\Property(property="issn", type="integer", example="201493630"),
+     *              @SWG\Property(property="issn", type="integer", example="20149360"),
      *          ),      
      *      ),
      *      @SWG\Response(
@@ -175,13 +175,53 @@ class ProceedingController extends Controller
         return new ProceedingsResource($proceeding);
     }
 
+    /**
+     * [updateCovers description]
+     * @param  Proceeding $proceeding 
+     * @return              
+     * @SWG\Put(
+     *     path="/proceedings/{proceedingId}/updateSubjects",
+     *     tags={"proceedings"},
+     *     consumes={"application/json"},
+     *     summary="Update proceeding subjects",
+     *     description="",
+     *     operationId="updateSubjects",
+     *     @SWG\Parameter(
+     *         description="ID of Proceeding to update",
+     *         format="int64",
+     *         in="path",
+     *         name="proceedingId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="id's of subject that need to be attached to proceeding",
+     *          required=true,
+     *          @SWG\Schema(
+     *              type="array",
+     *              @SWG\Items(
+     *                  @SWG\Property(property="subject_id", type="integer", example=1)
+     *              )
+     *          ),
+     *      ),
+     *     produces={"application/json"},
+     *     @SWG\Response(
+     *         response="200",
+     *         description="successful operation",
+     *     ),
+     *     security={{"Bearer":{}}}
+     *  )   
+     */
     public function updateSubjects(Proceeding $proceeding)
     {
         $data = request()->validate([
-            'subject.*' => 'required|int|exists:subjects,id'
+            '*.subject_id' => 'required|int|exists:subjects,id'
         ]);
 
-        $proceeding->subject()->sync($data['subject']);
+        $subjectsId = collect($data)->flatten();
+        $proceeding->subject()->sync($subjectsId);
 
         return new ProceedingsResource($proceeding);
     }
