@@ -14,4 +14,4 @@ class ArticleController extends Controller
     	return Articles::collection(Article::with('author')->paginate(5));
     }
     
-}
+} 
