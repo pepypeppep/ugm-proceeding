@@ -173,7 +173,7 @@
                 ]
             }
         },
-        "/proceedings/{proceedingId}/updateSubjects": {
+        "/proceedings/{proceedingId}/subjects": {
             "put": {
                 "tags": [
                     "proceedings"
@@ -199,7 +199,7 @@
                     {
                         "name": "body",
                         "in": "body",
-                        "description": "id's of subject that need to be attached to proceeding",
+                        "description": "Proceeding object that needs to be added",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -208,7 +208,7 @@
                                     "subject_id": {
                                         "description": "[updateCovers description]",
                                         "type": "integer",
-                                        "example": 1
+                                        "example": 2
                                     }
                                 }
                             }
@@ -318,8 +318,8 @@
             "description": "All proceeding operations"
         },
         {
-            "name": "store",
-            "description": "Access to Petstore orders"
+            "name": "articles",
+            "description": "All articles operations"
         },
         {
             "name": "user",

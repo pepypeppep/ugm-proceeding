@@ -180,7 +180,7 @@ class ProceedingController extends Controller
      * @param  Proceeding $proceeding 
      * @return              
      * @SWG\Put(
-     *     path="/proceedings/{proceedingId}/updateSubjects",
+     *     path="/proceedings/{proceedingId}/subjects",
      *     tags={"proceedings"},
      *     consumes={"application/json"},
      *     summary="Update proceeding subjects",
@@ -197,14 +197,14 @@ class ProceedingController extends Controller
      *      @SWG\Parameter(
      *          name="body",
      *          in="body",
-     *          description="id's of subject that need to be attached to proceeding",
+     *          description="Proceeding object that needs to be added",
      *          required=true,
      *          @SWG\Schema(
      *              type="array",
      *              @SWG\Items(
-     *                  @SWG\Property(property="subject_id", type="integer", example=1)
+     *                  @SWG\Property(property="subject_id", type="integer", example=2)
      *              )
-     *          ),
+     *          ),      
      *      ),
      *     produces={"application/json"},
      *     @SWG\Response(
