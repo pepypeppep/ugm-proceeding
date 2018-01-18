@@ -18,6 +18,7 @@ class Users extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'password' => $this->password,
             'institution' => optional($this->institution)->only(['name']),
             'is_superadmin' => $this->isSuperadmin(),
             'created_at' => $this->created_at->toDateTimeString(),

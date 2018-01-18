@@ -29,3 +29,12 @@ Route::get('/redirect', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/service', 'HomeController@service');
+Route::get('/service-api', 'HomeController@apiService');
+
+Route::get('/cookie', function ()
+{
+    $value = Cookie::get('user1');
+    return "hello $value";
+});

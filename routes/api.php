@@ -13,6 +13,10 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::group(['prefix' => 'auth-users', 'middleware' => 'client'], function(){
+	Route::get('/', 'Api\AuthUsersController@index');
+});
+
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function(){
 	Route::get('/', 'Api\UserController@index');;
 	Route::get('/{user}', 'Api\UserController@show');
