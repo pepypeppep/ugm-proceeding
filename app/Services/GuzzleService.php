@@ -46,8 +46,8 @@ class GuzzleService
 	public function getResponse($method, $uri)
 	{
 		$this->setBody();
-		$responses = $this->client->request($method, $uri, $this->body)->getBody();
-		$this->response = collect(json_decode($responses, true));
+		$response = $this->client->request($method, $uri, $this->body)->getBody();
+		$this->response = collect(json_decode($response, true));
 
 		return $this->response;
 	}

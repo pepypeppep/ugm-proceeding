@@ -81,13 +81,15 @@ class ApiUserProvider implements UserProvider
     	return Hash::check($credentials['password'], $user->getAuthPassword());
     }
 
-    protected function getUsers()
+    public function getUsers($params)
     {
     	$client = new GuzzleService;
-    	$client->headers['Authorization'] = env('API_TOKEN', false);
-    	$response = $client->getResponse('GET', 'api/auth-users');
 
-    	return collect($response['data']);
+        $client->form_params = $params;
+
+    	$response = $client->getResponse('POST', 'api/find-user');
+
+    	return $response['data'];
     }
 
     protected function getApiUser($user)
@@ -99,14 +101,16 @@ class ApiUserProvider implements UserProvider
 
     protected function getUserByCredential($email)
     {
-    	$user = $this->getUsers()->where('email', $email)->first();
+        $params = ['email' => $email];
+    	$user = $this->getUsers($params);
 
     	return $user ?: null;
     }
 
     protected function getUserById($id)
     {
-    	$user = $this->getUsers()->where('id', $id)->first();
+        $params = ['id' => $id];
+    	$user = $this->getUsers($id);
 
     	return $user ?: null;
     }

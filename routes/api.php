@@ -13,9 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'auth-users', 'middleware' => 'client'], function(){
-	Route::get('/', 'Api\AuthUsersController@index');
-});
+Route::post('/find-user', 'Api\AuthUsersController@show');
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth:api'], function(){
 	Route::get('/', 'Api\UserController@index');;

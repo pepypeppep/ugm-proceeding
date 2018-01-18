@@ -16,18 +16,16 @@ class UsersRepository extends GuzzleService
 
 	public function getToken()
 	{
-		$params = [
-			'form_params' => [
-		        'grant_type' => 'password',
-		        'client_id' => env('API_CLIENT_ID', false),
-		        'client_secret' => env('API_CLIENT_SECRET', false),
-		        'username' => request('email'),
-		        'password' => request('password'),
-		        'scope' => '*',
-		    ],
+		$this->form_params = [
+	        'grant_type' => 'password',
+	        'client_id' => env('API_CLIENT_ID', false),
+	        'client_secret' => env('API_CLIENT_SECRET', false),
+	        'username' => request('email'),
+	        'password' => request('password'),
+	        'scope' => '*',
 		];
 
-		$response = collect(json_decode($this->client->request('POST', $this->uris['request_token'], $params)->getBody(), true));
+		$response = $this->getResponse('POST', $this->uris['request_token']);
 
 		return $response->get('access_token');
 	}
@@ -44,22 +42,5 @@ class UsersRepository extends GuzzleService
 		$response = $this->getResponse('GET', $this->uris['get_user']);
 
 		return $response;
-	}
-
-	public function testBody()
-	{
-		$this->query = [
-			'name' => 'icst',
-			'alias' => 'icst 2017',
-		];
-
-		$this->form_params = [
-			'field1' => 'value',
-			'field2' => 'value'
-		];
-
-		$this->setBody();
-
-		return $this->body;
 	}
 }

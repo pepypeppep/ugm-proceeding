@@ -9,8 +9,16 @@ use App\Http\Resources\Users as Resource;
 
 class AuthUsersController extends Controller
 {
-    public function index()
+    public function show()
     {
-    	return Resource::collection(User::all());
+    	if (request()->has('email')) {
+    		$user = User::where('email', request('email'))->first();
+    	}
+
+    	if (request()->has('id')) {
+    		$user = User::find(request('id'));
+    	}
+
+    	return new Resource($user);
     }
 }

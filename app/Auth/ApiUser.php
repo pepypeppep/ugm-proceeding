@@ -18,4 +18,14 @@ class ApiUser extends GenericUser
 	{
 	    return null;
 	}
+
+	/**
+	 * Store API token to auth instance
+	 * 
+	 * @param string $token JWT api token
+	 */
+    public function setApiToken($token)
+    {
+        $this->attributes['api_token'] = 'Bearer '.$token;
+    }
 }
