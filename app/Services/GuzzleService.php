@@ -10,39 +10,79 @@ use GuzzleHttp\Psr7\Request;
 */
 class GuzzleService
 {
-	protected $body;
-
-	protected $client;
-
-	protected $response;
-
+	/**
+	 * base url for guzzle client request
+	 * @var string
+	 */	
 	public $base_uri;
 
-	protected $uri;
+	/**
+	 * request body
+	 * @var array
+	 */
+	protected $body;
 
-	protected $method;
+	/**
+	 * Guzzle http client
+	 * @var GuzzleHttp\Client
+	 */
+	protected $client;
 
-	public $multipart = [];
+	public $form_params = [];
 
+	/**
+	 * Request headers
+	 * @var array
+	 */
 	public $headers = [
 		'Accept' => 'application/json',
 		'Authorization' => '',
 	];
 
+	/**
+	 * json request that will be attach to $body
+	 * @var array
+	 */
 	public $json = [];
 
-	public $form_params = [];
+	/**
+	 * multipart form data request that
+	 * will be attached to body
+	 * @var array
+	 */
+	public $multipart = [];
 
+	/**
+	 * request url query
+	 * @var array
+	 */
 	public $query = [];
+
+	/**
+	 * request response
+	 * @var array
+	 */
+	protected $response;
 	
+	/**
+	 * set base url and inisiate Guzzle client
+	 */
 	function __construct()
 	{
 		$this->base_uri = url('api/');
+
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
 		]);
 	}
 
+	/**
+	 * set body property request, get response based on method, uri parameter
+	 * and body
+	 * @param  string $method GET|POST|PUT|DELETE
+	 * @param  string $uri
+	 * @return array
+	 */
 	public function getResponse($method, $uri)
 	{
 		$this->setBody();
@@ -52,6 +92,10 @@ class GuzzleService
 		return $this->response;
 	}
 
+	/**
+	 * set body property based on query, form_params,
+	 * json, multipart, and headers property
+	 */
 	public function setBody()
 	{
 		$body = [];
