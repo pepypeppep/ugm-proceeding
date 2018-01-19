@@ -6,12 +6,21 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Articles;
 use App\Article;
+use App\Repositories\Api\ArticlesRepository as Repository;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Repository $repo)
     {
-    	return Articles::collection(Article::with('author')->paginate(5));
+    	$queries = request()->validate([
+    		'keywords' => 'string',
+    		'keyword' => 'string',
+    		'name' => 'string',
+    		'authors' => 'string',
+    		'abstract' => 'string',
+    	]);
+
+    	return Articles::collection($repo->getAll($queries)->load('author'));
     }
     
 }

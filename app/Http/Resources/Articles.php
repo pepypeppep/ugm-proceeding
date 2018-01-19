@@ -17,7 +17,7 @@ class Articles extends Resource
         return [
             'title' => $this->title,
             'abstract' => $this->abstract,
-            'keywords' => $this->keywords,
+            'keywords' => $this->setKeywords(),
             'start_page' => $this->start_page,
             'end_page' => $this->end_page,
             'views' => $this->view,
@@ -25,7 +25,13 @@ class Articles extends Resource
             'cites' => $this->cites,
             'identifiers' => $this->identifiers,
             'authors' => $this->whenLoaded('author'),
+            'proceeding' => $this->when(!$this->checkUrl('proceedings'), $this->proceeding),
             'date_added' => $this->created_at->format('j F Y'),
         ];
+    }
+
+    public function checkUrl($url)
+    {
+        return str_contains(url()->current(), $url);
     }
 }

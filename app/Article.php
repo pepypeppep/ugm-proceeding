@@ -24,6 +24,11 @@ class Article extends Model
     	return $this->hasMany('App\Author');
     }
 
+    public function setKeywords()
+    {
+        return explode(',', $this->keywords);
+    }
+
     /*
     Custom attribute section
      */
