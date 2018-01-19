@@ -10,7 +10,7 @@ class LoginController extends Controller
 {
 	/**
 	 * login attempt using API user provider
-	 * and store the token into auth instance
+	 * and store the token into session
 	 * 
 	 * @param  UsersRepository $repo
 	 * @return Authenticatable

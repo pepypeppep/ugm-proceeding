@@ -29,6 +29,11 @@ class GuzzleService
 	 */
 	protected $client;
 
+	/**
+	 * request form parameters that will be
+	 * attached to body
+	 * @var array
+	 */
 	public $form_params = [];
 
 	/**
@@ -67,7 +72,7 @@ class GuzzleService
 	 */
 	function __construct()
 	{
-		$this->base_uri = url('api/');
+		$this->base_uri = config('app.url').'api/';
 
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
@@ -124,6 +129,10 @@ class GuzzleService
 		return $this;
 	}
 
+	/**
+	 * Set request header. Add api token if 
+	 * user is autenthicated
+	 */
 	public function setHeaders()
 	{
 		return [

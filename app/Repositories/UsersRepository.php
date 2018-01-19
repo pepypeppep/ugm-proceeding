@@ -11,7 +11,7 @@ class UsersRepository extends GuzzleService
 {
 	protected $uris = [
 		'request_token' => '/oauth/token',
-		'get_user' => 'api/user',
+		'get_user' => 'user',
 	];
 
 	public function getToken()

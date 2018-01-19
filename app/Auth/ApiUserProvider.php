@@ -87,7 +87,7 @@ class ApiUserProvider implements UserProvider
 
         $client->form_params = $params;
 
-    	$response = $client->getResponse('POST', 'api/find-user');
+    	$response = $client->getResponse('POST', 'find-user');
 
     	return $response['data'];
     }
