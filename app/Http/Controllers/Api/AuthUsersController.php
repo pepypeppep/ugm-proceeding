@@ -19,7 +19,11 @@ class AuthUsersController extends Controller
     		$user = User::where('email', request('email'))->first();
     	}
 
-    	if (request()->has('id')) {
+        if (request()->has('remember_token') && request()->has('id')) {
+            $user = User::where('id', request('id'))->where('remember_token', request('remember_token'))->first();
+        }
+
+    	if (request()->has('id') && !request()->has('remember_token')) {
     		$user = User::find(request('id'));
     	}
 

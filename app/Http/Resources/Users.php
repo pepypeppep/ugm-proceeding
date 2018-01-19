@@ -20,6 +20,7 @@ class Users extends Resource
             'email' => $this->email,
             'password' => $this->password,
             'institution' => optional($this->institution)->only(['name']),
+            'remember_token' => $this->remember_token,
             'is_superadmin' => $this->isSuperadmin(),
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),

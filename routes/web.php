@@ -34,3 +34,8 @@ Route::get('/service', 'HomeController@service');
 Route::get('/service-api', 'HomeController@apiService');
 
 Route::get('/login', 'LoginController@store');
+
+Route::get('/token', function ()
+{
+    return session('api_token');
+});

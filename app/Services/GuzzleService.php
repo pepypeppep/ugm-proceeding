@@ -4,6 +4,7 @@ namespace App\Services;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
 * A class to simplfy Guzzle HTTP request
@@ -34,10 +35,7 @@ class GuzzleService
 	 * Request headers
 	 * @var array
 	 */
-	public $headers = [
-		'Accept' => 'application/json',
-		'Authorization' => '',
-	];
+	public $headers = [];
 
 	/**
 	 * json request that will be attach to $body
@@ -74,6 +72,8 @@ class GuzzleService
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
 		]);
+
+		$this->headers = $this->setHeaders();
 	}
 
 	/**
@@ -122,5 +122,13 @@ class GuzzleService
 
 		$this->body = $body;
 		return $this;
+	}
+
+	public function setHeaders()
+	{
+		return [
+			'Accept' => 'application/json',
+			'Authorization' => session('api_token', null),
+		];
 	}
 }

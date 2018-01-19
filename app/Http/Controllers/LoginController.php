@@ -29,8 +29,9 @@ class LoginController extends Controller
     	// attempt login
     	if (Auth::attempt($credentials)) {
     		$token = $repo->getToken();
-    		auth()->user()->setApiToken($token);
-    		return auth()->user()->api_token;
+    		auth()->user()->api_token = $token;
+            session(['api_token' => $token]);
+    		return Auth::user()->name;
     	}
     }
 }

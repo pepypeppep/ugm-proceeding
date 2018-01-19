@@ -125,9 +125,20 @@ class ApiUserProvider implements UserProvider
     protected function getUserById($id)
     {
         $params = ['id' => $id];
-    	$user = $this->getUsers($id);
+    	$user = $this->getUsers($params);
 
     	return $user ?: null;
+    }
+
+    protected function getUserByToken($id, $token)
+    {
+        $params = [
+            'remember_token' => $token,
+            'id' => $id,
+        ];
+        $user = $this->getUsers($params);
+
+        return $user ?: null;
     }
 
 }

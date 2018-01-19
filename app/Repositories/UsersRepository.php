@@ -27,7 +27,7 @@ class UsersRepository extends GuzzleService
 
 		$response = $this->getResponse('POST', $this->uris['request_token']);
 
-		return $response->get('access_token');
+		return 'Bearer '.$response->get('access_token');
 	}
 
 	public function getUser()
