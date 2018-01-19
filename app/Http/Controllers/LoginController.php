@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
 	/**
-	 * login attempt using custom user provider
+	 * login attempt using API user provider
 	 * and store the token into auth instance
 	 * 
 	 * @param  UsersRepository $repo
-	 * @return string api_token
+	 * @return Authenticatable
 	 */
     public function store(UsersRepository $repo)
     {

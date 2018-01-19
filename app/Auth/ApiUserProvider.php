@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Hash;
 */
 class ApiUserProvider implements UserProvider
 {
-	
-	function __construct()
-	{
-		# code...
-	}
 
 	/**
      * Retrieve a user by their unique identifier.
@@ -81,6 +76,11 @@ class ApiUserProvider implements UserProvider
     	return Hash::check($credentials['password'], $user->getAuthPassword());
     }
 
+    /**
+     * get user form api
+     * @param  array $params email or id user
+     * @return array
+     */
     public function getUsers($params)
     {
     	$client = new GuzzleService;
@@ -92,6 +92,11 @@ class ApiUserProvider implements UserProvider
     	return $response['data'];
     }
 
+    /**
+     * Get new user Authenticatable instance        
+     * @param  array $user
+     * @return Authenticatable
+     */
     protected function getApiUser($user)
     {
     	if (!empty($user)) {
@@ -99,6 +104,11 @@ class ApiUserProvider implements UserProvider
     	}
     }
 
+    /**
+     * find user by email from API
+     * @param  string $email 
+     * @return array
+     */
     protected function getUserByCredential($email)
     {
         $params = ['email' => $email];
@@ -107,6 +117,11 @@ class ApiUserProvider implements UserProvider
     	return $user ?: null;
     }
 
+    /**
+     * find user by id from API
+     * @param  integer $id 
+     * @return array
+     */
     protected function getUserById($id)
     {
         $params = ['id' => $id];

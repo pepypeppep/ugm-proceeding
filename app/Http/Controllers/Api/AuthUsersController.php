@@ -9,6 +9,10 @@ use App\Http\Resources\Users as Resource;
 
 class AuthUsersController extends Controller
 {
+	/**
+	 * Search user with request paramenter
+	 * @return Resource User resource
+	 */
     public function show()
     {
     	if (request()->has('email')) {
