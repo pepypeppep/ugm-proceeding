@@ -10,5 +10,6 @@ $factory->define(App\Article::class, function (Faker $faker) {
         'keywords' => $faker->word.','.$faker->word.','.$faker->word,
         'end_page' => 26,
         'start_page' => 13,
+        'file' => 'https://jurnal.ugm.ac.id/ijc/article/download/25097/18730',
     ];
 });
