@@ -19,8 +19,18 @@ class ArticleController extends Controller
     		'name' => 'string',
     		'authors' => 'string',
     		'abstract' => 'string',
+            'sort' => [
+                'string', 
+                'regex:(asc|desc)',
+            ],
     	]);
 
     	return new ArticlesCollection($repo->getAll($queries));
-    }    
+    }
+
+    public function show(Article $article)
+    {
+        return new Articles($article->load('author'));
+    }
+
 }

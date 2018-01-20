@@ -12,6 +12,9 @@ class Article extends Model
     protected $dates = ['deleted_at'];
     protected $guarded = ['id'];
 
+    /*
+    RELATIONSHIP SECTION
+     */
     public function proceeding(){
     	return $this->belongsTo('App\Proceeding');
     }
@@ -24,20 +27,23 @@ class Article extends Model
     	return $this->hasMany('App\Author');
     }
 
+    public function indexation(){
+        return $this->hasOne('App\Indexation');
+    }
+
+    /*
+    CUSTOM METHOD SECTION
+     */
     public function setKeywords()
     {
         return explode(',', $this->keywords);
     }
-
-    /*
-    Custom attribute section
-     */
     
     /**
      * get article's identifiers. Merged from proceeding's and article's identifier
      * @return string ISSN, ISBN, DOI
      */
-    public function getIdentifiersAttribute(){
+    public function getIdentifiers(){
         $articleIdentifiers = $this->article_identifier()->get(['type', 'code'])->mapWithKeys(function ($item)
         {
            return [[
@@ -50,5 +56,18 @@ class Article extends Model
 
         return $identifiers;
     }
+
+    /*
+    CUSTOM ATTRIBUTE SECTION
+     */
+    
+    /**
+     * get indexed attribute based on indexation existance
+     * @return bool
+     */
+    public function getIndexedAttribute(){
+        return $this->indexation()->count() == 1;
+    }
+        
         
 }
