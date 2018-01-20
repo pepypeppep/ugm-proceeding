@@ -25,11 +25,16 @@ class Articles extends Resource
             'cites' => $this->cites,
             'identifiers' => $this->identifiers,
             'authors' => $this->whenLoaded('author'),
-            'proceeding' => $this->when(!$this->checkUrl('proceedings'), $this->proceeding),
+            'proceeding' => $this->when(!$this->checkUrl('proceedings'), new Proceedings($this->proceeding)),
             'date_added' => $this->created_at->format('j F Y'),
         ];
     }
 
+    /**
+     * Check if the current url contains the given string
+     * @param  string $url 
+     * @return bool
+     */
     public function checkUrl($url)
     {
         return str_contains(url()->current(), $url);

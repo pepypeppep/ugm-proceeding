@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Articles;
-use App\Article;
+use App\Http\Resources\ArticlesCollection;
 use App\Repositories\Api\ArticlesRepository as Repository;
+use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -20,7 +21,6 @@ class ArticleController extends Controller
     		'abstract' => 'string',
     	]);
 
-    	return Articles::collection($repo->getAll($queries)->load('author'));
-    }
-    
+    	return new ArticlesCollection($repo->getAll($queries));
+    }    
 }

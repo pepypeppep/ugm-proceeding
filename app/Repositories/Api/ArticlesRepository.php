@@ -28,6 +28,6 @@ class ArticlesRepository extends Repository
 
 	public function getAll($queries = null)
 	{
-		return $this->filterSort($queries)->paginate('10')->appends(request()->except('page'));
+		return $this->filterSort($queries)->with('author')->paginate('10')->appends(request()->except('page'));
 	}
 }
