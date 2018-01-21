@@ -29,3 +29,8 @@ Route::get('/redirect', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/proceedings', 'HomeController@service');
+Route::get('/users', 'HomeController@apiService');
+
+Route::get('/try-login', 'LoginController@store');

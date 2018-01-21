@@ -155,7 +155,7 @@
                                 },
                                 "issn": {
                                     "type": "integer",
-                                    "example": "201493630"
+                                    "example": "20149360"
                                 }
                             }
                         }
@@ -164,6 +164,60 @@
                 "responses": {
                     "405": {
                         "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/proceedings/{proceedingId}/subjects": {
+            "put": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Update proceeding subjects",
+                "description": "",
+                "operationId": "updateSubjects",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "proceedingId",
+                        "in": "path",
+                        "description": "ID of Proceeding to update",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Proceeding object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "properties": {
+                                    "subject_id": {
+                                        "description": "[updateCovers description]",
+                                        "type": "integer",
+                                        "example": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
                     }
                 },
                 "security": [
@@ -264,8 +318,8 @@
             "description": "All proceeding operations"
         },
         {
-            "name": "store",
-            "description": "Access to Petstore orders"
+            "name": "articles",
+            "description": "All articles operations"
         },
         {
             "name": "user",

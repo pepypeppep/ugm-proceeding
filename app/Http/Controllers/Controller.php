@@ -36,8 +36,8 @@ class Controller extends BaseController
      *   description="All proceeding operations",
      * )
      * @SWG\Tag(
-     *   name="store",
-     *   description="Access to Petstore orders"
+     *   name="articles",
+     *   description="All articles operations"
      * )
      * @SWG\Tag(
      *   name="user",

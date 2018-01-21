@@ -15,17 +15,46 @@ class Articles extends Resource
     public function toArray($request)
     {
         return [
-            'title' => $this->title,
+            'id' => $this->id,
             'abstract' => $this->abstract,
-            'keywords' => $this->keywords,
-            'start_page' => $this->start_page,
-            'end_page' => $this->end_page,
-            'views' => $this->view,
-            'downloads' => $this->downloads,
+            'authors' => Authors::collection($this->author),
             'cites' => $this->cites,
-            'identifiers' => $this->article_identifier()->get(['type', 'code']),
-            'authors' => $this->whenLoaded('author'),
             'date_added' => $this->created_at->format('j F Y'),
+            'downloads' => $this->downloads,
+            'end_page' => $this->end_page,
+            'identifiers' => $this->getIdentifiers(),
+            'indexed' => $this->indexed,
+            'file' => $this->getFile(),
+            'keywords' => $this->setKeywords(),
+            'proceeding' => $this->when(!$this->checkUrl('proceedings'), new Proceedings($this->proceeding)),
+            'start_page' => $this->start_page,
+            'title' => $this->title,
+            'views' => $this->view,
+        ];
+    }
+
+    /**
+     * Check if the current url contains the given string
+     * @param  string $url 
+     * @return bool
+     */
+    public function checkUrl($url)
+    {
+        return str_contains(url()->current(), $url);
+    }
+
+    public function getFile()
+    {
+        if ($this->indexed) {
+            return [
+                'type' => $this->indexation->type,
+                'link' => $this->indexation->link,
+            ];
+        }
+
+        return [
+            'type' => 'PDF',
+            'link' => $this->file,
         ];
     }
 }
