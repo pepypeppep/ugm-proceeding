@@ -18,7 +18,10 @@ class Subjects extends Resource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            
+            'date' => [
+                'created_at' => $this->created_at->format('j F y'),
+                'updated_at' => $this->updated_at->format('j F y'),
+            ],
         ];
     }
 

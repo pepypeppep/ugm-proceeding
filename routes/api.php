@@ -35,4 +35,3 @@ Route::group(['prefix' => 'proceedings'], function(){
 
 Route::get('/articles', 'Api\ArticleController@index');
 Route::get('/subjects','Api\SubjectController@index');
-Route::get('/subject','Api\SubjectController@show');

@@ -24,7 +24,7 @@ class SubjectsRepository extends Repository
 
 	public function getAll($queries = null)
 	{
-		return $this->filterSort($queries);
+		return $this->filterSort($queries)->paginate('10')->appends(request()->except('page'));
 	} 
 
 }
