@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -71,7 +72,7 @@ class Article extends Model
 
         return [
             'type' => 'PDF',
-            'link' => $this->file,
+            'link' => Storage::url($this->file),
         ];
     }
 
