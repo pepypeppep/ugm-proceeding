@@ -30,4 +30,23 @@ class ArticlesRepository extends Repository
 	{
 		return $this->filterSort($queries)->with('author')->paginate('10')->appends(request()->except('page'));
 	}
+
+	public function create($request)
+	{
+		$articles = collect([]);
+
+		foreach ($request['title'] as $key => $value) {
+			$article = $this->model->create([
+				'proceeding_id' => $request->proceeding_id,
+				'abstract' => $request->abstract[$key],
+				'end_page' => $request->end_page[$key],
+				'title' => $request->title[$key],
+				'start_page' => $request->start_page[$key],
+			]);
+
+			$articles->push($article);
+		}
+
+		return $articles;
+	}
 }

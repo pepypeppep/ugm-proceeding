@@ -38,4 +38,9 @@ Route::group(['prefix' => 'proceedings'], function(){
 Route::group(['prefix' => 'articles'], function(){
 	Route::get('/', 'Api\ArticleController@index');
 	Route::get('/{article}', 'Api\ArticleController@show');
+
+	Route::middleware(['auth:api'])->group(function ()
+	{
+		Route::post('/', 'Api\ArticleController@store');
+	});
 });

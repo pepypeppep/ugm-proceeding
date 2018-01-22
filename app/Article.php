@@ -56,6 +56,24 @@ class Article extends Model
 
         return $identifiers;
     }
+     /**
+      * Generate file link and type
+      * @return array PDF|DOAJ|SCOPUS
+      */
+    public function getFile()
+    {
+        if ($this->indexed) {
+            return [
+                'type' => $this->indexation->type,
+                'link' => $this->indexation->link,
+            ];
+        }
+
+        return [
+            'type' => 'PDF',
+            'link' => $this->file,
+        ];
+    }
 
     /*
     CUSTOM ATTRIBUTE SECTION
