@@ -6,6 +6,58 @@
     },
     "basePath": "/api",
     "paths": {
+        "/institutions/": {
+            "get": {
+                "tags": [
+                    "institutions"
+                ],
+                "summary": "Get all institutions",
+                "description": "Return collection of institutions",
+                "operationId": "getAllInstitutions",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/institutions/{institutionsId}": {
+            "get": {
+                "tags": [
+                    "institutions"
+                ],
+                "summary": "Find institution by Id",
+                "description": "Returns a single institution",
+                "operationId": "getInstitutionById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "institutionsId",
+                        "in": "path",
+                        "description": "ID of institution to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Proceeding not found"
+                    }
+                }
+            }
+        },
         "/proceedings/": {
             "get": {
                 "tags": [

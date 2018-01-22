@@ -44,3 +44,8 @@ Route::group(['prefix' => 'subjects'], function(){
 	Route::get('/', 'Api\SubjectController@index');
 	Route::get('/{subject}', 'Api\SubjectController@show');
 });
+
+Route::group(['prefix' => 'institutions'], function(){
+	Route::get('/', 'Api\InstitutionController@index');
+	Route::get('/{institution}', 'Api\InstitutionController@show');
+});
