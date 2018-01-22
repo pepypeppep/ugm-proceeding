@@ -13,7 +13,7 @@ class AdminSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-        	'id' => 2,
+        	'id' => 1,
         	'name' => 'UGM Proceeding',
         	'email' => 'ugm.proceeding@mail.com',
         	'is_superadmin' => 1,
