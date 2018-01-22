@@ -276,6 +276,58 @@
                     }
                 ]
             }
+        },
+        "/subjects/": {
+            "get": {
+                "tags": [
+                    "subjects"
+                ],
+                "summary": "Get all subjects",
+                "description": "Return collection of subjects",
+                "operationId": "getAllSubjects",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/subjects/{subjectsId}": {
+            "get": {
+                "tags": [
+                    "subjects"
+                ],
+                "summary": "Find subject by Id",
+                "description": "Returns a single subject",
+                "operationId": "getProceedingById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subjectsId",
+                        "in": "path",
+                        "description": "ID of subject to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Proceeding not found"
+                    }
+                }
+            }
         }
     },
     "definitions": {

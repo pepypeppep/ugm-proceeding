@@ -23,7 +23,7 @@ class Subjects extends Resource
                 'updated_at' => $this->updated_at->format('j F y'),
             ],
         ];
-    }
+    } 
 
     public function with($request)
     {

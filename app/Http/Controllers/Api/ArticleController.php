@@ -10,8 +10,8 @@ use App\Repositories\Api\ArticlesRepository as Repository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
-{
-    public function index(Repository $repo)
+{ 
+    public function index(Repository $repository)
     {
     	$queries = request()->validate([
     		'keywords' => 'string',
@@ -25,7 +25,7 @@ class ArticleController extends Controller
             ],
     	]);
 
-    	return new ArticlesCollection($repo->getAll($queries));
+    	return new ArticlesCollection($repository->getAll($queries));
     }
 
     public function show(Article $article)
