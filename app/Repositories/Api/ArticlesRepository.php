@@ -58,6 +58,13 @@ class ArticlesRepository extends Repository
 				$article->update(['file' => $path]);
 			}
 
+			if (!empty($request->doi[$key])) {
+				$article->article_identifier()->create([
+					'type' => 'doi',
+					'code' => $request->doi[$key],
+				]);
+			}
+
 			$articles->push($article->load('author'));
 		}
 
