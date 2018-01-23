@@ -47,5 +47,10 @@ class Controller extends BaseController
      *     url="http://swagger.io"
      *   )
      * )
+     * 
+     * @SWG\Tag(
+     *   name="institutions",
+     *   description="All institutions operations"
+     * )
      */
 }
