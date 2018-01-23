@@ -15,7 +15,6 @@ class ArticleController extends Controller
     public function index(Repository $repository)
     {
     	$queries = request()->validate([
-    		'keywords' => 'string',
     		'keyword' => 'string',
     		'name' => 'string',
     		'authors' => 'string',

@@ -14,7 +14,6 @@ class ArticlesRepository extends Repository
 
 	protected $fields = [
 		'keyword' => 'like',
-		'keywords' => 'like',
 		'title' => 'like',
 		'abstract' => 'like',
 		'authors' => 'like',
@@ -26,11 +25,21 @@ class ArticlesRepository extends Repository
 		$this->model = $article;
 	}
 
+	/**
+	 * Get all articles with query
+	 * @param  array $queries validated query
+	 * @return Collection
+	 */
 	public function getAll($queries = null)
 	{
 		return $this->filterSort($queries)->with('author')->paginate('10')->appends(request()->except('page'));
 	}
 
+	/**
+	 * create new articles query
+	 * @param  array $request 
+	 * @return Collection          
+	 */
 	public function create($request)
 	{
 		$articles = collect([]);

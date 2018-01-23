@@ -10,7 +10,7 @@ trait ArticleFilter
 	
 	public function keywordFilter($query)
 	{
-		$this->model = $this->model->where('title', 'like', "%$query%")->orWhere('abstract', 'like', "%$query%");
+		$this->model = $this->model->where('title', 'like', "%$query%")->orWhere('abstract', 'like', "%$query%")->orWhere('keywords', 'like', "%$query%");
 	}
 
 	public function authorsFilter($query)
