@@ -42,19 +42,4 @@ class Articles extends Resource
     {
         return str_contains(url()->current(), $url);
     }
-
-    public function getFile()
-    {
-        if ($this->indexed) {
-            return [
-                'type' => $this->indexation->type,
-                'link' => $this->indexation->link,
-            ];
-        }
-
-        return [
-            'type' => 'PDF',
-            'link' => $this->file,
-        ];
-    }
 }

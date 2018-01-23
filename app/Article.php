@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -55,6 +56,24 @@ class Article extends Model
         $identifiers = collect([$this->proceeding->identifiers, $articleIdentifiers])->collapse();
 
         return $identifiers;
+    }
+     /**
+      * Generate file link and type
+      * @return array PDF|DOAJ|SCOPUS
+      */
+    public function getFile()
+    {
+        if ($this->indexed) {
+            return [
+                'type' => $this->indexation->type,
+                'link' => $this->indexation->link,
+            ];
+        }
+
+        return [
+            'type' => 'PDF',
+            'link' => Storage::url($this->file),
+        ];
     }
 
     /*
