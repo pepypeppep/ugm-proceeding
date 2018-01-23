@@ -36,7 +36,7 @@ class Controller extends BaseController
      *   description="All proceeding operations",
      * )
      * @SWG\Tag(
-     *   name="articles",
+     *   name="article",
      *   description="All articles operations"
      * )
      * @SWG\Tag(
@@ -46,6 +46,15 @@ class Controller extends BaseController
      *     description="Find out more about our store",
      *     url="http://swagger.io"
      *   )
+     * )
+     * 
+     * @SWG\Tag(
+     *   name="institutions",
+     *   description="All institution operations"
+     * )
+     * @SWG\Tag(
+     *   name="subjects",
+     *   description="All subject operations"
      * )
      */
 }
