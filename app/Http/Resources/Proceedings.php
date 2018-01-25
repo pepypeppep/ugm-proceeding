@@ -56,8 +56,8 @@ class Proceedings extends Resource
             'organizer' => $this->organizer,
             'subjects' => $this->subject->pluck('name'),
             'date' => [
-                'conference_start' => $this->conference_start->format('j F y'),
-                'conference_end' => $this->conference_end->format('j F y'),
+                'conference_start' => $this->conference_start->format('j F Y'),
+                'conference_end' => $this->conference_end->format('j F Y'),
                 'published' => $this->published_at,
             ],
             'total_articles' => $this->article()->count(),

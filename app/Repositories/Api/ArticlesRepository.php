@@ -16,7 +16,7 @@ class ArticlesRepository extends Repository
 		'keyword' => 'like',
 		'title' => 'like',
 		'abstract' => 'like',
-		'authors' => 'like',
+		'author' => 'like',
 		'date' => 'like',
 	];
 	
