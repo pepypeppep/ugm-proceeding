@@ -65,7 +65,25 @@ class GuzzleService
 	 * request response
 	 * @var array
 	 */
-	protected $response;
+	public $response;
+
+	/**
+	 * response data
+	 * @var collection
+	 */
+	public $data;
+
+	/**
+	 * response metadata
+	 * @var collection
+	 */
+	public $meta;
+
+	/**
+	 * Pagination response links
+	 * @var [type]
+	 */
+	public $links;
 	
 	/**
 	 * set base url and inisiate Guzzle client
@@ -93,6 +111,8 @@ class GuzzleService
 		$this->setBody();
 		$response = $this->client->request($method, $uri, $this->body)->getBody();
 		$this->response = collect(json_decode($response, true));
+
+		$this->setResponseData()->setResponseMeta()->setResponselinks();
 
 		return $this->response;
 	}
@@ -139,5 +159,49 @@ class GuzzleService
 			'Accept' => 'application/json',
 			'Authorization' => session('api_token', null),
 		];
+	}
+
+	protected function setResponseData()
+	{
+		if (!empty($this->response['data'])) {
+			$this->data = $this->response['data'];
+		} else {
+			$this->data = [];
+		}
+
+		return $this;
+	}
+
+	protected function setResponseMeta()
+	{
+		if (!empty($this->response['meta'])) {
+			$this->meta = $this->response['meta'];
+		} else {
+			$this->meta = [];
+		}
+
+		return $this;
+	}
+
+	protected function setResponselinks()
+	{
+		if (!empty($this->response['links'])) {
+			$this->links = $this->response['links'];
+		} else {
+			$this->links = [];
+		}
+
+		return $this;
+	}
+
+	/**
+	 * Dynamically access the data's attributes.
+	 *
+	 * @param  string  $key
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+	    return $this->data[$key];
 	}
 }

@@ -32,5 +32,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proceedings', 'HomeController@service');
 Route::get('/users', 'HomeController@apiService');
+Route::get('/users/{user}', 'HomeController@findUser');
 
 Route::get('/try-login', 'LoginController@store');

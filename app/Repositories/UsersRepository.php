@@ -25,9 +25,9 @@ class UsersRepository extends GuzzleService
 	        'scope' => '*',
 		];
 
-		$response = $this->getResponse('POST', $this->uris['request_token']);
+		$this->getResponse('POST', $this->uris['request_token']);
 
-		return 'Bearer '.$response->get('access_token');
+		return 'Bearer '.$this->response->get('access_token');
 	}
 
 	public function getUser()
@@ -39,8 +39,15 @@ class UsersRepository extends GuzzleService
 		
 		$this->query = $query;
 
-		$response = $this->getResponse('GET', $this->uris['get_user']);
+		$this->getResponse('GET', $this->uris['get_user']);
 
-		return $response;
+		return $this;
+	}
+
+	public function findUser($id)
+	{
+		$this->getResponse('GET', $this->uris['get_user']."/$id");
+
+		return $this;
 	}
 }

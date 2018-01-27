@@ -42,6 +42,7 @@ class ArticlesRepository extends Repository
 	 */
 	public function create($request)
 	{
+		// Create new article instance
 		$article = $this->model->create([
 			'proceeding_id' => $request->proceeding_id,
 			'abstract' => $request->abstract,
@@ -51,6 +52,7 @@ class ArticlesRepository extends Repository
 			'keywords' => $request->keywords,
 		]);
 
+		// add authors
 		foreach ($request->authors as $key => $value) {
 			$article->author()->create([
 				'name' => $value['name'],
@@ -59,6 +61,8 @@ class ArticlesRepository extends Repository
 			]);
 		}
 
+		// upload file if article is not indexed 
+		// or create indexation if article is indexed
 		if ($request->file_type == 'pdf') {
 			$path = $request->file('file_pdf')->store('proceedings/'.$article->proceeding_id.'/articles');
 			$article->update(['file' => $path]);
@@ -69,6 +73,7 @@ class ArticlesRepository extends Repository
 			]);
 		}
 
+		// create identifiers based on doi
 		if (!empty($request->doi)) {
 			$article->article_identifier()->create([
 				'type' => 'doi',
