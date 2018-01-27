@@ -164,9 +164,9 @@ class GuzzleService
 	protected function setResponseData()
 	{
 		if (!empty($this->response['data'])) {
-			$this->data = $this->response['data'];
+			$this->data = collect($this->response['data']);
 		} else {
-			$this->data = [];
+			$this->data = collect($this->response);
 		}
 
 		return $this;
@@ -175,7 +175,7 @@ class GuzzleService
 	protected function setResponseMeta()
 	{
 		if (!empty($this->response['meta'])) {
-			$this->meta = $this->response['meta'];
+			$this->meta = collect($this->response['meta']);
 		} else {
 			$this->meta = [];
 		}
@@ -186,7 +186,7 @@ class GuzzleService
 	protected function setResponselinks()
 	{
 		if (!empty($this->response['links'])) {
-			$this->links = $this->response['links'];
+			$this->links = collect($this->response['links']);
 		} else {
 			$this->links = [];
 		}

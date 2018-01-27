@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\ProceedingsRepository;
 use App\Repositories\UsersRepository;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -46,5 +47,10 @@ class HomeController extends Controller
     public function findUser($user, UsersRepository $repo)
     {
         return $repo->findUser($user)->data;
+    }
+
+    public function proceedings(ProceedingsRepository $repo)
+    {
+       return $repo->getProceedings()->data;
     }
 }

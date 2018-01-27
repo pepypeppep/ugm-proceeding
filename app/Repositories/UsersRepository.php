@@ -11,7 +11,7 @@ class UsersRepository extends GuzzleService
 {
 	protected $uris = [
 		'request_token' => '/oauth/token',
-		'get_user' => 'user',
+		'base' => 'user',
 	];
 
 	public function getToken()
@@ -39,14 +39,14 @@ class UsersRepository extends GuzzleService
 		
 		$this->query = $query;
 
-		$this->getResponse('GET', $this->uris['get_user']);
+		$this->getResponse('GET', $this->uris['base']);
 
 		return $this;
 	}
 
 	public function findUser($id)
 	{
-		$this->getResponse('GET', $this->uris['get_user']."/$id");
+		$this->getResponse('GET', $this->uris['base']."/$id");
 
 		return $this;
 	}
