@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\ProceedingsRepository;
 use App\Repositories\UsersRepository;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
@@ -39,6 +40,27 @@ class HomeController extends Controller
 
     public function apiService(UsersRepository $repo)
     {
-        return $repo->getUser();
+        $repo->get();
+        return $repo->data;
+    }
+
+    public function findUser($user, UsersRepository $repo)
+    {
+        return $repo->find($user)->data;
+    }
+
+    public function proceedings(ProceedingsRepository $repo)
+    {
+       return $repo->get()->data;
+    }
+
+    public function findProceeding($proceeding, ProceedingsRepository $repo)
+    {
+        return $repo->find($proceeding)->articles->first();
+    }
+
+    public function storeProceeding(ProceedingsRepository $repo)
+    {
+        return $repo->store();
     }
 }

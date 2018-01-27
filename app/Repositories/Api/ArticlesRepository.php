@@ -42,41 +42,45 @@ class ArticlesRepository extends Repository
 	 */
 	public function create($request)
 	{
-		$articles = collect([]);
+		// Create new article instance
+		$article = $this->model->create([
+			'proceeding_id' => $request->proceeding_id,
+			'abstract' => $request->abstract,
+			'end_page' => $request->end_page,
+			'title' => $request->title,
+			'start_page' => $request->start_page,
+			'keywords' => $request->keywords,
+		]);
 
-		foreach ($request->title as $key => $value) {
-			$article = $this->model->create([
-				'proceeding_id' => $request->proceeding_id,
-				'abstract' => $request->abstract[$key],
-				'end_page' => $request->end_page[$key],
-				'title' => $request->title[$key],
-				'start_page' => $request->start_page[$key],
-				'keywords' => $request->keywords[$key],
+		// add authors
+		foreach ($request->authors as $key => $value) {
+			$article->author()->create([
+				'name' => $value['name'],
+				'affiliation' => $value['affiliation'],
+				'email' => $value['email'],
 			]);
-
-			foreach ($request->author_name[$key] as $key2 => $value2) {
-				$article->author()->create([
-					'name' => $request->author_name[$key][$key2],
-					'affiliation' => $request->author_affiliation[$key][$key2],
-					'email' => $request->author_email[$key][$key2],
-				]);
-			}
-
-			if ($request->file_type[$key] == 'pdf') {
-				$path = $request->file('file_pdf')[$key]->store('proceedings/'.$article->proceeding_id.'/articles');
-				$article->update(['file' => $path]);
-			}
-
-			if (!empty($request->doi[$key])) {
-				$article->article_identifier()->create([
-					'type' => 'doi',
-					'code' => $request->doi[$key],
-				]);
-			}
-
-			$articles->push($article->load('author'));
 		}
 
-		return $articles;
+		// upload file if article is not indexed 
+		// or create indexation if article is indexed
+		if ($request->file_type == 'pdf') {
+			$path = $request->file('file_pdf')->store('proceedings/'.$article->proceeding_id.'/articles');
+			$article->update(['file' => $path]);
+		} else {
+			$article->indexation()->create([
+				'type' => $request->file_type,
+				'link' => $request->file_link,
+			]);
+		}
+
+		// create identifiers based on doi
+		if (!empty($request->doi)) {
+			$article->article_identifier()->create([
+				'type' => 'doi',
+				'code' => $request->doi,
+			]);
+		}
+
+		return $article->load('author');
 	}
 }

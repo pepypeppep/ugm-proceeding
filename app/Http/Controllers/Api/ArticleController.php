@@ -71,7 +71,7 @@ class ArticleController extends Controller
 
     public function store(StoreArticles $request, Repository $repository)
     {
-        return new ArticlesCollection($repository->create($request));
+        return new Articles($repository->create($request));
     }
 
 }
