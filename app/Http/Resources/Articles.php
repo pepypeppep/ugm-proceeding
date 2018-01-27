@@ -33,6 +33,13 @@ class Articles extends Resource
         ];
     }
 
+    public function with($request)
+    {
+        return [
+            'status' => 'success'
+        ];
+    }
+
     /**
      * Check if the current url contains the given string
      * @param  string $url 

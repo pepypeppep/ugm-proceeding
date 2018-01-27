@@ -62,6 +62,11 @@ class ArticlesRepository extends Repository
 		if ($request->file_type == 'pdf') {
 			$path = $request->file('file_pdf')->store('proceedings/'.$article->proceeding_id.'/articles');
 			$article->update(['file' => $path]);
+		} else {
+			$article->indexation()->create([
+				'type' => $request->file_type,
+				'link' => $request->file_link,
+			]);
 		}
 
 		if (!empty($request->doi)) {
@@ -71,6 +76,6 @@ class ArticlesRepository extends Repository
 			]);
 		}
 
-		return $article;
+		return $article->load('author');
 	}
 }
