@@ -14,7 +14,7 @@ class RequestFailed extends \Exception
 	function __construct($response, $input)
 	{
 		$this->response = $response;
-		$this->input = $input;
+		$this->input = $input->getBody();
 	}
 	
 	public function render($request)

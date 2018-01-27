@@ -112,15 +112,18 @@ class GuzzleService
 	{
 		$this->setBody();
 
+		// Make a request. Throw the RequestFailed exception if failed
 		try {
 			$request = $this->client->request($method, $uri, $this->body);
 		} catch (ClientException $e) {
 			throw new RequestFailed($e->getResponse(), $e->getRequest());
 		}
 
+		// Get response body if success
 		$response = $request->getBody();
 		$this->response = collect(json_decode($response, true));
 
+		// Set data, meta, and links property
 		$this->setResponseData()->setResponseMeta()->setResponselinks();
 
 		return $this->response;
@@ -170,6 +173,10 @@ class GuzzleService
 		];
 	}
 
+	/**
+	 * set response data property
+	 * if API body doesn't have data, set response as data instead
+	 */
 	protected function setResponseData()
 	{
 		if (!empty($this->response['data'])) {
@@ -181,6 +188,9 @@ class GuzzleService
 		return $this;
 	}
 
+	/**
+	 * set response metadata
+	 */
 	protected function setResponseMeta()
 	{
 		if (!empty($this->response['meta'])) {
@@ -192,6 +202,9 @@ class GuzzleService
 		return $this;
 	}
 
+	/**
+	 * set response links
+	 */
 	protected function setResponselinks()
 	{
 		if (!empty($this->response['links'])) {

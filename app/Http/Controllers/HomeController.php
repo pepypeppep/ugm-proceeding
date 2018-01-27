@@ -40,7 +40,7 @@ class HomeController extends Controller
 
     public function apiService(UsersRepository $repo)
     {
-        $repo->getUser();
+        $repo->get();
         return $repo->data;
     }
 
