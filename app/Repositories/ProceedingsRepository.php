@@ -14,9 +14,23 @@ class ProceedingsRepository extends GuzzleService
 		'base' => 'proceedings',
 	];
 
-	public function getProceedings()
+	public function get()
 	{
 		$this->getResponse('GET', $this->uris['base']);
+
+		return $this;
+	}
+
+	public function find($id)
+	{
+		$this->getResponse('GET', $this->uris['base']."/$id");
+
+		return $this;
+	}
+
+	public function store()
+	{
+		$this->getResponse('POST', $this->uris['base']);
 
 		return $this;
 	}

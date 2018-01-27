@@ -31,6 +31,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/proceedings', 'HomeController@proceedings');
+Route::get('/proceedings/post', 'HomeController@storeProceeding');
+Route::get('/proceedings/{proceeding}', 'HomeController@findProceeding');
 Route::get('/users', 'HomeController@apiService');
 Route::get('/users/{user}', 'HomeController@findUser');
 

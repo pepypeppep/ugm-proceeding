@@ -46,11 +46,21 @@ class HomeController extends Controller
 
     public function findUser($user, UsersRepository $repo)
     {
-        return $repo->findUser($user)->data;
+        return $repo->find($user)->data;
     }
 
     public function proceedings(ProceedingsRepository $repo)
     {
-       return $repo->getProceedings()->data;
+       return $repo->get()->data;
+    }
+
+    public function findProceeding($proceeding, ProceedingsRepository $repo)
+    {
+        return $repo->find($proceeding)->articles->first();
+    }
+
+    public function storeProceeding(ProceedingsRepository $repo)
+    {
+        return $repo->store();
     }
 }

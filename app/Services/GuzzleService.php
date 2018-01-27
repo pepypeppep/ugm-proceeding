@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\RequestFailed;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -109,7 +111,14 @@ class GuzzleService
 	public function getResponse($method, $uri)
 	{
 		$this->setBody();
-		$response = $this->client->request($method, $uri, $this->body)->getBody();
+
+		try {
+			$request = $this->client->request($method, $uri, $this->body);
+		} catch (ClientException $e) {
+			throw new RequestFailed($e->getResponse(), $e->getRequest());
+		}
+
+		$response = $request->getBody();
 		$this->response = collect(json_decode($response, true));
 
 		$this->setResponseData()->setResponseMeta()->setResponselinks();
@@ -202,6 +211,10 @@ class GuzzleService
 	 */
 	public function __get($key)
 	{
+		if (is_array($this->data[$key])) {
+			return collect($this->data[$key]);
+		}
+
 	    return $this->data[$key];
 	}
 }

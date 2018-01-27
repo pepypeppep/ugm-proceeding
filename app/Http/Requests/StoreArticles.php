@@ -32,6 +32,7 @@ class StoreArticles extends FormRequest
             'file_link' => 'string|required_if:file_type,scopus,doaj',
             'file_pdf' => 'mimes:pdf|required_if:file_type,pdf',
             'keywords' => 'required|string',
+            'proceeding_id' => 'required|exists:proceedings,id',
             'title' => 'required|string',
             'authors.*.affiliation' => 'required|string',
             'authors.*.email' => 'required|email',

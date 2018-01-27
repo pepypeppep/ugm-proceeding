@@ -45,7 +45,7 @@ class UsersRepository extends GuzzleService
 	 * get collection of users
 	 * @return Collection 
 	 */
-	public function getUser()
+	public function get()
 	{
 		$query = request()->validate([
 			'name' => 'string',
@@ -59,7 +59,7 @@ class UsersRepository extends GuzzleService
 		return $this;
 	}
 
-	public function findUser($id)
+	public function find($id)
 	{
 		$this->getResponse('GET', $this->uris['base']."/$id");
 
