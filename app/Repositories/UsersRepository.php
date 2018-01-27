@@ -9,13 +9,23 @@ use App\Services\GuzzleService;
 */
 class UsersRepository extends GuzzleService
 {
+	/**
+	 * Define base uris here
+	 * avoid to directly specify the uri on the method
+	 * @var array
+	 */
 	protected $uris = [
 		'request_token' => '/oauth/token',
 		'base' => 'user',
 	];
 
+	/**
+	 * get access token
+	 * @return string Bearer token
+	 */
 	public function getToken()
-	{
+	{	
+		// Specify the forms parameter
 		$this->form_params = [
 	        'grant_type' => 'password',
 	        'client_id' => env('API_CLIENT_ID', false),
@@ -25,11 +35,16 @@ class UsersRepository extends GuzzleService
 	        'scope' => '*',
 		];
 
+		// Make request to API endpoint and get the response
 		$this->getResponse('POST', $this->uris['request_token']);
 
-		return 'Bearer '.$this->response->get('access_token');
+		return 'Bearer '.$this->data->get('access_token');
 	}
 
+	/**
+	 * get collection of users
+	 * @return Collection 
+	 */
 	public function getUser()
 	{
 		$query = request()->validate([
