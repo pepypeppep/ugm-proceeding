@@ -1,5 +1,7 @@
 @extends('dashboard.layouts.master')
 
+@section('title', 'Proceedings Management')
+
 @section('header')
   <section class="header py-5">
     <div class="row justify-content-between">
@@ -18,7 +20,7 @@
     <div class="row">
       <!-- SIDEBAR -->
       @include('dashboard.proceeding.sidebar')
-      
+
       <!-- SEARCH AND SORT -->
       <div class="col-md-10 pl-lg-5">
         <form class="form-inline mb-3">
@@ -45,101 +47,33 @@
         <!-- ARTICLE LIST -->
         <div class="card article-card">
           <div class="card-body">
-            <!-- ARTICLE ITEMS -->
-            <div class="d-md-flex flex-row justify-content-between">
-              <div class="paper-info d-flex">
-                <i class="fa fa-file-text-o fa-2x p-3"></i>
-                <p class="m-0 pl-2">
-                  <a href="detail.html" class="text-primary"><b>Proceeding of ICTA 2017</b></a> <br>
-                  26&ndash;27 November 2017, Eastparc Hotel, Yogyakarta, Indonesia. <br>
-                  <span class="text-muted">Draft</span>
-                </p>
-              </div>
-              <div class="action text-right">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                  <button type="button" class="btn btn-outline-secondary">View</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Trash</a>
-                      <a class="dropdown-item" href="#">Metrics</a>
+            @foreach ($proceedings->data as $proceeding)
+              <div class="d-md-flex flex-row justify-content-between">
+                <div class="paper-info d-flex">
+                  <i class="fa fa-file-text-o fa-2x p-3"></i>
+                  <p class="m-0 pl-2">
+                    <a href="detail.html" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
+                    {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
+                    <span class="text-muted">{{ $proceeding['status'] }}</span>
+                  </p>
+                </div>
+                <div class="action text-right">
+                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-outline-secondary">View</button>
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Trash</a>
+                        <a class="dropdown-item" href="#">Metrics</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <hr>
-            <!-- ARTICLE ITEMS -->
-            <div class="d-md-flex flex-row justify-content-between">
-              <div class="paper-info d-flex">
-                <i class="fa fa-file-text-o fa-2x p-3"></i>
-                <p class="m-0 pl-2">
-                  <b class="text-primary">Proceeding of ICTA 2017</b> <br>
-                  26&ndash;27 November 2017, Eastparc Hotel, Yogyakarta, Indonesia. <br>
-                  <span class="text-muted">Draft</span>
-                </p>
-              </div>
-              <div class="action text-right">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                  <button type="button" class="btn btn-outline-secondary">View</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Trash</a>
-                      <a class="dropdown-item" href="#">Metrics</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <!-- ARTICLE ITEMS -->
-            <div class="d-md-flex flex-row justify-content-between">
-              <div class="paper-info d-flex">
-                <i class="fa fa-file-text-o fa-2x p-3"></i>
-                <p class="m-0 pl-2">
-                  <b class="text-primary">Proceeding of ICTA 2017</b> <br>
-                  26&ndash;27 November 2017, Eastparc Hotel, Yogyakarta, Indonesia. <br>
-                  <span class="text-muted">Draft</span>
-                </p>
-              </div>
-              <div class="action text-right">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                  <button type="button" class="btn btn-outline-secondary">View</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Trash</a>
-                      <a class="dropdown-item" href="#">Metrics</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <!-- ARTICLE ITEMS -->
-            <div class="d-md-flex flex-row justify-content-between">
-              <div class="paper-info d-flex">
-                <i class="fa fa-file-text-o fa-2x p-3"></i>
-                <p class="m-0 pl-2">
-                  <b class="text-primary">Proceeding of ICTA 2017</b> <br>
-                  26&ndash;27 November 2017, Eastparc Hotel, Yogyakarta, Indonesia. <br>
-                  <span class="text-muted">Draft</span>
-                </p>
-              </div>
-              <div class="action text-right">
-                <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                  <button type="button" class="btn btn-outline-secondary">View</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Trash</a>
-                      <a class="dropdown-item" href="#">Metrics</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              @if (!$loop->last)
+                <hr>
+              @endif
+            @endforeach
             <!-- END OF ITEM -->
           </div>
         </div>

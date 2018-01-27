@@ -53,6 +53,7 @@ class Proceedings extends Resource
             'back_cover' => $this->back_cover_url,
             'status' => $this->status,
             'identifiers' => $this->identifiers,
+            'location' => $this->location,
             'organizer' => $this->organizer,
             'subjects' => $this->subject->pluck('name'),
             'date' => [

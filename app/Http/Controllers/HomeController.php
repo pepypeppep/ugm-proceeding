@@ -27,30 +27,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-    public function apiService(UsersRepository $repo)
-    {
-        $repo->get();
-        return $repo->data;
-    }
-
-    public function findUser($user, UsersRepository $repo)
-    {
-        return $repo->find($user)->data;
-    }
-
-    public function proceedings(ProceedingsRepository $repo)
-    {
-       return $repo->get()->data;
-    }
-
-    public function findProceeding($proceeding, ProceedingsRepository $repo)
-    {
-        return $repo->find($proceeding)->articles->first();
-    }
-
-    public function storeProceeding(ProceedingsRepository $repo)
-    {
-        return $repo->store();
-    }
 }

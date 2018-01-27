@@ -11,18 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.proceeding.index');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/proceedings', 'HomeController@proceedings');
-Route::get('/proceedings/post', 'HomeController@storeProceeding');
-Route::get('/proceedings/{proceeding}', 'HomeController@findProceeding');
 Route::get('/users', 'HomeController@apiService');
 Route::get('/users/{user}', 'HomeController@findUser');
 
 Route::get('/try-login', 'LoginController@store');
+
+Route::group(['prefix' => 'proceedings'], function(){
+	Route::get('/', 'Admin\ProceedingController@index');
+});
