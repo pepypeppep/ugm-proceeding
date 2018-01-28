@@ -39,7 +39,13 @@ class ProceedingsRepository extends Repository
 
 	public function getAll($queries = null)
 	{
-		return $this->filterSort($queries)->with('subject')->paginate('10')->appends(request()->except('page'));
+		$proceedings = $this->filterSort($queries);
+
+		if (empty(auth('api')->user())) {
+			$proceedings = $proceedings->whereNotNull('published_at');
+		}
+
+		return $proceedings->with('subject')->paginate('10')->appends(request()->except('page'));
 	}
 
 }
