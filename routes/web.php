@@ -23,8 +23,3 @@ Route::get('/try-login', 'LoginController@store');
 Route::group(['prefix' => 'proceedings'], function(){
 	Route::get('/', 'Admin\ProceedingController@index')->name('proceeding.index');
 });
-
-Route::get('/token', function ()
-{
-	return session('api_token');
-});
