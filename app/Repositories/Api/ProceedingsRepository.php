@@ -40,9 +40,7 @@ class ProceedingsRepository extends Repository
 
 	public function getAll($queries = null)
 	{
-		$proceedings = $this->filterSort($queries);
-
-		return $proceedings->with('subject')->paginate('10')->appends(request()->except('page'));
+		return $this->filterSort($queries)->with('subject')->paginate('10')->appends(request()->except('page'));
 	}
 
 }
