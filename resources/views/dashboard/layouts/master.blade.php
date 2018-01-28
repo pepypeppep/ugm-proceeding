@@ -29,11 +29,17 @@
     
     <div class="container-fluid pt-5 px-md-5">
 
-      <!-- HEADER -->
-      @yield('header')
+      @if (count($errors))
+        @include('dashboard.layouts.error') 
+      @else
+        <!-- HEADER -->
+        @yield('header')
 
-      <!-- BODY -->
-      @yield('content')
+        <!-- BODY -->
+        @yield('content')
+      @endif
+
+      
     </div>
 
     <!-- Optional JavaScript -->
