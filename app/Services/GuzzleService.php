@@ -97,8 +97,6 @@ class GuzzleService
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
 		]);
-
-		$this->headers = $this->setHeaders();
 	}
 
 	/**
@@ -153,9 +151,7 @@ class GuzzleService
 			$body['multipart'] = $this->multipart;
 		}
 
-		if (!empty($this->headers)) {
-			$body['headers'] = $this->headers;
-		}
+		$body['headers'] = $this->setHeaders();
 
 		$this->body = $body;
 		return $this;
