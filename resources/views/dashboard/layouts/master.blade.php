@@ -29,15 +29,11 @@
     
     <div class="container-fluid pt-5 px-md-5">
 
-      @if (count($errors))
-        @include('dashboard.layouts.error') 
-      @else
-        <!-- HEADER -->
-        @yield('header')
+      <!-- HEADER -->
+      @yield('header')
 
-        <!-- BODY -->
-        @yield('content')
-      @endif
+      <!-- BODY -->
+      @yield('content')
 
       
     </div>
