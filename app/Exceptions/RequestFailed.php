@@ -11,16 +11,17 @@ class RequestFailed extends \Exception
 
 	public $input;
 
-	function __construct($response, $input)
+	function __construct($response = [], $input = [])
 	{
 		$this->response = $response;
-		$this->input = $input->getBody();
+		$this->input = $input;
 	}
 	
 	public function render($request)
 	{
 		$error = $this->getErrorData();
-		return $error;
+		
+		return view('dashboard.layouts.error');
 	}
 
 	public function getErrorData()
