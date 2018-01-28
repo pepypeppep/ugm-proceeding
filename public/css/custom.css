@@ -1,0 +1,118 @@
+/*change default colour and font*/
+body {
+	color: rgb(72, 72, 72);
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+/*
+* MODIFY NAV ITEMS
+*/
+/*add margin to icon on nav item*/
+.nav-item a i.fa {
+	margin-right: 8px;
+}
+
+.nav-item, .nav-item a {
+	color: grey;
+}
+
+.nav-link.active {
+	font-weight: 700;
+	color: #3b439c;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+	background-color: #3b77a4;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+	color: #3b77a4;
+	font-weight: 700;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #3b77a4;
+  background-color: #fff;
+  border-color: #fff #fff #3b77a4 #fff;
+  border-bottom: 3px solid;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.nav.scrollable-nav {
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.nav.scrollable-nav a {
+    display: inline-block;
+    float: none;
+}
+
+/*
+* PROCEEDINGS LIST CLASS
+*/
+.paper-info, .action {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.list-group-hover li:hover {
+	background-color: rgba(0, 0, 0, 0.075);
+}
+
+/*make sticky nav below the navbar*/
+.sticky-top.sticky-nav {
+	top: 50px;
+	z-index: 1010;
+	padding: 20px 0px 0px 0px;
+}
+
+/*
+* ARTICLE LIST
+*/
+
+ul.articles {
+	padding-left: 0;
+}
+
+.row.article-item {
+/*	margin-left: 0.1rem;
+	margin-right: 0.1rem;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
+}
+
+.modal-custom {
+	width: 50%;
+}
+.modal-custom2 {
+	width: 40%;
+}
+.forms-footer {
+	position: fixed;
+	float: right;
+	right: 25px;
+	top: 200px;
+	padding: 20px 10px 20px 10px;
+}
+
+/*
+*
+*/
+@media(min-width: 768px){
+	.w-md-25 {
+		width: 25% !important;
+	}
+}
+
+.form-separator {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+	margin-bottom: 1rem;
+}
