@@ -7,19 +7,16 @@ namespace App\Exceptions;
 */
 class RequestFailed extends \Exception
 {
-	public $response;
+	public $e;
 
-	public $input;
-
-	function __construct($response = [], $input = [])
+	function __construct($e)
 	{
-		$this->response = $response;
-		$this->input = $input;
+		$this->e = $e;
 	}
 	
 	public function render($request)
 	{
-		$error = $this->getErrorData();
+		// $error = $this->getErrorData();
 		
 		return view('dashboard.layouts.error');
 	}
