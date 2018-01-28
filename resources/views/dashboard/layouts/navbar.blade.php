@@ -7,13 +7,16 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">Proceedings</a>
+      <li class="nav-item">
+        <a class="nav-link" href="/proceedings">Proceedings</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="report.html">Report</a>
+        <a class="nav-link" href="#">Users</a>
       </li>
-      <li class="nav-item dropdown">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Subjects</a>
+      </li>
+      {{-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Manage
         </a>
@@ -22,7 +25,7 @@
           <a class="dropdown-item" href="subject.html">Subject</a>
           <a class="dropdown-item" href="institution.html">Institution</a>
         </div>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </nav>

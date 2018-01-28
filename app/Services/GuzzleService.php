@@ -97,8 +97,6 @@ class GuzzleService
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
 		]);
-
-		$this->headers = $this->setHeaders();
 	}
 
 	/**
@@ -115,8 +113,8 @@ class GuzzleService
 		// Make a request. Throw the RequestFailed exception if failed
 		try {
 			$request = $this->client->request($method, $uri, $this->body);
-		} catch (ClientException $e) {
-			throw new RequestFailed($e->getResponse(), $e->getRequest());
+		} catch (\Exception $e) {
+			throw new RequestFailed($e);
 		}
 
 		// Get response body if success
@@ -153,9 +151,7 @@ class GuzzleService
 			$body['multipart'] = $this->multipart;
 		}
 
-		if (!empty($this->headers)) {
-			$body['headers'] = $this->headers;
-		}
+		$body['headers'] = $this->setHeaders();
 
 		$this->body = $body;
 		return $this;

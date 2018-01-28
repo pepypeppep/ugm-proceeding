@@ -16,7 +16,11 @@ class ProceedingsRepository extends GuzzleService
 
 	public function get()
 	{
-		$this->getResponse('GET', $this->uris['base'].'ss');
+		$this->query = [
+			'status' => request('tab'),
+		];
+
+		$this->getResponse('GET', $this->uris['base']);
 
 		return $this;
 	}

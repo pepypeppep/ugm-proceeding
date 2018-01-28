@@ -23,8 +23,8 @@
 
       <!-- SEARCH AND SORT -->
       <div class="col-md-10 pl-lg-5">
-        <form class="form-inline mb-3">
-          <input class="form-control mb-2 mb-md-0 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline mb-3" method="GET">
+          <input class="form-control mb-2 mb-md-0 mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
           <div class="input-group">
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
               <option selected>Subject...</option>
@@ -47,33 +47,41 @@
         <!-- ARTICLE LIST -->
         <div class="card article-card">
           <div class="card-body">
-            @foreach ($proceedings->data as $proceeding)
-              <div class="d-md-flex flex-row justify-content-between">
-                <div class="paper-info d-flex">
-                  <i class="fa fa-file-text-o fa-2x p-3"></i>
-                  <p class="m-0 pl-2">
-                    <a href="detail.html" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
-                    {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
-                    <span class="text-muted">{{ $proceeding['status'] }}</span>
-                  </p>
-                </div>
-                <div class="action text-right">
-                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <button type="button" class="btn btn-outline-secondary">View</button>
-                    <div class="btn-group" role="group">
-                      <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item" href="#">Trash</a>
-                        <a class="dropdown-item" href="#">Metrics</a>
+            @if (!empty($proceedings->data->first()))
+              @foreach ($proceedings->data as $proceeding)
+                <div class="d-md-flex flex-row justify-content-between">
+                  <div class="paper-info d-flex">
+                    <i class="fa fa-file-text-o fa-2x p-3"></i>
+                    <p class="m-0 pl-2">
+                      <a href="detail.html" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
+                      {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
+                      <span class="text-muted">{{ $proceeding['status'] }}</span>
+                    </p>
+                  </div>
+                  <div class="action text-right">
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                      <button type="button" class="btn btn-outline-secondary">View</button>
+                      <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                          <a class="dropdown-item" href="#">Trash</a>
+                          <a class="dropdown-item" href="#">Metrics</a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                @if (!$loop->last)
+                  <hr>
+                @endif
+              @endforeach
+            @else
+              <div class="text-center py-4">
+                <i class="fa fa-file-text-o fa-5x p-3"></i>
+                <h2>No records found</h2>
+                <h5 style="font-weight: 300">Please try again with different keywords or status</h5>
               </div>
-              @if (!$loop->last)
-                <hr>
-              @endif
-            @endforeach
+            @endif            
             <!-- END OF ITEM -->
           </div>
         </div>
