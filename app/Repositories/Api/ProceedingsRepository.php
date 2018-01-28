@@ -22,10 +22,11 @@ class ProceedingsRepository extends Repository
 	* @var array('field' => 'query operator')
 	*/
 	protected $fields = [
-		'keyword' => 'like',
-		'name' => 'like',
 		'alias' => 'like',
 		'date' => 'like',
+		'keyword' => 'like',
+		'name' => 'like',
+		'status' => 'like',
 		'subject' => '=',
 	];
 	
@@ -40,10 +41,6 @@ class ProceedingsRepository extends Repository
 	public function getAll($queries = null)
 	{
 		$proceedings = $this->filterSort($queries);
-
-		if (empty(auth('api')->user())) {
-			$proceedings = $proceedings->whereNotNull('published_at');
-		}
 
 		return $proceedings->with('subject')->paginate('10')->appends(request()->except('page'));
 	}

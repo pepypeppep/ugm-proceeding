@@ -75,6 +75,7 @@ class ProceedingController extends Controller
             'alias' => 'string',
             'date' => 'string',
             'subject' => 'integer',
+            'status' => 'string',
             'sort' => [
                 'string', 
                 'regex:(asc|desc)',
