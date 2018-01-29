@@ -36,7 +36,7 @@ class Controller extends BaseController
      *   description="All proceeding operations",
      * )
      * @SWG\Tag(
-     *   name="article",
+     *   name="articles",
      *   description="All articles operations"
      * )
      * @SWG\Tag(

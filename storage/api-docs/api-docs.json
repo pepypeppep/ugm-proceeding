@@ -6,6 +6,47 @@
     },
     "basePath": "/api",
     "paths": {
+        "/articles/": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Get all articles with query",
+                "description": "Return collection of articles",
+                "operationId": "getAllarticles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "keyword values that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author name that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Article's title that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/institutions/": {
             "get": {
                 "tags": [
@@ -68,6 +109,50 @@
                 "operationId": "getAllProceedings",
                 "produces": [
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "keyword values that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of the proceeding that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alias",
+                        "in": "query",
+                        "description": "Alias of the proceeding that need to be considered for filter. Ex: ICTA",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "subject id of the proceeding that need to be considered for filter. Ex: 3",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date of the conference ex: 2017-12",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
+                        "required": false,
+                        "type": "string"
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -586,7 +671,7 @@
             "description": "All proceeding operations"
         },
         {
-            "name": "article",
+            "name": "articles",
             "description": "All articles operations"
         },
         {

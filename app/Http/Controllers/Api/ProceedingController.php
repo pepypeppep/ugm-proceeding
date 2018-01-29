@@ -19,6 +19,48 @@ class ProceedingController extends Controller
     *     operationId="getAllProceedings",
     *     tags={"proceedings"},
     *     produces={"application/json"},
+    *     @SWG\Parameter(
+     *         name="keyword",
+     *         in="query",
+     *         description="keyword values that need to be considered for filter",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Name of the proceeding that need to be considered for filter",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="alias",
+     *         in="query",
+     *         description="Alias of the proceeding that need to be considered for filter. Ex: ICTA",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="subject",
+     *         in="query",
+     *         description="subject id of the proceeding that need to be considered for filter. Ex: 3",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="date",
+     *         in="query",
+     *         description="Date of the conference ex: 2017-12",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="sort",
+     *         in="query",
+     *         description="you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
+     *         required=false,
+     *         type="string",
+     *     ),
     *     @SWG\Response(
     *         response=200,
     *         description="successful operation"
@@ -33,6 +75,7 @@ class ProceedingController extends Controller
             'alias' => 'string',
             'date' => 'string',
             'subject' => 'integer',
+            'status' => 'string',
             'sort' => [
                 'string', 
                 'regex:(asc|desc)',
