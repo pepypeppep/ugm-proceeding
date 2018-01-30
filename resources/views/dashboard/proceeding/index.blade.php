@@ -23,8 +23,8 @@
 
       <!-- SEARCH AND SORT -->
       <div class="col-md-10 pl-lg-5">
-        <form class="form-inline mb-3" method="GET">
-          <input class="form-control mb-2 mb-md-0 mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search">
+        <form class="form-inline mb-3" method="GET" action="/proceedings">
+          <input class="form-control mb-2 mb-md-0 mr-sm-2" value="{{ request('keyword') }}" type="search" name="keyword" placeholder="Search" aria-label="Search">
           <div class="input-group">
             <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
               <option selected>Subject...</option>
@@ -85,6 +85,19 @@
             <!-- END OF ITEM -->
           </div>
         </div>
+        <nav class="mt-4" aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item @if($proceedings->meta['current_page'] == 1) disabled @endif">
+              <a class="page-link" href="{{ $proceedings->previousPage() }}" tabindex="-1">Previous</a>
+            </li>
+            @for ($i = 1; $i <= $proceedings->meta['last_page']; $i++)
+              <li class="page-item @if($i == $proceedings->meta['current_page']) active @endif)"><a class="page-link" href="{{ $proceedings->page($i) }}">{{ $i }}</a></li>
+            @endfor
+            <li class="page-item @if($proceedings->meta['current_page'] == $proceedings->meta['last_page']) disabled @endif">
+              <a class="page-link" href="{{ $proceedings->nextPage() }}">Next</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </section>

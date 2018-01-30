@@ -212,6 +212,21 @@ class GuzzleService
 		return $this;
 	}
 
+	public function page($page)
+	{
+		return url()->current().'?'.http_build_query(request()->merge(['page' => $page])->all());
+	}
+
+	public function nextPage()
+	{
+		return $this->page($this->meta['current_page']+1);
+	}
+
+	public function previousPage()
+	{
+		return $this->page($this->meta['current_page']-1);
+	}
+
 	/**
 	 * Dynamically access the data's attributes.
 	 *

@@ -17,12 +17,19 @@ class ProceedingController extends Controller
 
     public function index()
     {
+        $this->repository->query = [
+            'keyword' => request('keyword'),
+            'page' => request('page'),
+            'status' => request('tab'),
+        ];
+
     	$proceedings = $this->repository->get();
 
     	return view('dashboard.proceeding.index', compact('proceedings'));
     }
 
-    public function show($proceeding){
+    public function show($proceeding)
+    {
         $proceeding = $this->repository->find($proceeding);
 
         return view('dashboard.proceeding.detail', compact('proceeding'));
