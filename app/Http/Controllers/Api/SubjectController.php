@@ -39,13 +39,13 @@ class SubjectController extends Controller
      *     path="/subjects/{subjectsId}",
      *     summary="Find subject by Id",
      *     description="Returns a single subject",
-     *     operationId="getProceedingById",
+     *     operationId="getSubjectById",
      *     tags={"subjects"},
      *     produces={"application/json"},
      *     @SWG\Parameter(
      *         description="ID of subject to return",
      *         in="path",
-     *         name="subjectsId",
+     *         name="subjectId",
      *         required=true,
      *         type="integer",
      *         format="int64"
@@ -67,9 +67,33 @@ class SubjectController extends Controller
     public function show(Subject $subject)
     { 
         return new Subjects($subject);
-    }
+    } 
 
-    
+    /**
+     * @param  Repository
+     * @return Eloquent
+     * @SWG\Post(
+     *      path="/subjects",
+     *      tags={"subjects"},
+     *      operationId="addSubjects",
+     *      summary="Add new subject",
+     *      description="",
+     *      consumes={"application/json"},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Subjects object that needs to be added",
+     *          required=true,
+     *          @SWG\Schema(ref="#/definitions/Subjects"),    
+     *      ),
+     *      @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *      ),
+     *      security={{"Bearer":{}}}
+     * )
+     */    
     public function store(Repository $repository)
     {
         $data = request()->validate([
@@ -79,6 +103,56 @@ class SubjectController extends Controller
         ]);
 
         return new Subjects(Subject::create($data));
+    }
+
+    /**
+     * @param  Repository
+     * @return Eloquent
+     * @SWG\Put(
+     *      path="/subjects/{subjectId}",
+     *      tags={"subjects"},
+     *      operationId="updateSubject",
+     *      summary="Update existing subject",
+     *      description="",
+     *      consumes={"application/json"},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *         description="ID of subject to return",
+     *         in="path",
+     *         name="subjectId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Subject object that needs to be added",
+     *          required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="name", type="string", example="Forestry"),
+     *              @SWG\Property(property="created_at", type="date", example="2017-10-26"),
+     *              @SWG\Property(property="updated_at", type="date", example="2017-10-27"),
+     *          ),      
+     *      ),
+     *      @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *      ),
+     *      security={{"Bearer":{}}}
+     * )
+     */
+    public function update(Subject $subject)
+    {
+        $data = request()->validate([
+            'name' => 'required|string',
+            'created_at' => 'required|date',
+            'updated_at' => 'required|date',
+        ]);
+
+        $subject->update($data);
+
+        return new Subjects($subject);
     }
     
 } 
