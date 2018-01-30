@@ -21,4 +21,10 @@ class ProceedingController extends Controller
 
     	return view('dashboard.proceeding.index', compact('proceedings'));
     }
+
+    public function show($proceeding){
+        $proceeding = $this->repository->find($proceeding);
+
+        return view('dashboard.proceeding.detail', compact('proceeding'));
+    }
 }
