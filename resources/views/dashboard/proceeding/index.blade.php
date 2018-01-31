@@ -9,7 +9,7 @@
         <h2>Proceedings Management</h2>
       </div>
       <div class="col-md-2">
-        <button class="btn btn-block btn-primary" data-toggle="modal" data-target="#mydaftar" >Create new proceeding</button>
+        <a class="btn btn-block btn-primary" href="{{ route('proceeding.create') }}" >Create new proceeding</a>
       </div>
     </div>
   </section>

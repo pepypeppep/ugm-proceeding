@@ -51,14 +51,14 @@
               <div class="form-group row">
                 <div class="col-sm-4">
                   <label for="conference_start">Start date</label>
-                  <input name="conference_start" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('conference_start')) is-invalid @endif" id="conference_start" value="{{ request()->old('conference_start') }}" required>
+                  <input name="conference_start" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('conference_start')) is-invalid @endif" id="conference_start" value="{{ request()->old('conference_start') }}" required data-provide="datepicker" data-date-format="yyyy-mm-dd">
                   <div class="invalid-feedback">{{ $errors->first('conference_start') }}</div>
                 </div>
               </div>
               <div class="form-group row">
                 <div class="col-sm-4">
                   <label for="conference_end">End date</label>
-                  <input value="{{ request()->old('conference_end') }}" name="conference_end" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('conference_end')) is-invalid @endif" id="conference_end">
+                  <input value="{{ request()->old('conference_end') }}" name="conference_end" type="text" class="form-control datepicker mb-2 mb-sm-0 @if($errors->has('conference_end')) is-invalid @endif" id="conference_end" data-provide="datepicker" data-date-format="yyyy-mm-dd">
                   <div class="invalid-feedback">{{ $errors->first('conference_end') }}</div>
                 </div>
               </div>
