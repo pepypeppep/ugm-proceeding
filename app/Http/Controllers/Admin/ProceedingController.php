@@ -24,7 +24,7 @@ class ProceedingController extends Controller
             'page' => request('page'),
             'status' => request('tab'),
             'subject' => request('subject'),
-            'sort' => request('sort') ? : 'updated_at.desc',
+            'sort' => request('sort') ?: 'updated_at.desc',
         ];
 
     	$proceedings = $this->repository->get();
@@ -41,5 +41,26 @@ class ProceedingController extends Controller
         $proceeding = $this->repository->find($proceeding);
 
         return view('dashboard.proceeding.detail', compact('proceeding'));
+    }
+
+    public function create()
+    {
+        return view('dashboard.proceeding.create');
+    }
+
+    public function store()
+    {
+        $request = request()->validate([
+            'name' => 'required|string',
+            'alias' => 'required|string',
+            'organizer' => 'required|string',
+            'location' => 'string',
+            'conference_start' => 'required|date',
+            'conference_end' => 'date',
+        ]);
+
+        $proceeding = $this->repository->store($request);
+
+        return redirect(route('proceeding.show', ['proceeding' => $proceeding->id]));
     }
 }

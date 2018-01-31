@@ -28,8 +28,9 @@ class ProceedingsRepository extends GuzzleService
 		return $this;
 	}
 
-	public function store()
+	public function store($json)
 	{
+		$this->json = $json;
 		$this->getResponse('POST', $this->uris['base']);
 
 		return $this;

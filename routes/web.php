@@ -22,5 +22,7 @@ Route::get('/try-login', 'LoginController@store');
 
 Route::group(['prefix' => 'proceedings'], function(){
 	Route::get('/', 'Admin\ProceedingController@index')->name('proceeding.index');
+	Route::get('/create', 'Admin\ProceedingController@create')->name('proceeding.create');
 	Route::get('/{proceeding}', 'Admin\ProceedingController@show')->name('proceeding.show');
+	Route::post('/', 'Admin\ProceedingController@store')->name('proceeding.store');
 });

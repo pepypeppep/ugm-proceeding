@@ -102,11 +102,3 @@
     </div>
   </section>
 @endsection
-
-@section('script')
-  {{-- <script type="text/javascript">
-      $(function(){
-        $("#sortSelect").val("{{ request('sort') }}");
-      });
-    </script --}}>
-@endsection
