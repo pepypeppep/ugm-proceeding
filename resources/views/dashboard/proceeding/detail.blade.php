@@ -133,7 +133,7 @@
           <div class="col-md-3 mb-2">
             <form class="form">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." >
                 <span class="input-group-btn">
                   <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
                 </span>
@@ -148,7 +148,7 @@
             </select>
           </div>
           <div class="col-md-2 ml-auto mb-2 order-first order-md-3">
-            <a class="btn btn-block btn-primary" href="addnewarticle.html"><i class="fa fa-plus fa-fw mr-2"></i>Add New Article</a>
+            <a class="btn btn-block btn-primary" href="{{ route('article.create', ['proceeding' => $proceeding->id]) }}"><i class="fa fa-plus fa-fw mr-2"></i>Add New Article</a>
           </div>
         </div>
         <hr>

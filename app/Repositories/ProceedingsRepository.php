@@ -26,7 +26,7 @@ class ProceedingsRepository extends GuzzleService
 	}
 
 	public function find($id)
-	{
+	{ 
 		$this->getResponse('GET', $this->uris['base']."/$id");
 
 		return $this;
