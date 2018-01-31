@@ -23,21 +23,30 @@
 
       <!-- SEARCH AND SORT -->
       <div class="col-md-10 pl-lg-5">
-        <form class="form-inline mb-3" method="GET" action="/proceedings">
-          <input class="form-control mb-2 mb-md-0 mr-sm-2" value="{{ request('keyword') }}" type="search" name="keyword" placeholder="Search" aria-label="Search">
-          <div class="input-group">
-            <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected>Subject...</option>
-              <option>Web development</option>
-              <option>Microbiology</option>
-              <option>Food and Nutrition</option>
-            </select>
+        <form class="form-inline mb-3" method="GET" action="{{ request()->fullUrl() }}">
+          <div class="input-group  mb-2 mb-md-0 mr-sm-3">
+            <input class="form-control" value="{{ request('keyword') }}" type="search" name="keyword" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
+            </div>
           </div>
+          @foreach (request()->only('tab') as $key => $value)
+            <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+          @endforeach
+          {{-- <div class="input-group  mb-2 mr-sm-2 mb-sm-0">
+            <select class="custom-select" onchange="this.form.submit()" name="subject" id="inlineFormCustomSelect">
+              <option value="">Subject...</option>
+              @foreach ($subjects as $subject)
+                <option value="{{ $subject['id'] }}">{{ $subject['name'] }}</option>
+              @endforeach 
+            </select>
+          </div> --}}
           <div class="input-group ml-sm-auto">
-            <select class="custom-select mb-2 mb-sm-0" id="inlineFormCustomSelect">
-              <option selected>Sort by...</option>
-              <option>Creation date</option>
-              <option>Last updated</option>
+            <select class="custom-select mb-2 mb-sm-0" id="sortSelect" name="sort" onchange="this.form.submit()">
+              <option value="">Sort by...</option>
+              <option value="updated_at.desc" @if(request('sort') == 'updated_at.desc') selected @endif>Last updated</option>
+              <option value="created_at.asc" @if(request('sort') == 'created_at.asc') selected @endif>Oldest</option>
+              <option value="created_at.desc" @if(request('sort') == 'created_at.desc') selected @endif>Newest</option>
             </select>
           </div>
         </form>
@@ -49,16 +58,19 @@
           <div class="card-body">
             @if (!empty($proceedings->data->first()))
               @foreach ($proceedings->data as $proceeding)
-                <div class="d-md-flex flex-row justify-content-between">
-                  <div class="paper-info d-flex">
+                <div class="row justify-content-between">
+                  <div class="col-lg-8 paper-info d-flex">
                     <i class="fa fa-file-text-o fa-2x p-3"></i>
                     <p class="m-0 pl-2">
                       <a href="/proceedings/{{ $proceeding['id'] }}" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
                       {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
-                      <span class="text-muted">{{ $proceeding['status'] }}</span>
+                      <span class="text-muted">Last updated: {{ \Carbon\Carbon::parse($proceeding['updated_at'])->diffForHumans() }}</span>
                     </p>
                   </div>
-                  <div class="action text-right">
+                  <div class="col-lg-1 text-right">
+                    <span class="badge badge-secondary">{{ $proceeding['status'] }}</span>
+                  </div>
+                  <div class="col action text-right">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
                       <button type="button" class="btn btn-outline-secondary">View</button>
                       <div class="btn-group" role="group">
@@ -85,20 +97,16 @@
             <!-- END OF ITEM -->
           </div>
         </div>
-        <nav class="mt-4" aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <li class="page-item @if($proceedings->meta['current_page'] == 1) disabled @endif">
-              <a class="page-link" href="{{ $proceedings->previousPage() }}" tabindex="-1">Previous</a>
-            </li>
-            @for ($i = 1; $i <= $proceedings->meta['last_page']; $i++)
-              <li class="page-item @if($i == $proceedings->meta['current_page']) active @endif)"><a class="page-link" href="{{ $proceedings->page($i) }}">{{ $i }}</a></li>
-            @endfor
-            <li class="page-item @if($proceedings->meta['current_page'] == $proceedings->meta['last_page']) disabled @endif">
-              <a class="page-link" href="{{ $proceedings->nextPage() }}">Next</a>
-            </li>
-          </ul>
-        </nav>
+        @include('layouts.pagination', ['response' => $proceedings])
       </div>
     </div>
   </section>
+@endsection
+
+@section('script')
+  {{-- <script type="text/javascript">
+      $(function(){
+        $("#sortSelect").val("{{ request('sort') }}");
+      });
+    </script --}}>
 @endsection
