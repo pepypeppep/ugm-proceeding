@@ -61,6 +61,8 @@ class Proceedings extends Resource
                 'conference_end' => $this->conference_end->format('j F Y'),
                 'published' => $this->published_at,
             ],
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
             'total_articles' => $this->article()->count(),
             'articles' => Articles::collection($this->whenLoaded('article')),
         ];
