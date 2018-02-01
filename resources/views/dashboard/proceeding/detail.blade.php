@@ -130,22 +130,24 @@
       <!-- TAB PANE ARTICLES LIST -->
       <div class="tab-pane fade show " id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
         <div class="row pt-4">
-          <div class="col-md-3 mb-2">
-            <form class="form">
+          <div class="col-md-5 mb-2">
+            <form class="form-inline" method="GET" action="/proceedings/{{ $proceeding->id }}">
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." >
+                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." value="{{ request('keyword') }}" name="keyword">
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button"><i class="fa fa-search"></i></button>
+                  <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
                 </span>
               </div>
+              <div class="input-group ml-md-4 ml-0 mt-2 mt-md-0">
+                <select class="custom-select" id="inlineFormCustomSelect" name="sort" onchange="this.form.submit()">
+                  <option value="title.asc" @if(request('sort') == 'title.asc') selected @endif>Title A~Z</option>
+                  <option value="title.desc" @if(request('sort') == 'title.desc') selected @endif>Title Z~A</option>
+                  <option value="updated_at.desc" @if(request('sort') == 'updated_at.desc') selected @endif>Last updated</option>
+                  <option value="created_at.asc" @if(request('sort') == 'created_at.asc') selected @endif>Oldest</option>
+                  <option value="created_at.desc" @if(request('sort') == 'created_at.desc') selected @endif>Newest</option>
+                </select>
+              </div>
             </form>
-          </div>
-          <div class="col-md-2 mb-2">
-            <select class="custom-select" id="inlineFormCustomSelect">
-              <option selected>Sort by...</option>
-              <option>Most updated</option>
-              <option>Creation date</option>
-            </select>
           </div>
           <div class="col-md-2 ml-auto mb-2 order-first order-md-3">
             <a class="btn btn-block btn-primary" href="{{ route('article.create', ['proceeding' => $proceeding->id]) }}"><i class="fa fa-plus fa-fw mr-2"></i>Add New Article</a>
@@ -153,7 +155,7 @@
         </div>
         <hr>
         <!-- ARTICLES LIST -->
-        @if (!empty($proceeding->articles->first()))
+        @if (!empty($proceeding->articles))
           @foreach ($proceeding->articles as $article)
             <div class="row article-item">
               <div class="col-md-8">
