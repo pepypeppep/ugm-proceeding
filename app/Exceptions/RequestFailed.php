@@ -16,9 +16,11 @@ class RequestFailed extends \Exception
 	
 	public function render($request)
 	{
-		// $error = $this->getErrorData();
-		
-		return view('dashboard.layouts.error');
+		$error = json_decode($this->e->getResponse()->getBody(), true);
+
+		// return $errors;
+
+		return view('dashboard.layouts.error')->withErrors($error);
 	}
 
 	public function getErrorData()

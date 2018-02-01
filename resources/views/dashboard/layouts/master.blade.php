@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="/css/custom.css">
     <!-- Font Swesome CSS -->
     <link rel="stylesheet" href="/css/font-awesome.css">
+    {{-- DATEPICKER CSS --}}
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
     <!-- Favicons -->
@@ -43,6 +45,15 @@
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.js"></script>
     <script src="/js/bootstrap.js"></script>
+    {{-- DATE PICKER JS --}}
+    <script src="/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+      $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
+    </script>
 
     @yield('script')
   </body>
