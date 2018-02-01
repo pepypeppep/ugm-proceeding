@@ -7,20 +7,21 @@ namespace App\Exceptions;
 */
 class RequestFailed extends \Exception
 {
-	public $e;
+	public $code;
+	public $body;
 
 	function __construct($e)
 	{
-		$this->e = $e;
+		$this->code = $e->getStatusCode();
+		$this->body = $e->getBody();
 	}
 	
 	public function render($request)
 	{
-		$error = json_decode($this->e->getResponse()->getBody(), true);
+		$code = $this->code;
+		$body = $this->body;
 
-		// return $errors;
-
-		return view('dashboard.layouts.error')->withErrors($error);
+		return view('dashboard.layouts.error', compact('code'))->withErrors($body);
 	}
 
 	public function getErrorData()

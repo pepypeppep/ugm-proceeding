@@ -111,11 +111,7 @@ class GuzzleService
 		$this->setBody();
 
 		// Make a request. Throw the RequestFailed exception if failed
-		try {
-			$request = $this->client->request($method, $uri, $this->body);
-		} catch (ClientException $e) {
-			throw new RequestFailed($e);
-		}
+		$request = $this->client->request($method, $uri, $this->body);
 
 		// Get response body if success
 		$response = $request->getBody();
