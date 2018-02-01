@@ -13,15 +13,17 @@ class RequestFailed extends \Exception
 	function __construct($e)
 	{
 		$this->code = $e->getStatusCode();
-		$this->body = $e->getBody();
+		$this->body = json_decode($e->getBody(), true);
 	}
 	
 	public function render($request)
 	{
-		$code = $this->code;
-		$body = $this->body;
-
-		return view('dashboard.layouts.error', compact('code'))->withErrors($body);
+		if (in_array($this->code, [400, 404, 401, 403, 500])) {
+			$code = $this->code;
+			return view('dashboard.layouts.error', compact('code'))->withErrors($this->body);
+		} elseif ($this->code == 422) {
+			return redirect()->back()->withInput()->withErrors($this->body['errors']);
+		}
 	}
 
 }

@@ -50,16 +50,16 @@ class ProceedingController extends Controller
 
     public function store()
     {
-        $request = request()->validate([
-            'name' => 'required|string',
-            'alias' => 'required|string',
-            'organizer' => 'required|string',
-            'location' => 'string',
-            'conference_start' => 'required|date',
-            'conference_end' => 'date',
-        ]);
+        // $request = request()->validate([
+        //     'name' => 'required|string',
+        //     'alias' => 'required|string',
+        //     'organizer' => 'required|string',
+        //     'location' => 'string',
+        //     'conference_start' => 'required|date',
+        //     'conference_end' => 'date',
+        // ]);
 
-        $proceeding = $this->repository->store($request);
+        $proceeding = $this->repository->store(request()->all());
 
         return redirect(route('proceeding.show', ['proceeding' => $proceeding->id]));
     }
