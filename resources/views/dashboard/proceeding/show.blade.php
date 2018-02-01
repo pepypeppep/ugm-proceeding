@@ -134,9 +134,10 @@
             <form class="form-inline" method="GET" action="/proceedings/{{ $proceeding->id }}">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." value="{{ request('keyword') }}" name="keyword">
-                <span class="input-group-btn">
+                <div class="input-group-prepend">
                   <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
-                </span>
+                </div>
+                
               </div>
               <div class="input-group ml-md-4 ml-0 mt-2 mt-md-0">
                 <select class="custom-select" id="inlineFormCustomSelect" name="sort" onchange="this.form.submit()">

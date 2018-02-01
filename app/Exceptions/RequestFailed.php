@@ -24,24 +24,4 @@ class RequestFailed extends \Exception
 		return view('dashboard.layouts.error', compact('code'))->withErrors($body);
 	}
 
-	public function getErrorData()
-	{
-		$code = $this->response->getStatusCode();
-
-		switch ($code) {
-			case 404:
-				return [
-					'message' => 'Page not found'
-				];
-				break;
-
-			case 422:
-				return json_decode($this->response->getBody(), true);
-				break;
-			
-			default:
-				return 'Request errors';
-				break;
-		}
-	}
 }

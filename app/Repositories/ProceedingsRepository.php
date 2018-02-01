@@ -31,12 +31,12 @@ class ProceedingsRepository extends GuzzleService
             $this->articles = $this->articles->filter(function ($item) use ($keyword){
                 $title = stristr($item['title'], $keyword);
                 $authors = collect($item['authors'])->search(function ($item) use ($keyword){
-                                return stristr($item['name'],$keyword);
-                            }) !== false;
+                    return stristr($item['name'], $keyword);
+                }) !== false;
 
                 return $title || $authors; 
             });
-        }else{
+        } else{
             $this->articles = $this->articles;
         }
 

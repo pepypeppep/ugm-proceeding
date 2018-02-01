@@ -40,7 +40,7 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->find($proceeding);
 
-        return view('dashboard.proceeding.detail', compact('proceeding'));
+        return view('dashboard.proceeding.show', compact('proceeding'));
     }
 
     public function create()
