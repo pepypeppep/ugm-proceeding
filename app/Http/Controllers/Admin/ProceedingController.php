@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ProceedingsRepository;
+use App\Repositories\SubjectsRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ProceedingController extends Controller
 {
@@ -15,14 +17,27 @@ class ProceedingController extends Controller
     	$this->repository = $repository;
     }
 
-    public function index()
+    public function index(SubjectsRepository $subjects)
     {
-    	$proceedings = $this->repository->get();
+        $this->repository->query = [
+            'keyword' => request('keyword'),
+            'page' => request('page'),
+            'status' => request('tab'),
+            'subject' => request('subject'),
+            'sort' => request('sort') ? : 'updated_at.desc',
+        ];
 
-    	return view('dashboard.proceeding.index', compact('proceedings'));
+    	$proceedings = $this->repository->get();
+        $subjects = Cache::remember('subjects.list', 1200, function () use ($subjects)
+        {
+            return $subjects->get()->data;
+        });
+
+    	return view('dashboard.proceeding.index', compact('proceedings', 'subjects'));
     }
 
-    public function show($proceeding){
+    public function show($proceeding)
+    {
         $proceeding = $this->repository->find($proceeding);
 
         return view('dashboard.proceeding.detail', compact('proceeding'));
