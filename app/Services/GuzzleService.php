@@ -113,7 +113,7 @@ class GuzzleService
 		// Make a request. Throw the RequestFailed exception if failed
 		try {
 			$request = $this->client->request($method, $uri, $this->body);
-		} catch (\Exception $e) {
+		} catch (ClientException $e) {
 			throw new RequestFailed($e);
 		}
 
