@@ -27,7 +27,7 @@
               <div class="form-group row">
                 <div class="col-sm-9">
                   <label>Name</label>
-                  <textarea class="form-control @if($errors->has('name')) is-invalid @endif" name="name" id="name" rows="1" autofocus>{{ request()->old('name') }}</textarea>
+                  <textarea class="form-control @if($errors->has('name')) is-invalid @endif" name="name" id="name" rows="1" required autofocus>{{ request()->old('name') }}</textarea>
                   <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                 </div>
               </div>
