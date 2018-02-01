@@ -49,7 +49,10 @@
     <script src="/js/bootstrap-datepicker.min.js"></script>
 
     <script type="text/javascript">
-      // $('.datepicker').datepicker();
+      $('.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+      });
     </script>
 
     @yield('script')

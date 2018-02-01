@@ -151,6 +151,7 @@ class ProceedingController extends Controller
             'name' => 'required|string',
             'alias' => 'string',
             'organizer' => 'string',
+            'location' => 'string',
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
         ]);
