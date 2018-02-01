@@ -56,7 +56,6 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof ServerException) {
             throw new RequestFailed($exception->getResponse());
-            
         }
         return parent::render($request, $exception);
     }
