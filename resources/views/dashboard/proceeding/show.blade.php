@@ -96,7 +96,9 @@
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Subject area</h4>
-              
+              @foreach ($proceeding->subject as $subject)
+                
+              @endforeach
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Conference info</h4>
