@@ -29,7 +29,7 @@
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
             </div>
-          </div>
+          </div> 
           @foreach (request()->only('tab') as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
           @endforeach

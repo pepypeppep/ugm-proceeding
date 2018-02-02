@@ -15,6 +15,6 @@ class ArticleController extends Controller
 
     public function create()
     {
-    	return view('dashboard.proceeding.addarticle');
+    	return view('dashboard.proceeding.createarticle');
     }
 }

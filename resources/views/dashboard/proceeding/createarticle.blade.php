@@ -1,73 +1,15 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Proceeding Management - Onli</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/custom.css">
-    <!-- Font Swesome CSS -->
-    <link rel="stylesheet" href="/css/font-awesome.css">
-    <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png?v=3eKR9vjrYw">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png?v=3eKR9vjrYw">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png?v=3eKR9vjrYw">
-    <link rel="manifest" href="img/favicons/manifest.json?v=3eKR9vjrYw">
-    <link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg?v=3eKR9vjrYw" color="#3b77a4">
-    <link rel="shortcut icon" href="img/favicons/favicon.ico?v=3eKR9vjrYw">
-    <meta name="msapplication-config" content="img/favicons/browserconfig.xml?v=3eKR9vjrYw">
-    <meta name="theme-color" content="#ffffff">
-
-  </head>
-  <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        <img src="img/logos/logo-text.svg" height="30" class="d-inline-block align-top" alt="">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.html">Proceedings</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="report.html">Report</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Manage
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="user.html">Users</a>
-              <a class="dropdown-item" href="subject.html">Subject</a>
-              <a class="dropdown-item" href="institution.html">Institution</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    
-    <div class="container-fluid pt-5 px-md-5">
-
-      <!-- HEADER -->
-      <section class="header py-5">
-        <div class="row justify-content-between">
-          <div class="col-md-6 mb-3 mb-md-0">
-            <h2>Create articles</h2>
-          </div>
-          <div class="col-md-2">
-            <button onclick="addItem()" type="button" class="btn btn-block btn-primary"><i class="fa fa-plus fa-fw"></i> Add item</button>
-          </div>
+@extends('dashboard.layouts.master')
+@section('title', 'Create New Article')
+  @section('header')
+    <section class="header py-5">
+      <div class="row justify-content-between">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <h2>Create Articles</h2>
         </div>
-      </section>
-
+      </div>
+    </section>
+  @endsection
+  @section('content')
       <!-- BODY -->
       <section class="body pb-5">
         <div class="row">
@@ -138,7 +80,7 @@
                     </div>
                   </div>
                   <div class="form-separator mt-4 sticky-top sticky-nav bg-white">
-                    <div class="d-flex justify-content-between align-items-baseline">
+                    <div class="d-flex justify-content-between align-items-baseline author-custom">
                     <h5 >Author #1</h5>
                     <button onClick="addAuthor()" type="button" class="btn btn-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
                   </div>
@@ -167,12 +109,12 @@
           </div>
         </div>
       </section>
-    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/js/jquery-3.2.1.min.js"></script>
     <script src="/js/popper.js"></script>
+    <script src="/js/scrolling.js"></script>
     <script src="/js/bootstrap.js"></script>
 
     <script type="text/javascript">
@@ -220,5 +162,4 @@
           $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="affiliation['+index+']" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="affiliation['+index+']" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
       }
     </script>
-  </body>
-</html>
+    @endsection
