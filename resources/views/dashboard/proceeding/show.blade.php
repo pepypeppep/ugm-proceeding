@@ -90,15 +90,58 @@
             </div>
           </div>
           <div class="col-md-9">
-            <div class="mb-3">
+            <div class="mb-4">
               <h4 class="text-primary">Introduction</h4>
               {{ $proceeding->introduction }}
             </div>
-            <div class="mb-3">
-              <h4 class="text-primary">Subject area</h4>
-              @foreach ($proceeding->subject as $subject)
-                
-              @endforeach
+            <div class="mb-4">
+              <h4 class="text-primary mb-2">Subject area</h4>
+              <form id="subjectForm" method="POST" action="{{ route('proceeding.update.subjects', [$proceeding->id]) }}">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
+                @foreach ($proceeding->subjects as $subject)
+                  <div class="chip mr-2 mb-2">
+                    {{ $subject['name'] }}
+                    <input type="hidden" name="subject_id[{{ $loop->index }}]" value="{{ $subject['id'] }}">
+                    <span class="closebtn" onclick="deleteSubjects(this)">&times;</span>
+                  </div> 
+                @endforeach
+                <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#addSubjectModal">+ Add subject</button>
+              </form>
+              {{-- MODAL ADD SUBJECT --}}
+              <div class="modal"  id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Add Proceeding Subject</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="{{ route('proceeding.update.subjects', [$proceeding->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      {{ method_field('PUT') }}
+                      <div class="modal-body">
+                        @foreach ($proceeding->subjects as $subject)
+                          <input type="hidden" name="subject_id[{{ $loop->index+1 }}]" value="{{ $subject['id'] }}">
+                        @endforeach
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Select one subject</label>
+                          <select class="form-control" id="exampleFormControlSelect1" name="subject_id[0]">
+                            @foreach ($subjects as $subject)
+                              <option value="{{ $subject['id'] }}">{{ $subject['name'] }}</option>
+                            @endforeach
+                          </select>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Conference info</h4>
@@ -211,4 +254,13 @@
       </div>
     </div>
   </section>
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+    function deleteSubjects(element) {
+      element.parentElement.remove();  
+      document.getElementById("subjectForm").submit()
+    }
+  </script>
 @endsection

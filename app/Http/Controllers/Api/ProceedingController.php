@@ -228,6 +228,7 @@ class ProceedingController extends Controller
      *     tags={"proceedings"},
      *     consumes={"application/json"},
      *     summary="Update proceeding subjects",
+     *     produces="form",
      *     description="",
      *     operationId="updateSubjects",
      *     @SWG\Parameter(
@@ -238,18 +239,14 @@ class ProceedingController extends Controller
      *         required=true,
      *         type="integer"
      *     ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Proceeding object that needs to be added",
-     *          required=true,
-     *          @SWG\Schema(
-     *              type="array",
-     *              @SWG\Items(
-     *                  @SWG\Property(property="subject_id", type="integer", example=2)
-     *              )
-     *          ),      
-     *      ),
+     *     @SWG\Parameter(
+     *         description="Subject id",
+     *         format="int64",
+     *         in="query",
+     *         name="subject_id[0]",
+     *         required=true,
+     *         type="integer"
+     *     ),
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response="200",
@@ -261,11 +258,10 @@ class ProceedingController extends Controller
     public function updateSubjects(Proceeding $proceeding)
     {
         $data = request()->validate([
-            '*.subject_id' => 'required|int|exists:subjects,id'
+            'subject_id.*' => 'required|int|exists:subjects,id'
         ]);
 
-        $subjectsId = collect($data)->flatten();
-        $proceeding->subject()->sync($subjectsId);
+        $proceeding->subject()->sync($data['subject_id']);
 
         return new ProceedingsResource($proceeding);
     }
