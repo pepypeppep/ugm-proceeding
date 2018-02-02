@@ -210,8 +210,8 @@ class ProceedingController extends Controller
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
             'introduction' => 'string|max:2500',
-            'isbn' => 'digits:13',
-            'issn' => 'digits:8',
+            'isbn' => 'nullable|digits:13',
+            'issn' => 'nullable|digits:8',
         ]);
 
         $proceeding->update($data);

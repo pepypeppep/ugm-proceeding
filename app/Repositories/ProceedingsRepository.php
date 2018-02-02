@@ -16,6 +16,14 @@ class ProceedingsRepository extends GuzzleService
 
 	public function get()
 	{
+		$this->query = [
+		    'keyword' => request('keyword'),
+		    'page' => request('page'),
+		    'status' => request('tab'),
+		    'subject' => request('subject'),
+		    'sort' => request('sort') ?: 'updated_at.desc',
+		];
+
 		$this->getResponse('GET', $this->uris['base']);
 
 		return $this;
@@ -60,6 +68,14 @@ class ProceedingsRepository extends GuzzleService
 	{
 		$this->json = $json;
 		$this->getResponse('POST', $this->uris['base']);
+
+		return $this;
+	}
+
+	public function update($json, $id)
+	{
+		$this->json = $json;
+		$this->getResponse('PUT', $this->uris['base']."/$id");
 
 		return $this;
 	}

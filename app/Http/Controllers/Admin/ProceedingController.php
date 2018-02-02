@@ -19,21 +19,9 @@ class ProceedingController extends Controller
 
     public function index(SubjectsRepository $subjects)
     {
-        $this->repository->query = [
-            'keyword' => request('keyword'),
-            'page' => request('page'),
-            'status' => request('tab'),
-            'subject' => request('subject'),
-            'sort' => request('sort') ?: 'updated_at.desc',
-        ];
+        $proceedings = $this->repository->get();
 
-    	$proceedings = $this->repository->get();
-        $subjects = Cache::remember('subjects.list', 1200, function () use ($subjects)
-        {
-            return $subjects->get()->data;
-        });
-
-    	return view('dashboard.proceeding.index', compact('proceedings', 'subjects'));
+    	return view('dashboard.proceeding.index', compact('proceedings'));
     }
 
     public function show($proceeding)
@@ -62,5 +50,12 @@ class ProceedingController extends Controller
         $isbn = optional($proceeding->identifiers->where('type', 'isbn')->first())['id'];
 
         return view('dashboard.proceeding.edit', compact('proceeding', 'isbn', 'issn'));
+    }
+
+    public function update($proceeding)
+    {
+        $proceeding = $this->repository->update(request()->all(), $proceeding);
+
+        return $proceeding->data;
     }
 }

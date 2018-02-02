@@ -91,12 +91,12 @@
           </div>
           <div class="col-md-9">
             <div class="mb-3">
-              <h4 class="text-primary">Conference Name</h4>
-              {{ $proceeding->name }}
-            </div>
-            <div class="mb-3">
               <h4 class="text-primary">Introduction</h4>
               {{ $proceeding->introduction }}
+            </div>
+            <div class="mb-3">
+              <h4 class="text-primary">Subject area</h4>
+              
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Conference info</h4>
@@ -112,14 +112,14 @@
                   </tr>
                   <tr>
                     <th class="w-25">Added to Online Library</th>
-                    <td>{{ $proceeding->articles->first()['date_added'] }}</td>
+                    <td>{{ $proceeding->created_at }}</td>
                   </tr>
-                  <tr>
-                    @foreach($proceeding->identifiers as $identifier)
+                  @foreach($proceeding->identifiers as $identifier)
+                    <tr>
                       <th class="w-25">Electronic {{ $identifier['type'] }}</th>
                       <td>{{ $identifier['id'] }}</td>
-                    @endforeach
-                  </tr>
+                    </tr>
+                  @endforeach
                   <tr>
                     <th class="w-25">Proceeding status</th>
                     <td>{{ $proceeding->status }}</td>
