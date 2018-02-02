@@ -18,14 +18,14 @@
   <section class="body pb-5">
     <!-- NAV TAB -->
     <nav class="nav nav-tabs scrollable-nav" id="myTab" role="tablist">
-      <a class="nav-item nav-link active" id="nav-overview-tab" data-toggle="tab" href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
-      <a class="nav-item nav-link" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false">Details</a>
-      <a class="nav-item nav-link" id="nav-articles-tab" data-toggle="tab" href="#nav-articles" role="tab" aria-controls="nav-articles" aria-selected="false">Articles</a>
-    </nav>
+      <a class="nav-item nav-link @if(request('tab') == 'overview' || request('tab') == null) {{ 'active' }} @endif" id="nav-overview-tab" data-toggle="tab" href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
+      <a class="nav-item nav-link @if(request('tab') == 'details') {{ 'active' }} @endif" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false">Details</a>
+      <a class="nav-item nav-link @if(request('tab') == 'articles') {{ 'active' }} @endif" id="nav-articles-tab" data-toggle="tab" href="#nav-articles" role="tab" aria-controls="nav-articles" aria-selected="false">Articles</a>
+    </nav> 
     <!-- NAV TAB CONTENTS -->
     <div class="tab-content" id="nav-tabContent">
       <!-- Overview -->
-      <div class="tab-pane fade show active" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
+      <div class="tab-pane fade  @if(request('tab') == 'overview' || request('tab') == null) {{ 'show active' }} @endif" id="nav-overview" role="tabpanel" aria-labelledby="nav-overview-tab">
         <!-- TOTAL STATS -->
         <div class="row py-4">
           <div class="col-md">
@@ -77,7 +77,7 @@
         </div>  
       </div>
       <!-- DETAILS TAB -->
-      <div class="tab-pane fade" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
+      <div class="tab-pane fade  @if(request('tab') == 'details') {{ 'show active' }} @endif" id="nav-details" role="tabpanel" aria-labelledby="nav-details-tab">
         <div class="row pt-4">
           <div class="col-md-3 mb-4">
             <div class="sticky-top sticky-nav">
@@ -128,7 +128,7 @@
         </div>
       </div>
       <!-- TAB PANE ARTICLES LIST -->
-      <div class="tab-pane fade show " id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
+      <div class="tab-pane fade  @if(request('tab') == 'articles') {{ 'show active' }} @endif" id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
         <div class="row pt-4">
           <div class="col-md-5 mb-2">
             <form class="form-inline" method="GET" action="/proceedings/{{ $proceeding->id }}">
@@ -137,8 +137,8 @@
                 <div class="input-group-prepend">
                   <button class="btn btn-secondary" type="submit"><i class="fa fa-search"></i></button>
                 </div>
-                
               </div>
+              <input type="hidden" name="tab" value="articles">
               <div class="input-group ml-md-4 ml-0 mt-2 mt-md-0">
                 <select class="custom-select" id="inlineFormCustomSelect" name="sort" onchange="this.form.submit()">
                   <option value="title.asc" @if(request('sort') == 'title.asc') selected @endif>Title A~Z</option>
@@ -151,7 +151,7 @@
             </form>
           </div>
           <div class="col-md-2 ml-auto mb-2 order-first order-md-3">
-            <a class="btn btn-block btn-primary" href="{{ route('article.create', ['proceeding' => $proceeding->id]) }}"><i class="fa fa-plus fa-fw mr-2"></i>Add New Article</a>
+            <a class="btn btn-block btn-primary" href="{{ route('article.create', ['proceeding' => $proceeding->id]) }}"><i class="fa fa-plus fa-fw mr-2"></i>Create New Article</a>
           </div>
         </div>
         <hr>
