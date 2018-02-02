@@ -38,6 +38,9 @@ class ProceedingController extends Controller
 
     public function show($proceeding)
     {
+        $this->repository->query = [
+            'status' => request('tab'),
+        ];
         $proceeding = $this->repository->find($proceeding);
 
         return view('dashboard.proceeding.show', compact('proceeding'));
