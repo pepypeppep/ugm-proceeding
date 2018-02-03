@@ -247,6 +247,15 @@ class ProceedingController extends Controller
      *         required=true,
      *         type="integer"
      *     ),
+     *     @SWG\Parameter(
+     *         name="action",
+     *         in="query",
+     *         description="File type values of the article",
+     *         required=true,
+     *         type="string",
+     *         enum={"attach", "detach"},
+     *         default="attach"
+     *     ),
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response="200",
@@ -258,10 +267,11 @@ class ProceedingController extends Controller
     public function updateSubjects(Proceeding $proceeding)
     {
         $data = request()->validate([
-            'subject_id.*' => 'required|int|exists:subjects,id'
+            'subject_id.*' => 'required|int|exists:subjects,id',
+            'action' => 'required|string|in:attach,detach',
         ]);
 
-        $proceeding->subject()->sync($data['subject_id']);
+        $proceeding->subject()->{$data['action']}($data['subject_id']);
 
         return new ProceedingsResource($proceeding);
     }

@@ -508,6 +508,18 @@
                         "required": true,
                         "type": "integer",
                         "format": "int64"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "attach",
+                        "enum": [
+                            "attach",
+                            "detach"
+                        ]
                     }
                 ],
                 "responses": {
