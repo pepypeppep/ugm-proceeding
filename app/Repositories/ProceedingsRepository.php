@@ -79,4 +79,12 @@ class ProceedingsRepository extends GuzzleService
 
 		return $this;
 	}
+
+	public function updateSubjects($params, $id)
+	{
+		$this->form_params = $params;
+		$this->getResponse('PUT', $this->uris['base']."/$id/subjects");
+
+		return $this;
+	}
 }

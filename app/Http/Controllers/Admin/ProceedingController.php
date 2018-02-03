@@ -17,18 +17,22 @@ class ProceedingController extends Controller
     	$this->repository = $repository;
     }
 
-    public function index(SubjectsRepository $subjects)
+    public function index()
     {
         $proceedings = $this->repository->get();
 
     	return view('dashboard.proceeding.index', compact('proceedings'));
     }
 
-    public function show($proceeding)
+    public function show($proceeding, SubjectsRepository $subjects)
     {
         $proceeding = $this->repository->find($proceeding);
+        $subjects = $subjects->get()->data->reject(function ($item) use ($proceeding)
+        {
+            return str_contains($item['id'], $proceeding->subjects->pluck('id')->all());
+        });
 
-        return view('dashboard.proceeding.show', compact('proceeding'));
+        return view('dashboard.proceeding.show', compact('proceeding', 'subjects'));
     }
 
     public function create()
@@ -56,6 +60,13 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->update(request()->all(), $proceeding);
 
-        return $proceeding->data;
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
+    }
+
+    public function updateSubjects($proceeding)
+    {
+        $proceeding = $this->repository->updateSubjects(request()->all(), $proceeding);
+
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
     }
 }

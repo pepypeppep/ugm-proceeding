@@ -26,6 +26,7 @@ Route::group(['prefix' => 'proceedings'], function(){
 	Route::get('/{proceeding}', 'Admin\ProceedingController@show')->name('proceeding.show');
 	Route::get('/{proceeding}/edit', 'Admin\ProceedingController@edit')->name('proceeding.edit');
 	Route::put('/{proceeding}', 'Admin\ProceedingController@update')->name('proceeding.update');
+	Route::put('/{proceeding}/subjects', 'Admin\ProceedingController@updateSubjects')->name('proceeding.update.subjects');
 	Route::get('/{proceeding}/create-article', 'Admin\ArticleController@create')->name('article.create');
 	Route::post('/', 'Admin\ProceedingController@store')->name('proceeding.store');
 });
