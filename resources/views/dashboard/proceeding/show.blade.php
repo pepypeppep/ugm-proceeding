@@ -103,13 +103,14 @@
                   <span class="closebtn" onclick="deleteSubjects({{ $subject['id'] }}, '{{ $subject['name'] }}')">&times;</span>
                 </div> 
               @endforeach
-              <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#addSubjectModal">+ Add subject</button>
+              <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#addSubjectModal"><i class="fa fa-plus fa-fw"></i> Add subject</button>
+
               {{-- ADD SUBECT MODAL --}}
               <div class="modal"  id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title">Add Proceeding Subject</h5>
+                      <h5 class="modal-title">Select one or more subjects</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -119,18 +120,20 @@
                       {{ method_field('PUT') }}
                       <div class="modal-body">
                         <div class="form-group">
-                          <label for="exampleFormControlSelect1">Select one subject</label>
-                          <select class="form-control" id="exampleFormControlSelect1" name="subject_id[0]">
-                            @foreach ($subjects as $subject)
-                              <option value="{{ $subject['id'] }}">{{ $subject['name'] }}</option>
-                            @endforeach
-                          </select>
+                          @foreach ($subjects as $subject)
+                            <div class="form-check">
+                              <input class="form-check-input" name="subject_id[{{ $loop->index }}]" type="checkbox" value="{{ $subject['id'] }}" id="subjectCheck{{ $loop->index }}">
+                              <label class="form-check-label" for="defaultCheck1">
+                                {{ $subject['name'] }}
+                              </label>
+                            </div>
+                          @endforeach
                           <input type="hidden" name="action" value="attach">
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add subject(s)</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                       </div>
                     </form>
                   </div>
@@ -154,7 +157,7 @@
                       <input type="hidden" name="subject_id[0]" id="deleteSubjectId" value="">
                       <input type="hidden" name="action" value="detach">
                       <div class="modal-body">
-                        <b id="subjectName"></b> subject will be removed form {{ $proceeding->name }}. It can be added again later.
+                        <b id="subjectName"></b> subject will be removed from {{ $proceeding->name }}. <br> It can be added again later.
                       </div>
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Delete</button>
