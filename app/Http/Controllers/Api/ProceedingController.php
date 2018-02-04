@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Proceedings as ProceedingsResource;
 use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
 use App\Repositories\Api\ProceedingsRepository as Repository;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ProceedingController extends Controller
 {
@@ -326,6 +327,10 @@ class ProceedingController extends Controller
 
         collect($data)->map(function ($item, $key) use ($proceeding)
         {
+            if (Storage::exists($proceeding->{$key})) {
+                Storage::delete($proceeding->{$key});
+            }
+
             $path = request()->file($key)->store('proceedings/'.$proceeding->id);
             $proceeding->update([$key => $path]);
         });
