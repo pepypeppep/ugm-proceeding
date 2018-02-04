@@ -34,6 +34,9 @@
       <!-- HEADER -->
       @yield('header')
 
+      {{-- FEEDBACK --}}
+      @include('dashboard.layouts.alerts')
+
       <!-- BODY -->
       @yield('content')
 

@@ -210,7 +210,7 @@ class ProceedingController extends Controller
             'organizer' => 'required|string',
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
-            'introduction' => 'string|max:2500',
+            'introduction' => 'nullable|string|max:2500',
             'isbn' => 'nullable|digits:13',
             'issn' => 'nullable|digits:8',
         ]);

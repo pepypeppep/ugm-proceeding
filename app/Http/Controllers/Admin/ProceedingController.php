@@ -44,7 +44,7 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->store(request()->all());
 
-        return redirect(route('proceeding.show', ['proceeding' => $proceeding->id]));
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'The proceeding has been created. Now you can add cover image, subjects, and introduction text.');
     }
 
     public function edit($proceeding)
@@ -60,20 +60,20 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->update(request()->all(), $proceeding);
 
-        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', $proceeding->name.' has been updated!');
     }
 
     public function updateSubjects($proceeding)
     {
         $proceeding = $this->repository->updateSubjects(request()->all(), $proceeding);
 
-        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Subject(s) has been updated!');
     }
 
     public function updateCover($proceeding)
     {
         $proceeding = $this->repository->updateCover(request()->file('front_cover'), $proceeding);
 
-        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Cover has been updated!');
     }
 }
