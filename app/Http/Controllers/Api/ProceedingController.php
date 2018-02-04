@@ -8,6 +8,7 @@ use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
 use App\Repositories\Api\ProceedingsRepository as Repository;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ProceedingController extends Controller
 {
