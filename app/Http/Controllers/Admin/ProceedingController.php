@@ -69,4 +69,11 @@ class ProceedingController extends Controller
 
         return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
     }
+
+    public function updateCover($proceeding)
+    {
+        $proceeding = $this->repository->updateCover(request()->file('front_cover'), $proceeding);
+
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']));
+    }
 }
