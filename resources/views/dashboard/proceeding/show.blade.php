@@ -105,7 +105,14 @@
           <div class="col-md-9">
             <div class="mb-4">
               <h4 class="text-primary">Introduction</h4>
-              {{ $proceeding->introduction }}
+              @empty ($proceeding->data['introduction'])
+                <div class="">
+                  {{-- <span class="text-muted">This proceeding has no introduction yet. You can create a introduction text by clicking button below.</span> <br> --}}
+                  <a class="btn btn-sm btn-outline-primary" href="{{ route('proceeding.edit', [$proceeding->id, 'focus' => 'introduction']) }}">Add introduction text</a>
+                </div>
+              @else
+                {{ $proceeding->introduction }}
+              @endempty
             </div>
             <div class="mb-4">
               <h4 class="text-primary mb-2">Subject area</h4>
@@ -116,7 +123,7 @@
                   <span class="closebtn" onclick="deleteSubjects({{ $subject['id'] }}, '{{ $subject['name'] }}')">&times;</span>
                 </div> 
               @endforeach
-              <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#addSubjectModal"><i class="fa fa-plus fa-fw"></i> Add subject</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal" data-target="#addSubjectModal">Add subject</button>
 
               {{-- ADD SUBECT MODAL --}}
               <div class="modal"  id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">
