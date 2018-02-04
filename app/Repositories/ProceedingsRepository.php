@@ -87,4 +87,17 @@ class ProceedingsRepository extends GuzzleService
 
 		return $this;
 	}
+
+	public function updateCover($file, $id)
+	{
+		$this->multipart = [
+			[
+				'name' => 'front_cover',
+				'contents' => fopen($file, 'r')
+			],
+		];
+		$this->getResponse('POST', $this->uris['base']."/$id/covers");
+
+		return $this;
+	}
 }
