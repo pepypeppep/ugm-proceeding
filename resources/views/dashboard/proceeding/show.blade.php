@@ -85,8 +85,15 @@
           <div class="col-md-3 mb-4">
             <div class="sticky-top sticky-nav">
               <h4 class="text-primary">Cover image</h4>
-              <img src="{{ $proceeding->front_cover }}" class="rounded img-fluid">
-              <button class="btn btn-primary btn-block mt-3">Upload image</button>
+              @if (empty($proceeding->front_cover))
+                <div class="text-center text-muted py-5">
+                  <i class="fa fa-camera fa-4x"></i> <br>
+                  <span>No image available</span>
+                </div>
+              @else
+                <img src="{{ $proceeding->front_cover }}" class="rounded img-fluid mb-3">
+              @endif
+              <button class="btn btn-primary btn-block">Upload image</button>
             </div>
           </div>
           <div class="col-md-9">
