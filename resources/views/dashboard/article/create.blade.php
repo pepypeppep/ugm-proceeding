@@ -100,8 +100,14 @@
                   <input type="text" name="name" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ request()->old('name') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                 </div>
+                <div class="col-md-3 mt-md-2 mt-4">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox1">
+                    <label class="form-check-label">Corresponding Author </label>
+                  </div>
+                </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row" id="email_form" style="display: none;">
                 <label for="title" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-md-5 col-12">
                   <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ request()->old('email') }}" required>
@@ -145,7 +151,13 @@
         $('.author-custom > h5').text('Author #1');
     }
   });
-    
+
+  $(document).ready(function(){
+      $("#checkbox1").click(function(){
+          $("#email_form").toggle();
+      });
+  });
+
   function showLinkInput() {
     $('#file_link').show();
     $('#file_pdf').hide();
