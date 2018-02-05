@@ -29,21 +29,15 @@
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="submit"><i class="fa fa-search"></i></button>
             </div>
-          </div>
+          </div> 
           @foreach (request()->only('tab') as $key => $value)
             <input type="hidden" name="{{ $key }}" value="{{ $value }}">
           @endforeach
-          {{-- <div class="input-group  mb-2 mr-sm-2 mb-sm-0">
-            <select class="custom-select" onchange="this.form.submit()" name="subject" id="inlineFormCustomSelect">
-              <option value="">Subject...</option>
-              @foreach ($subjects as $subject)
-                <option value="{{ $subject['id'] }}">{{ $subject['name'] }}</option>
-              @endforeach 
-            </select>
-          </div> --}}
           <div class="input-group ml-sm-auto">
             <select class="custom-select mb-2 mb-sm-0" id="sortSelect" name="sort" onchange="this.form.submit()">
               <option value="">Sort by...</option>
+              <option value="name.asc" @if(request('sort') == 'name.asc') selected @endif>Name A-Z</option>
+              <option value="name.desc" @if(request('sort') == 'name.desc') selected @endif>Name Z-A</option>
               <option value="updated_at.desc" @if(request('sort') == 'updated_at.desc') selected @endif>Last updated</option>
               <option value="created_at.asc" @if(request('sort') == 'created_at.asc') selected @endif>Oldest</option>
               <option value="created_at.desc" @if(request('sort') == 'created_at.desc') selected @endif>Newest</option>
@@ -53,7 +47,7 @@
         <!-- SMALL DEVICES MENU -->
         @include('dashboard.proceeding.small-nav')
 
-        <!-- ARTICLE LIST -->
+        <!-- PROCEEDING LIST -->
         <div class="card article-card">
           <div class="card-body">
             @if (!empty($proceedings->data->first()))
@@ -72,7 +66,7 @@
                   </div>
                   <div class="col action text-right">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                      <button type="button" class="btn btn-outline-secondary">View</button>
+                      <a type="button" href="{{ route('proceeding.show', [$proceeding['id']]) }}" class="btn btn-outline-secondary">View</a>
                       <div class="btn-group" role="group">
                         <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
@@ -89,9 +83,9 @@
               @endforeach
             @else
               <div class="text-center py-4">
-                <i class="fa fa-file-text-o fa-5x p-3"></i>
+                <img src="/img/ilustrations/empty-search.svg" style="height: 250px" class="img-fluid">
                 <h2>No records found</h2>
-                <h5 style="font-weight: 300">Please try again with different keywords or status</h5>
+                <h5 style="font-weight: 300">Please try again with different keywords</h5>
               </div>
             @endif            
             <!-- END OF ITEM -->
