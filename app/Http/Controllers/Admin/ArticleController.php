@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\ProceedingsRepository;
+use App\Repositories\ArticlesRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     protected $repository;
 
-    function __construct(ProceedingsRepository $repository)
+    function __construct()
     {
-    	$this->repository = $repository;
+    	$this->repository = new ArticlesRepository;
     }
 
     public function create($proceeding)
@@ -21,5 +21,12 @@ class ArticleController extends Controller
     	
         return view('dashboard.article.create', compact('proceeding'));
     } 
+
+    public function store()
+    {
+        $articles = $this->repository->store();
+
+        return $articles;
+    }
 
 }
