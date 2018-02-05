@@ -135,8 +135,17 @@
   </section>
 @endsection
 
-@section('script')
+@section('script') 
 <script type="text/javascript">
+  $(window).scroll(function() {
+    if($(this).scrollTop() > window.innerHeight*1.05)
+    {
+        $('.author-custom > h5').text('Authors');
+    } else {
+        $('.author-custom > h5').text('Author #1');
+    }
+  });
+    
   function showLinkInput() {
     $('#file_link').show();
     $('#file_pdf').hide();
