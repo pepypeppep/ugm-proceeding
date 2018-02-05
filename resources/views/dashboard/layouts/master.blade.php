@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    {{-- SUMMER NOTE --}}
+    <link href="/summernote/summernote-bs4.css" rel="stylesheet">
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png?v=3eKR9vjrYw">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png?v=3eKR9vjrYw">

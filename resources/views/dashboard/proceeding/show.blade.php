@@ -111,7 +111,7 @@
                   <a class="btn btn-sm btn-outline-primary" href="{{ route('proceeding.edit', [$proceeding->id, 'focus' => 'introduction']) }}">Add introduction text</a>
                 </div>
               @else
-                {{ $proceeding->introduction }}
+                {!! $proceeding->introduction !!}
               @endempty
             </div>
             <div class="mb-4">
