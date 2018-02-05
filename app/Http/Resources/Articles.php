@@ -30,6 +30,8 @@ class Articles extends Resource
             'start_page' => $this->start_page,
             'title' => $this->title,
             'views' => $this->view,
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 
