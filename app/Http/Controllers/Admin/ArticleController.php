@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\ProceedingsRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    // protected $repository;
+    protected $repository;
 
-    // function __construct(ArticlesRepository $repository){
-    // 	$this->repository = $repository;
-    // }
-
-    public function create()
+    function __construct(ProceedingsRepository $repository)
     {
-    	return view('dashboard.proceeding.createarticle');
+    	$this->repository = $repository;
+    }
+
+    public function create($proceeding)
+    {
+    	$proceeding = $this->repository->find($proceeding);
+    	
+        return view('dashboard.proceeding.createarticle', compact('proceeding'));
     }
 }

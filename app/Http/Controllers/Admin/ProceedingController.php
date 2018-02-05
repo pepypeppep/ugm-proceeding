@@ -37,7 +37,7 @@ class ProceedingController extends Controller
     }
 
     public function show($proceeding)
-    {
+    { 
         $proceeding = $this->repository->find($proceeding);
 
         return view('dashboard.proceeding.show', compact('proceeding'));

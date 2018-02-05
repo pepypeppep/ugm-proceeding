@@ -23,22 +23,26 @@
                   <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Title</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" name="title" id="title" rows="1"></textarea>
+                      <textarea class="form-control @if($errors->has('title')) is-invalid @endif" name="title" id="title" rows="1">{{ request()->old('title') }}</textarea>
+                      <div class="invalid-feedback">{{ $errors->first('title') }}</div>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="start_page" class="col-sm-2 col-form-label">Page</label>
                     <div class="col-sm-5">
-                      <input name="start_page" type="number" class="form-control mb-2 mb-sm-0" id="start_page" placeholder="Start page">
+                      <input name="start_page" type="number" class="form-control mb-2 mb-sm-0 @if($errors->has('start_page')) is-invalid @endif" id="start_page" placeholder="Start page" value="{{ request()->old('start_page') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('start_page') }}</div>
                     </div>
                     <div class="col-sm-5">
-                      <input name="end_page" type="number" class="form-control mb-2 mb-sm-0" id="end_page" placeholder="End page">
+                      <input name="end_page" type="number" class="form-control mb-2 mb-sm-0 @if($errors->has('end_page')) is-invalid @endif" id="end_page" placeholder="End page" value="{{ request()->old('end_page') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('end_page') }}</div>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="abstract" class="col-sm-2 col-form-label">Abstract</label>
                     <div class="col-sm-10">
-                      <textarea class="form-control" name="abstract" id="abstract" rows="5"></textarea>
+                      <textarea class="form-control @if($errors->has('abstract')) is-invalid @endif" name="abstract" id="abstract" rows="5">{{ request()->old('abstract') }}</textarea>
+                      <div class="invalid-feedback">{{ $errors->first('abstract') }}</div>
                     </div>
                   </div>
                   <div class="form-separator mt-5">
@@ -70,13 +74,15 @@
                   <div class="form-group row" id="file_link" style="display: none;">
                     <label for="file_link" class="col-sm-2 col-form-label">Link</label>
                     <div class="col-md-10 col-12">
-                      <input type="text" name="file_link" class="form-control">
+                      <input type="text" name="file_link" class="form-control @if($errors->has('file_link')) is-invalid @endif" value="{{ request()->old('file_link') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('file_link') }}</div>
                     </div>
                   </div>
                   <div class="form-group row" id="file_pdf">
                     <label for="file_pdf" class="col-sm-2 col-form-label">Upload PDF</label>
                     <div class="col-md-5 col-12">
-                      <input type="file" name="file_pdf" class="form-control">
+                      <input type="file" name="file_pdf" class="form-control @if($errors->has('file_pdf')) is-invalid @endif" value="{{ request()->old('file_link') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('file_pdf') }}</div>
                     </div>
                   </div>
                   <div class="form-separator mt-4 sticky-top sticky-nav bg-white">
@@ -88,24 +94,39 @@
                   <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-md-5 col-12">
-                      <input type="text" name="name" class="form-control">
+                      <input type="text" name="name" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ request()->old('name') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-md-5 col-12">
-                      <input type="email" name="email" class="form-control">
+                      <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ request()->old('email') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                     </div>
                   </div>
                   <div class="form-group row">
                     <label for="title" class="col-sm-2 col-form-label">Affiliation</label>
                     <div class="col-sm-10" id="affiliationsGroup1">
-                      <input type="text" name="affiliation" class="form-control" id="inputOther1">
+                      <input type="text" name="affiliation" class="form-control @if($errors->has('affiliation')) is-invalid @endif" id="inputOther1" value="{{ request()->old('affiliation') }}" required>
+                      <div class="invalid-feedback">{{ $errors->first('affiliation') }}</div>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
+          </div>
+          <div class="col-lg-4">
+            <div class="card" style="border: none;">
+                <div class="card-body" id="cardBody">
+                  <div class="form-separator">
+                    <h5>Last Article</h5>
+                  </div>
+                  <div class="form-group row">
+                      <a href="#" class="col-sm-12 col-form-label">{{ $proceeding->articles->first()['title'] }}</a>
+                  </div>
+                </div>
+              </div>
           </div>
         </div>
       </section>
