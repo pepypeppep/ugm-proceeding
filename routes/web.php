@@ -32,3 +32,7 @@ Route::group(['prefix' => 'proceedings'], function(){
 	Route::post('/', 'Admin\ProceedingController@store')->name('proceeding.store');
 });
 
+Route::group(['prefix' => 'articles'], function(){
+	Route::post('/', 'Admin\ArticleController@store')->name('article.store');
+});
+
