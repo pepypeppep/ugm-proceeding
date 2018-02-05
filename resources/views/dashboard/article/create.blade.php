@@ -17,7 +17,8 @@
   <section class="body pb-5">
     <div class="row">
       <div class="col-lg-8">
-        <form id="form" method="POST" action="">
+        <form id="form" method="POST" action="{{ route('article.store') }}">
+          {{ csrf_field() }}
           <div class="card" style="border: none;">
             <div class="card-body" id="cardBody">
               <div class="form-separator">
@@ -97,24 +98,29 @@
               <div class="form-group row">
                 <label for="title" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-md-5 col-12">
-                  <input type="text" name="name" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ request()->old('name') }}" required>
+                  <input type="text" name="authors[1][name]" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ request()->old('name') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="title" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-md-5 col-12">
-                  <input type="email" name="email" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ request()->old('email') }}" required>
+                  <input type="email" name="authors[1][email]" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ request()->old('email') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="title" class="col-sm-2 col-form-label">Affiliation</label>
                 <div class="col-sm-10" id="affiliationsGroup1">
-                  <input type="text" name="affiliation" class="form-control @if($errors->has('affiliation')) is-invalid @endif" id="inputOther1" value="{{ request()->old('affiliation') }}" required>
+                  <input type="text" name="authors[1][affiliation]" class="form-control @if($errors->has('affiliation')) is-invalid @endif" id="inputOther1" value="{{ request()->old('affiliation') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('affiliation') }}</div>
                 </div>
               </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col text-right">
+              <button class="btn btn-primary" type="submit">Save</button>
             </div>
           </div>
         </form>
@@ -180,10 +186,10 @@
       affiliations.push(lastInput);
     }
 
-    $('#cardBody').append('<div class="form-separator mt-4 bg-white"><div class="d-flex justify-content-between align-items-baseline"><h5 >Author #'+index+'</h5></div></div><div class="form-group row"><label for="name" class="col-sm-2 col-form-label">Name</label><div class="col-md-5 col-12"><input type="text" name="name['+index+']" class="form-control"></div></div><div class="form-group row"><label for="email" class="col-sm-2 col-form-label">Email</label><div class="col-md-5 col-12"><input type="email" name="email['+index+']" class="form-control"></div></div><div class="form-group row"><label for="affiliation" class="col-sm-2 col-form-label">Affiliation</label><div class="col-sm-10" id="affiliationsGroup'+index+'"></div></div>')
+    $('#cardBody').append('<div class="form-separator mt-4 bg-white"><div class="d-flex justify-content-between align-items-baseline"><h5 >Author #'+index+'</h5></div></div><div class="form-group row"><label for="name" class="col-sm-2 col-form-label">Name</label><div class="col-md-5 col-12"><input type="text" name="authors['+index+'][name]" class="form-control"></div></div><div class="form-group row"><label for="email" class="col-sm-2 col-form-label">Email</label><div class="col-md-5 col-12"><input type="email" name="authors['+index+'][email]" class="form-control"></div></div><div class="form-group row"><label for="affiliation" class="col-sm-2 col-form-label">Affiliation</label><div class="col-sm-10" id="affiliationsGroup'+index+'"></div></div>')
 
     function appendItems(item, key) {
-      $('#affiliationsGroup'+index).append('<div class="form-check mb-2"><input class="form-check-input" onChange="toggleInput('+index+')" name="affiliation['+index+']" type="radio" value="'+item+'" id="check'+index+'"><label class="form-check-label" for="check'+index+'">'+item+'</label></div>');
+      $('#affiliationsGroup'+index).append('<div class="form-check mb-2"><input class="form-check-input" onChange="toggleInput('+index+')" name="authors['+index+'][affiliation]" type="radio" value="'+item+'" id="check'+index+'"><label class="form-check-label" for="check'+index+'">'+item+'</label></div>');
     }
 
     affiliations.forEach(appendItems)
