@@ -36,7 +36,7 @@
 							<div class="form-group row">
 							  <div class="col-sm-12">
 							    <label>Introduction</label>
-							    <textarea class="form-control @if($errors->has('introduction')) is-invalid @endif" name="introduction" id="introduction" rows="4" required @if(request('focus') == 'introduction') autofocus @endif>{{ $proceeding->introduction }}</textarea>
+							    <textarea id="summernote" class="form-control @if($errors->has('introduction')) is-invalid @endif" name="introduction" id="introduction" rows="4" required @if(request('focus') == 'introduction') autofocus @endif>{{ $proceeding->introduction }}</textarea>
 							    <div class="invalid-feedback">{{ $errors->first('introduction') }}</div>
 							  </div>
 							</div>
@@ -104,4 +104,9 @@
 			</div>
 		</div>
 	</section>
+@endsection
+
+@section('script')
+	{{-- INITIALIZE TEXT EDITOR. INCLUDE THIS FOR EVERY FORM THAT NEED TEXT EDITOR --}}
+	@include('layouts.summernote')
 @endsection
