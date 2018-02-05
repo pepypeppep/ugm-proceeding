@@ -19,6 +19,7 @@ class ArticleController extends Controller
     {
     	$proceeding = $this->repository->find($proceeding);
     	
-        return view('dashboard.proceeding.createarticle', compact('proceeding'));
-    }
+        return view('dashboard.article.create', compact('proceeding'));
+    } 
+
 }

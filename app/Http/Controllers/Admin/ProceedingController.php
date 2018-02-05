@@ -17,30 +17,21 @@ class ProceedingController extends Controller
     	$this->repository = $repository;
     }
 
-    public function index(SubjectsRepository $subjects)
+    public function index()
     {
-        $this->repository->query = [
-            'keyword' => request('keyword'),
-            'page' => request('page'),
-            'status' => request('tab'),
-            'subject' => request('subject'),
-            'sort' => request('sort') ?: 'updated_at.desc',
-        ];
+        $proceedings = $this->repository->get();
 
-    	$proceedings = $this->repository->get();
-        $subjects = Cache::remember('subjects.list', 1200, function () use ($subjects)
+    	return view('dashboard.proceeding.index', compact('proceedings'));
+    }
+    public function show($proceeding, SubjectsRepository $subjects)
+    {
+        $proceeding = $this->repository->find($proceeding);
+        $subjects = $subjects->get()->data->reject(function ($item) use ($proceeding)
         {
-            return $subjects->get()->data;
+            return str_contains($item['id'], $proceeding->subjects->pluck('id')->all());
         });
 
-    	return view('dashboard.proceeding.index', compact('proceedings', 'subjects'));
-    }
-
-    public function show($proceeding)
-    { 
-        $proceeding = $this->repository->find($proceeding);
-
-        return view('dashboard.proceeding.show', compact('proceeding'));
+        return view('dashboard.proceeding.show', compact('proceeding', 'subjects'));
     }
 
     public function create()
@@ -52,6 +43,36 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->store(request()->all());
 
-        return redirect(route('proceeding.show', ['proceeding' => $proceeding->id]));
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'The proceeding has been created. Now you can add cover image, subjects, and introduction text.');
+    }
+
+    public function edit($proceeding)
+    {
+        $proceeding = $this->repository->find($proceeding);
+        $issn = optional($proceeding->identifiers->where('type', 'issn')->first())['id'];
+        $isbn = optional($proceeding->identifiers->where('type', 'isbn')->first())['id'];
+
+        return view('dashboard.proceeding.edit', compact('proceeding', 'isbn', 'issn'));
+    }
+
+    public function update($proceeding)
+    {
+        $proceeding = $this->repository->update(request()->all(), $proceeding);
+
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', $proceeding->name.' has been updated!');
+    }
+
+    public function updateSubjects($proceeding)
+    {
+        $proceeding = $this->repository->updateSubjects(request()->all(), $proceeding);
+
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Subject(s) has been updated!');
+    }
+
+    public function updateCover($proceeding)
+    {
+        $proceeding = $this->repository->updateCover(request()->file('front_cover'), $proceeding);
+
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Cover has been updated!');
     }
 }

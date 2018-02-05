@@ -55,10 +55,10 @@ class Proceedings extends Resource
             'identifiers' => $this->identifiers,
             'location' => $this->location,
             'organizer' => $this->organizer,
-            'subjects' => $this->subject->pluck('name'),
+            'subjects' => Subjects::collection($this->subject),
             'date' => [
-                'conference_start' => $this->conference_start->format('j F Y'),
-                'conference_end' => $this->conference_end->format('j F Y'),
+                'conference_start' => $this->conference_start->toDateString(),
+                'conference_end' => $this->conference_end->toDateString(),
                 'published' => $this->published_at,
             ],
             'created_at' => $this->created_at->toDateTimeString(),

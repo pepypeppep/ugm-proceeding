@@ -18,7 +18,7 @@
       <div class="col-lg-8">
         <form method="POST" action="{{ route('proceeding.store') }}">
           {{ csrf_field() }}
-          <div class="card" style="border: none;">
+          <div class="card">
             <div class="card-body" id="cardBody">
               <div class="form-separator">
                 <h5>General informations</h5>
@@ -55,7 +55,7 @@
                   <div class="input-group input-daterange datepicker">
                     <input type="text" class="form-control @if($errors->has('conference_start')) is-invalid @endif" name="conference_start" value="{{ request()->old('conference_start') }}" required>
                     <div class="input-group-append">
-                      <span class="input-group-text" id="">To</span>
+                      <span class="input-group-text">To</span>
                     </div>
                     <input type="text" class="form-control @if($errors->has('conference_end')) is-invalid @endif" name="conference_end" value="{{ request()->old('conference_end') }}" required>
                   </div>
@@ -63,6 +63,7 @@
                   <div class="invalid-feedback">{{ $errors->first('conference_end') }}</div>
                 </div>
               </div>
+              {{-- LOCATION FIELD --}}
               <div class="form-group row">
                 <div class="col-sm-6">
                   <label for="location">Conference's location</label>

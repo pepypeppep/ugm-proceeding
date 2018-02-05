@@ -5,10 +5,13 @@
 @section('header')
   <section class="header py-5">
     <div class="row justify-content-between">
-      <div class="col-md-12 mb-3 mb-md-0">
-        <h3><span class="badge badge-secondary">{{ $proceeding->status }}</span></h3>
+      <div class="col-md-10 mb-3 mb-md-0">
         <h2 class="m-0">{{ $proceeding->name }}</h2>
+        <h3><span class="badge badge-secondary">{{ $proceeding->status }}</span></h3>
         <span class="text-muted">{{ $proceeding->alias }}, {{ $proceeding->date['conference_start'] }}, {{ $proceeding->location }}</span>
+      </div>
+      <div class="col-md-2">
+        <a class="btn btn-block btn-primary" href="{{ route('proceeding.edit', [$proceeding->id]) }}" >Edit proceeding details</a>
       </div>
     </div>
   </section>
@@ -82,18 +85,102 @@
           <div class="col-md-3 mb-4">
             <div class="sticky-top sticky-nav">
               <h4 class="text-primary">Cover image</h4>
-              <img src="{{ $proceeding->front_cover }}" class="rounded img-fluid">
-              <button class="btn btn-primary btn-block mt-3">Upload image</button>
+              @if (empty($proceeding->data['front_cover']))
+                <div class="text-center text-muted py-5">
+                  <i class="fa fa-camera fa-4x"></i> <br>
+                  <span>No image available</span>
+                </div>
+              @else
+                <img src="{{ $proceeding->front_cover }}" class="rounded img-fluid mb-3">
+              @endif
+              <label class="btn btn-primary btn-block btn-file">
+                Upload cover 
+                <form id="changeCoverForm" method="POST" action="{{ route('proceeding.cover', [$proceeding->id]) }}" enctype="multipart/form-data">
+                  {{ csrf_field() }}
+                  <input type="file" name="front_cover" style="display: none;" onchange="this.form.submit()">
+                </form>
+              </label>
             </div>
           </div>
           <div class="col-md-9">
-            <div class="mb-3">
-              <h4 class="text-primary">Conference Name</h4>
-              {{ $proceeding->name }}
-            </div>
-            <div class="mb-3">
+            <div class="mb-4">
               <h4 class="text-primary">Introduction</h4>
               {{ $proceeding->introduction }}
+            </div>
+            <div class="mb-4">
+              <h4 class="text-primary mb-2">Subject area</h4>
+              @foreach ($proceeding->subjects as $subject)
+                <div class="chip mr-2 mb-2">
+                  {{ $subject['name'] }}
+                  <input type="hidden" name="subject_id[{{ $loop->index }}]" value="{{ $subject['id'] }}">
+                  <span class="closebtn" onclick="deleteSubjects({{ $subject['id'] }}, '{{ $subject['name'] }}')">&times;</span>
+                </div> 
+              @endforeach
+              <button type="button" class="btn btn-primary rounded" data-toggle="modal" data-target="#addSubjectModal"><i class="fa fa-plus fa-fw"></i> Add subject</button>
+
+              {{-- ADD SUBECT MODAL --}}
+              <div class="modal"  id="addSubjectModal" tabindex="-1" role="dialog" aria-labelledby="addSubjectModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Select one or more subjects</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form action="{{ route('proceeding.update.subjects', [$proceeding->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      {{ method_field('PUT') }}
+                      <div class="modal-body">
+                        <div class="form-group">
+                          @foreach ($subjects as $subject)
+                            <div class="form-check">
+                              <input class="form-check-input" name="subject_id[{{ $loop->index }}]" type="checkbox" value="{{ $subject['id'] }}" id="subjectCheck{{ $loop->index }}">
+                              <label class="form-check-label" for="defaultCheck1">
+                                {{ $subject['name'] }}
+                              </label>
+                            </div>
+                          @endforeach
+                          <input type="hidden" name="action" value="attach">
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add subject(s)</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {{-- END ADD SUBJECT MODAL --}}
+
+              {{-- DELETE SUBJECT MODAL --}}
+              <div class="modal"  id="deleteSubjectModal" tabindex="-1" role="dialog" aria-labelledby="deleteSubjectModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title"><b>Delete subject</b></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form id="deleteSubjectForm" action="{{ route('proceeding.update.subjects', [$proceeding->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      {{ method_field('PUT') }}
+                      <input type="hidden" name="subject_id[0]" id="deleteSubjectId" value="">
+                      <input type="hidden" name="action" value="detach">
+                      <div class="modal-body">
+                        <b id="subjectName"></b> subject will be removed from {{ $proceeding->name }}. <br> It can be added again later.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {{-- END OF DELETE SUBJECT MODAL --}}
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Conference info</h4>
@@ -109,14 +196,14 @@
                   </tr>
                   <tr>
                     <th class="w-25">Added to Online Library</th>
-                    <td>{{ $proceeding->articles->first()['date_added'] }}</td>
+                    <td>{{ $proceeding->created_at }}</td>
                   </tr>
-                  <tr>
-                    @foreach($proceeding->identifiers as $identifier)
+                  @foreach($proceeding->identifiers as $identifier)
+                    <tr>
                       <th class="w-25">Electronic {{ $identifier['type'] }}</th>
                       <td>{{ $identifier['id'] }}</td>
-                    @endforeach
-                  </tr>
+                    </tr>
+                  @endforeach
                   <tr>
                     <th class="w-25">Proceeding status</th>
                     <td>{{ $proceeding->status }}</td>
@@ -156,46 +243,64 @@
         </div>
         <hr>
         <!-- ARTICLES LIST -->
-        @if (!empty($proceeding->articles))
-          @foreach ($proceeding->articles as $article)
-            <div class="row article-item">
-              <div class="col-md-8">
-                <h5 class="text-primary m-0">{{ $article['title'] }}</h5>
-                <span class="text-muted">
+        @if ($proceeding->total_articles == 0)
+          <div class="text-center py-4">
+            <i class="fa fa-file-text-o fa-5x mb-3"></i>
+            <h2>This proceeding has no articles</h2>
+            <h5 style="font-weight: 300">Go add a new one!</h5>
+          </div>
+        @else
+          @if (!empty($proceeding->articles->first()))
+            @foreach ($proceeding->articles as $article)
+              <div class="row article-item">
+                <div class="col-md-8">
+                  <h5 class="text-primary m-0">{{ $article['title'] }}</h5>
+                  <span class="text-muted">
                     {{ collect($article['authors'])->implode('name','; ') }}
-                <br><small>Last updated: 5 hours ago</small></span>
-              </div>
-              <div class="col-md-2 pt-2 pt-md-0">
-                <div class="d-flex">
-                  <span class="mr-4">{{ $article['views'] }}<br>views</span>
-                  <span>{{ $article['downloads'] }}<br>Downloads</span>
+                  <br><small>Last updated: 5 hours ago</small></span>
                 </div>
-              </div>
-              <div class="col-md-2 text-right pt-2 pt-md-0">
-                <div class="btn-group w-100" role="group" aria-label="Button group with nested dropdown">
-                  <button type="button" class="btn btn-outline-secondary w-100">View</button>
-                  <div class="btn-group" role="group">
-                    <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
-                      <a class="dropdown-item" href="#">Trash</a>
-                      <a class="dropdown-item" href="#">Metrics</a>
+                <div class="col-md-2 pt-2 pt-md-0">
+                  <div class="d-flex">
+                    <span class="mr-4">{{ $article['views'] }}<br>views</span>
+                    <span>{{ $article['downloads'] }}<br>Downloads</span>
+                  </div>
+                </div>
+                <div class="col-md-2 text-right pt-2 pt-md-0">
+                  <div class="btn-group w-100" role="group" aria-label="Button group with nested dropdown">
+                    <button type="button" class="btn btn-outline-secondary w-100">View</button>
+                    <div class="btn-group" role="group">
+                      <button id="btnGroupDrop1" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href="#">Trash</a>
+                        <a class="dropdown-item" href="#">Metrics</a>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              @if (!$loop->last)
+                <hr>
+              @endif
+            @endforeach
+          @else
+            <div class="text-center py-4">
+              <img src="/img/ilustrations/empty-search.svg" style="height: 250px" class="img-fluid">
+              <h2>No records found</h2>
+              <h5 style="font-weight: 300">Please try again with different keywords</h5>
             </div>
-            @if (!$loop->last)
-              <hr>
-            @endif
-          @endforeach
-        @else
-          <div class="text-center py-4">
-            <i class="fa fa-file-text-o fa-5x p-3"></i>
-            <h2>No records found</h2>
-            <h5 style="font-weight: 300">Please try again with different keywords or status</h5>
-          </div>
+          @endif
         @endif
       </div>
     </div>
   </section>
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+    function deleteSubjects(id, name) {
+      $('#deleteSubjectId').attr('value', id);
+      $('#subjectName').html(name);
+      $('#deleteSubjectModal').modal()
+    }
+  </script>
 @endsection

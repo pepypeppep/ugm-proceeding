@@ -502,22 +502,24 @@
                         "format": "int64"
                     },
                     {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Proceeding object that needs to be added",
+                        "name": "subject_id[0]",
+                        "in": "query",
+                        "description": "Subject id",
                         "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "subject_id": {
-                                        "description": "[updateCovers description]",
-                                        "type": "integer",
-                                        "example": 2
-                                    }
-                                }
-                            }
-                        }
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "attach",
+                        "enum": [
+                            "attach",
+                            "detach"
+                        ]
                     }
                 ],
                 "responses": {
