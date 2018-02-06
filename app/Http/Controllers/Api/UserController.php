@@ -14,7 +14,7 @@ class UserController extends Controller
     /**
     * @SWG\Get(
     *     path="/users/",
-    *     summary="Get all users",
+    *     summary="Get all AAA",
     *     description="Return collection of users",
     *     operationId="getAllUsers",
     *     tags={"user"},

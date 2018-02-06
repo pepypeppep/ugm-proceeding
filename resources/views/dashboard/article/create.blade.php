@@ -138,7 +138,7 @@
                 <h5>Last Article</h5>
               </div>
               <div class="form-group row">
-                  <a href="#" class="col-sm-12 col-form-label">{{ $proceeding->articles->first()['title'] }}</a>
+                  <a href="" class="col-sm-12 col-form-label">{{ $proceeding->articles->first()['title'] }}</a>
               </div>
             </div>
           </div>
