@@ -4,9 +4,7 @@ namespace App\Repositories;
 
 use App\Services\GuzzleService;
 
-/**
-* Proceedings Repository
-*/
+
 class ArticlesRepository extends GuzzleService
 {	
 	protected $uris = [

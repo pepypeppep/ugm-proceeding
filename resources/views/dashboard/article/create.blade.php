@@ -6,7 +6,8 @@
 <section class="header py-5">
   <div class="row justify-content-between">
     <div class="col-md-6 mb-3 mb-md-0">
-      <h2>Create Articles</h2>
+      <h2 class="m-0">Create Articles</h2>
+      <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fa fa-chevron-circle-left fa-fw"></i>Back to proceedings</a>
     </div>
   </div>
 </section>
@@ -19,7 +20,7 @@
       <div class="col-lg-8">
         <form id="form" method="POST" action="{{ route('article.store') }}">
           {{ csrf_field() }}
-          <div class="card" style="border: none;">
+          <div class="card">
             <div class="card-body" id="cardBody">
               <div class="form-separator">
                 <h5>Article details</h5>
@@ -45,7 +46,7 @@
               <div class="form-group row">
                 <label for="abstract" class="col-sm-2 col-form-label">Abstract</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control @if($errors->has('abstract')) is-invalid @endif" name="abstract" id="abstract" rows="5">{{ request()->old('abstract') }}</textarea>
+                  <textarea id="summernote" class="form-control @if($errors->has('abstract')) is-invalid @endif" name="abstract" id="abstract" rows="5">{{ request()->old('abstract') }}</textarea>
                   <div class="invalid-feedback">{{ $errors->first('abstract') }}</div>
                 </div>
               </div>
@@ -78,38 +79,44 @@
               <div class="form-group row" id="file_link" style="display: none;">
                 <label for="file_link" class="col-sm-2 col-form-label">Link</label>
                 <div class="col-md-10 col-12">
-                  <input type="text" name="file_link" class="form-control @if($errors->has('file_link')) is-invalid @endif" value="{{ request()->old('file_link') }}" required>
+                  <input type="text" name="file_link" class="form-control @if($errors->has('file_link')) is-invalid @endif" value="{{ request()->old('file_link') }}">
                   <div class="invalid-feedback">{{ $errors->first('file_link') }}</div>
                 </div>
               </div>
               <div class="form-group row" id="file_pdf">
                 <label for="file_pdf" class="col-sm-2 col-form-label">Upload PDF</label>
                 <div class="col-md-5 col-12">
-                  <input type="file" name="file_pdf" class="form-control @if($errors->has('file_pdf')) is-invalid @endif" value="{{ request()->old('file_link') }}" required>
+                  <input type="file" name="file_pdf" class="form-control @if($errors->has('file_pdf')) is-invalid @endif" value="{{ request()->old('file_link') }}">
                   <div class="invalid-feedback">{{ $errors->first('file_pdf') }}</div>
                 </div>
               </div>
               <div class="form-separator mt-4 sticky-top sticky-nav bg-white">
                 <div class="d-flex justify-content-between align-items-baseline author-custom">
-                <h5 >Author #1</h5>
-                <button onClick="addAuthor()" type="button" class="btn btn-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
+                  <h5 >Author #1</h5>
+                  <button onClick="addAuthor()" type="button" class="btn btn-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
+                </div>
               </div>
-              </div>
-              <div class="form-group row">
+              <div class="form-group row authors1">
                 <label for="title" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-md-5 col-12">
                   <input type="text" name="authors[1][name]" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ request()->old('name') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('name') }}</div>
                 </div>
+                <div class="col-md-3 mt-md-2 mt-4">
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="checkbox1" onclick="toggleCorresponding('1');">
+                    <label class="form-check-label">Corresponding Author </label>
+                  </div>
+                </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row authors1" id="email_form1" style="display: none;">
                 <label for="title" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-md-5 col-12">
                   <input type="email" name="authors[1][email]" class="form-control @if($errors->has('email')) is-invalid @endif" value="{{ request()->old('email') }}" required>
                   <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                 </div>
               </div>
-              <div class="form-group row">
+              <div class="form-group row authors1">
                 <label for="title" class="col-sm-2 col-form-label">Affiliation</label>
                 <div class="col-sm-10" id="affiliationsGroup1">
                   <input type="text" name="authors[1][affiliation]" class="form-control @if($errors->has('affiliation')) is-invalid @endif" id="inputOther1" value="{{ request()->old('affiliation') }}" required>
@@ -117,83 +124,99 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="form-group row">
-            <div class="col text-right">
-              <button class="btn btn-primary" type="submit">Save</button>
+            <div class="card-footer bg-white" style="border: none;">
+              <div class="text-right">
+                <button class="btn btn-primary" type="submit">Save</button>
+              </div>
             </div>
           </div>
         </form>
       </div>
       <div class="col-lg-4">
-        <div class="card" style="border: none;">
-            <div class="card-body" id="cardBody">
-              <div class="form-separator">
-                <h5>Last Article</h5>
-              </div>
-              <div class="form-group row">
-                  <a href="#" class="col-sm-12 col-form-label">{{ $proceeding->articles->first()['title'] }}</a>
-              </div>
-            </div>
+        <div class="card sticky-top sticky-nav">
+          <div class="card-header bg-white">
+            <h5 class="m-0">Last created article</h5>
           </div>
+          <div class="card-body">
+            @empty ($lastArticle)
+              <div class="text-center text-muted">
+                <i class="fas fa-info fa-5x"></i>
+                <h4 class="mt-3">This is your first article</h4>
+              </div>
+            @else
+              <a href="#" target="_blank">{{ $lastArticle['title'] }}</a> <br>
+              <small class="text-muted">{{ \Carbon\Carbon::parse($lastArticle['created_at'])->diffForHumans() }}</small>
+            @endempty
+          </div>
+        </div>
       </div>
     </div>
   </section>
 @endsection
 
 @section('script') 
-<script type="text/javascript">
-  $(window).scroll(function() {
-    if($(this).scrollTop() > window.innerHeight*1.05)
-    {
-        $('.author-custom > h5').text('Authors');
-    } else {
-        $('.author-custom > h5').text('Author #1');
-    }
-  });
-    
-  function showLinkInput() {
-    $('#file_link').show();
-    $('#file_pdf').hide();
-  }
-
-  function showPdfInput() {
-    $('#file_link').hide();
-    $('#file_pdf').show();
-  }
-
-  function toggleInput(index) {
-    var inputOther = $('#inputOther'+index)
-    var radioOther = $('#radioOther'+index)
-
-    if (radioOther.is(':checked')) {
-      inputOther.attr("disabled", false)
-      inputOther.focus()
-    } else {
-      inputOther.attr("disabled", "disabled")
-      inputOther.val('')
-    }
-  }
-
-  var affiliations = [];
-  var index = 1
-
-  function addAuthor() {
-    var lastInput = $('#inputOther'+index).val();
-    index++
-
-    if (affiliations.indexOf(lastInput) == -1 && lastInput != '' && lastInput != undefined) {
-      affiliations.push(lastInput);
+  <script type="text/javascript">
+    $(window).scroll(function() {
+      if($(this).scrollTop() > window.innerHeight*1.05)
+      {
+          $('.author-custom > h5').text('Authors');
+      } else {
+          $('.author-custom > h5').text('Author #1');
+      }
+    });
+      
+    function showLinkInput() {
+      $('#file_link').show();
+      $('#file_pdf').hide();
     }
 
-    $('#cardBody').append('<div class="form-separator mt-4 bg-white"><div class="d-flex justify-content-between align-items-baseline"><h5 >Author #'+index+'</h5></div></div><div class="form-group row"><label for="name" class="col-sm-2 col-form-label">Name</label><div class="col-md-5 col-12"><input type="text" name="authors['+index+'][name]" class="form-control"></div></div><div class="form-group row"><label for="email" class="col-sm-2 col-form-label">Email</label><div class="col-md-5 col-12"><input type="email" name="authors['+index+'][email]" class="form-control"></div></div><div class="form-group row"><label for="affiliation" class="col-sm-2 col-form-label">Affiliation</label><div class="col-sm-10" id="affiliationsGroup'+index+'"></div></div>')
-
-    function appendItems(item, key) {
-      $('#affiliationsGroup'+index).append('<div class="form-check mb-2"><input class="form-check-input" onChange="toggleInput('+index+')" name="authors['+index+'][affiliation]" type="radio" value="'+item+'" id="check'+index+'"><label class="form-check-label" for="check'+index+'">'+item+'</label></div>');
+    function showPdfInput() {
+      $('#file_link').hide();
+      $('#file_pdf').show();
     }
+
+    function toggleInput(index) {
+      var inputOther = $('#inputOther'+index)
+      var radioOther = $('#radioOther'+index)
+
+      if (radioOther.is(':checked')) {
+        inputOther.attr("disabled", false)
+        inputOther.focus()
+      } else {
+        inputOther.attr("disabled", "disabled")
+        inputOther.val('')
+      }
+    }
+
+    var affiliations = [];
+    var index = 1
+
+    function addAuthor() {
+      var lastInput = $('#inputOther'+index).val();
+      index++
+
+      if (affiliations.indexOf(lastInput) == -1 && lastInput != '' && lastInput != undefined) {
+        affiliations.push(lastInput);
+      }
+
+    $('#cardBody').append('<div class="form-separator mt-4 bg-white authors'+index+'"><div class="d-flex justify-content-between align-items-baseline"><h5 >Author #'+index+'</h5><button type="button" class="close" aria-label="Close" onclick="deleteAuthor('+index+')"><span aria-hidden="true">&times;</span></button></div></div><div class="form-group row authors'+index+'"><label for="name" class="col-sm-2 col-form-label">Name</label><div class="col-md-5 col-12"><input type="text" name="authors['+index+'][name]" class="form-control"></div><div class="col-md-3 mt-md-2 mt-4"><div class="form-check"><input type="checkbox" class="form-check-input" id="checkbox'+index+'" onclick="toggleCorresponding('+index+')"><label class="form-check-label">Corresponding Author </label></div></div></div><div class="form-group row authors'+index+'" id="email_form'+index+'" style="display: none;"><label for="email" class="col-sm-2 col-form-label">Email</label><div class="col-md-5 col-12"><input type="email" name="authors['+index+'][email]" class="form-control"></div></div><div class="form-group row authors'+index+'"><label for="affiliation" class="col-sm-2 col-form-label">Affiliation</label><div class="col-sm-10" id="affiliationsGroup'+index+'"></div></div>')
+
+      function appendItems(item, key) {
+        $('#affiliationsGroup'+index).append('<div class="form-check mb-2"><input class="form-check-input" onChange="toggleInput('+index+')" name="authors['+index+'][affiliation]" type="radio" value="'+item+'" id="check'+index+'"><label class="form-check-label" for="check'+index+'">'+item+'</label></div>');
+      }
 
     affiliations.forEach(appendItems)
       $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="affiliation['+index+']" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="affiliation['+index+']" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
   }
+
+  function toggleCorresponding(id){
+    $("#email_form"+id).toggle();
+  }
+
+  function deleteAuthor(id){
+    $(".authors"+id).remove();
+  }
 </script>
+  {{-- INITIALIZE TEXT EDITOR. INCLUDE THIS FOR EVERY FORM THAT NEED TEXT EDITOR --}}
+  @include('layouts.summernote')
 @endsection

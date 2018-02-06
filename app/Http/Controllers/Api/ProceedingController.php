@@ -157,7 +157,10 @@ class ProceedingController extends Controller
             'conference_end' => 'required|date',
         ]);
 
-        return new ProceedingsResource(Proceeding::create($data));
+        $proceeding = Proceeding::create($data);
+        $proceeding->owner()->attach(request()->user()->id);
+        
+        return new ProceedingsResource($proceeding);
     }
 
     /**

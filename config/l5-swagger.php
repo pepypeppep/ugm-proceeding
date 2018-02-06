@@ -9,7 +9,7 @@ return [
         |--------------------------------------------------------------------------
         */
 
-        'title' => 'L5 Swagger UI',
+        'title' => 'UGM Proceeding API Documentation',
     ],
 
     'routes' => [
