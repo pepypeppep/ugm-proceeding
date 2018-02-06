@@ -736,7 +736,7 @@
                 "tags": [
                     "user"
                 ],
-                "summary": "Get all AAAAAAA",
+                "summary": "Get all users",
                 "description": "Return collection of users",
                 "operationId": "getAllUsers",
                 "produces": [
