@@ -45,7 +45,7 @@
               <div class="form-group row">
                 <label for="abstract" class="col-sm-2 col-form-label">Abstract</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control @if($errors->has('abstract')) is-invalid @endif" name="abstract" id="abstract" rows="5">{{ request()->old('abstract') }}</textarea>
+                  <textarea id="summernote" class="form-control @if($errors->has('abstract')) is-invalid @endif" name="abstract" id="abstract" rows="5">{{ request()->old('abstract') }}</textarea>
                   <div class="invalid-feedback">{{ $errors->first('abstract') }}</div>
                 </div>
               </div>
@@ -211,4 +211,7 @@
     $(".authors"+id).remove();
   }
 </script>
+
+{{-- INITIALIZE TEXT EDITOR. INCLUDE THIS FOR EVERY FORM THAT NEED TEXT EDITOR --}}
+  @include('layouts.summernote')
 @endsection
