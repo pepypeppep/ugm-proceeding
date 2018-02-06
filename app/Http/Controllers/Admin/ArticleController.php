@@ -19,9 +19,10 @@ class ArticleController extends Controller
 
     public function create($proceeding)
     {
-    	$lastArticle = $this->proceeding->find($proceeding)->articles->sortBy('created_at')->first();
+        $proceeding = $this->proceeding->find($proceeding);
+    	$lastArticle = $proceeding->articles->sortBy('created_at')->first();
     	
-        return view('dashboard.article.create', compact('lastArticle'));
+        return view('dashboard.article.create', compact('lastArticle', 'proceeding'));
     } 
 
     public function store()

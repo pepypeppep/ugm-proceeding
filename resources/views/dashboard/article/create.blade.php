@@ -6,7 +6,8 @@
 <section class="header py-5">
   <div class="row justify-content-between">
     <div class="col-md-6 mb-3 mb-md-0">
-      <h2>Create Articles</h2>
+      <h2 class="m-0">Create Articles</h2>
+      <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fa fa-chevron-circle-left fa-fw"></i>Back to proceedings</a>
     </div>
   </div>
 </section>
@@ -137,8 +138,15 @@
             <h5 class="m-0">Last created article</h5>
           </div>
           <div class="card-body">
-            <a href="#" target="_blank">{{ $lastArticle['title'] }}</a> <br>
-            <small class="text-muted">{{ \Carbon\Carbon::parse($lastArticle['created_at'])->diffForHumans() }}</small>
+            @empty ($lastArticle)
+              <div class="text-center text-muted">
+                <i class="fas fa-info fa-5x"></i>
+                <h4 class="mt-3">This is your first article</h4>
+              </div>
+            @else
+              <a href="#" target="_blank">{{ $lastArticle['title'] }}</a> <br>
+              <small class="text-muted">{{ \Carbon\Carbon::parse($lastArticle['created_at'])->diffForHumans() }}</small>
+            @endempty
           </div>
         </div>
       </div>

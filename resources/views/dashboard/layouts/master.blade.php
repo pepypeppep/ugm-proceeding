@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/custom.css">
     <!-- Font Swesome CSS -->
-    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/fontawesome-all.css">
     {{-- DATEPICKER CSS --}}
     <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
     <!-- Google fonts -->
