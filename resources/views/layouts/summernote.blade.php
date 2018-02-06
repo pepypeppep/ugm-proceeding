@@ -1,5 +1,5 @@
 {{-- INCLUDE THIS VIEW ON SCRIPT SECTION FOR EVERY FORM THAT NEED TEXT EDITOR --}}
-<script src="/summernote/summernote-bs4.min.js"></script>
+<script src="/summernote/summernote-bs4.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
