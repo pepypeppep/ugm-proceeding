@@ -34,6 +34,5 @@ class ArticlesRepository extends GuzzleService
 		});
 
 		return $multipart;
->>>>>>> upstream/master
 	}
 }
