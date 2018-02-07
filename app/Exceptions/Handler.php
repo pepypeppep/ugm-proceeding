@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Exceptions\RequestFailed;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
