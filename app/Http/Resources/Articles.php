@@ -29,7 +29,7 @@ class Articles extends Resource
             'proceeding' => $this->when(!$this->checkUrl('proceedings'), new Proceedings($this->proceeding)),
             'start_page' => $this->start_page,
             'title' => $this->title,
-            'views' => $this->view,
+            'views' => $this->views,
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
         ];

@@ -40,7 +40,7 @@
             <h5 class="text-primary m-0">{{ $article['title'] }}</h5>
             <span class="text-muted">
               {{ collect($article['authors'])->implode('name','; ') }}
-            <br><small>Last updated: 5 hours ago</small></span>
+            <br><small>Last updated: {{ \Carbon\Carbon::parse($article['updated_at'])->diffForHumans() }}</small></span>
           </div>
           <div class="col-md-2 pt-2 pt-md-0">
             <div class="d-flex">
