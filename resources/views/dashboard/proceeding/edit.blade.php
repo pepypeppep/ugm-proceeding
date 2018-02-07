@@ -7,6 +7,7 @@
     <div class="row justify-content-between">
       <div class="col-md-10 mb-3 mb-md-0">
         <h2 class="m-0">Edit proceeding details</h2>
+        <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to proceedings</a>
       </div>
     </div>
   </section>

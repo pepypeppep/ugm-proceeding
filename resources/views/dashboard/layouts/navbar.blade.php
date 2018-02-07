@@ -7,7 +7,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
-      <li class="nav-item">
+      <li class="nav-item @if(request()->is('proceedings*')) active @endif">
         <a class="nav-link" href="/proceedings">Proceedings</a>
       </li>
       <li class="nav-item">
