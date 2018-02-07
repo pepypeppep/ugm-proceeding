@@ -11,28 +11,45 @@ class ArticlesRepository extends GuzzleService
 		'base' => 'articles',
 	];
 
-	public function store()
+	public function store($request)
 	{
 		$multipart = collect();
 
-		collect(request()->all())->except('authors', '_token')->each(function ($item, $key) use ($multipart)
+		collect($request)->except('authors', '_token', 'file_pdf', 'file_link')->each(function ($item, $key) use ($multipart)
 		{
 			$multipart->push([
 				'name' => $key,
-				'content' => $item,
+				'contents' => $item,
 			]);
 		});
 
-		collect(request('authors'))->each(function ($item, $index) use ($multipart)
+		if ($request['file_type'] == 'pdf') {
+			$multipart->push([
+				'name' => 'file_pdf',
+				'contents' => fopen(request()->file('file_pdf'), 'r'),
+			]);
+		} else {
+			$multipart->push([
+				'name' => 'file_link',
+				'contents' => $request['file_link'],
+			]);
+		}
+
+		collect($request['authors'])->each(function ($item, $index) use ($multipart)
 		{
 			foreach ($item as $key => $value) {
-				$multipart->push([
-					'name' => "authors[$key][$index]",
-					'content' => $value,
-				]);
+				if (!empty($value)) {
+					$multipart->push([
+						'name' => "authors[$index][$key]",
+						'contents' => $value,
+					]);
+				}
 			}
 		});
 
-		return $multipart;
+		$this->multipart = $multipart->toArray();
+		$this->getResponse('POST', $this->uris['base']);
+
+		return $this;
 	}
 }

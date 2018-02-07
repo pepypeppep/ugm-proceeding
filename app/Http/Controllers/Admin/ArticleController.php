@@ -27,9 +27,9 @@ class ArticleController extends Controller
 
     public function store()
     {
-        $articles = $this->repository->store();
+        $article = $this->repository->store(request()->all());
 
-        return $articles;
+        return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']));
     }
 
 }

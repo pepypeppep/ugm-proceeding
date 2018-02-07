@@ -26,7 +26,7 @@ class StoreArticles extends FormRequest
         return [
             'abstract' => 'required|string',
             'authors' => 'required|array',
-            'doi' => 'required|string',
+            'doi' => 'nullable|string',
             'end_page' => 'required|integer',
             'file_type' => 'required|string',
             'file_link' => 'string|required_if:file_type,scopus,doaj',
@@ -35,7 +35,7 @@ class StoreArticles extends FormRequest
             'proceeding_id' => 'required|exists:proceedings,id',
             'title' => 'required|string',
             'authors.*.affiliation' => 'required|string',
-            'authors.*.email' => 'required|email',
+            'authors.*.email' => 'nullable|email',
             'authors.*.name' => 'required|string',
         ];
     }
