@@ -29,7 +29,7 @@ class ArticleController extends Controller
     {
         $article = $this->repository->store(request()->all());
 
-        return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']));
+        return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']))->with('success', 'You have successfully created an article!');
     }
 
 }
