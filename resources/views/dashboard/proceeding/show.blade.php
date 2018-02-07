@@ -52,7 +52,7 @@
           <div class="col-md">
             <div class="card">
               <div class="card-body text-center">
-                <i class="fa fa-file-text-o fa-2x text-primary"></i>
+                <i class="far fa-file-alt fa-2x text-primary"></i>
                 <h3 class="text-primary m-0"><b>{{ $proceeding->articles->count() }}</b></h3>
                 <span>Articles</span>
               </div>
