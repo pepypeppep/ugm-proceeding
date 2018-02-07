@@ -31,7 +31,7 @@ class LoginController extends Controller
     		$token = $repo->getToken();
     		auth()->user()->api_token = $token;
             session(['api_token' => $token]);
-    		return Auth::user()->name;
+    		return Auth::user()->name."<br>".$token;
     	}
     }
 }
