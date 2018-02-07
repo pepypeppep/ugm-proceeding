@@ -50,6 +50,8 @@ class ArticlesRepository extends Repository
 			'title' => $request->title,
 			'start_page' => $request->start_page,
 			'keywords' => $request->keywords,
+			'downloads' => 0,
+			'views' => 0,
 		]);
 
 		// add authors
@@ -57,7 +59,7 @@ class ArticlesRepository extends Repository
 			$article->author()->create([
 				'name' => $value['name'],
 				'affiliation' => $value['affiliation'],
-				'email' => $value['email'],
+				'email' => optional($value)['email'],
 			]);
 		}
 

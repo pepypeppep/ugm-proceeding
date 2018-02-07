@@ -43,7 +43,7 @@ class ProceedingController extends Controller
     {
         $proceeding = $this->repository->store(request()->all());
 
-        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'The proceeding has been created. Now you can add cover image, subjects, and introduction text.');
+        return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'The proceeding has been created. Now you can add cover image, subjects, and introduction text.'); 
     }
 
     public function edit($proceeding)

@@ -54,7 +54,7 @@
               @foreach ($proceedings->data as $proceeding)
                 <div class="row justify-content-between">
                   <div class="col-lg-8 paper-info d-flex">
-                    <i class="fa fa-file-text-o fa-2x p-3"></i>
+                    <i class="far fa-file-alt fa-2x p-3"></i>
                     <p class="m-0 pl-2">
                       <a href="/proceedings/{{ $proceeding['id'] }}" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
                       {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
