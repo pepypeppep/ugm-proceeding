@@ -55,6 +55,7 @@
                 <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
                 <div class="col-md-8 col-12">
                   <input type="text" name="keywords" class="form-control @if($errors->has('keywords')) is-invalid @endif" value="{{ request()->old('keywords') }}">
+                  <small class="form-text text-muted">Seperate each keyword with comma. Ex: Microbiology, Molecular biology</small>
                   <div class="invalid-feedback">{{ $errors->first('keywords') }}</div>
                 </div>
               </div>
@@ -221,7 +222,7 @@
       }
 
       affiliations.forEach(appendItems)
-      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="affiliation['+index+']" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="affiliation['+index+']" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
+      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="authors['+index+'][affiliation]" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="authors['+index+'][affiliation]" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
   }
 
   function toggleCorresponding(id){

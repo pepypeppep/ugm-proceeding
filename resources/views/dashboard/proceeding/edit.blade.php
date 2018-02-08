@@ -73,6 +73,14 @@
 							    <div class="invalid-feedback">{{ $errors->first('conference_end') }}</div>
 							  </div>
 							</div>
+							{{-- FIELD ORGANIZER --}}
+							<div class="form-group row">
+							  <div class="col-sm-6">
+							    <label for="location">Conference's location</label>
+							    <input name="location" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('location')) is-invalid @endif" id="location" value="{{ $proceeding->location }}" required>
+							    <div class="invalid-feedback">{{ $errors->first('location') }}</div>
+							  </div>
+							</div>
 							<div class="form-separator mt-5">
 								<h5>Identifiers</h5>
 							</div>
