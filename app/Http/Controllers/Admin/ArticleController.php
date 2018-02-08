@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ArticlesRepository;
+use App\Repositories\AuthorsRepository;
 use App\Repositories\ProceedingsRepository;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,19 @@ class ArticleController extends Controller
         $articles = $this->repository->store();
 
         return $articles;
+    }
+
+    public function show(AuthorsRepository $authors)
+    {
+        $authors = $authors->get()->data;
+        // return $authors;
+        return view('dashboard.article.author', compact('authors'));
+    }
+
+    public function find(Request $request, AuthorsRepository $authors)
+    {
+        $authors = $authors->get()->data;
+        return $authors::search($request->get('name'));
     }
 
 }
