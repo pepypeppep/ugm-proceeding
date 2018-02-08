@@ -44,7 +44,7 @@
 							{{-- FIELD ALIAS --}}
 							<div class="form-group row">
 							  <div class="col-sm-4">
-							    <label for="alias">Conference's Alias</label>
+							    <label for="alias">Conference's short name</label>
 							    <input name="alias" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('alias')) is-invalid @endif" id="alias" value="{{ $proceeding->alias }}" required>
 							    <small id="aliasHelp" class="form-text text-muted">e.g. ICST 2017</small>
 							    <div class="invalid-feedback">{{ $errors->first('alias') }}</div>
