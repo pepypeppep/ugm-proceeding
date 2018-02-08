@@ -221,7 +221,7 @@
       }
 
       affiliations.forEach(appendItems)
-      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="affiliation['+index+']" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="affiliation['+index+']" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
+      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="authors['+index+'][affiliation]" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="authors['+index+'][affiliation]" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
   }
 
   function toggleCorresponding(id){
