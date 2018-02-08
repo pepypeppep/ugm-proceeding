@@ -55,6 +55,7 @@
                 <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
                 <div class="col-md-8 col-12">
                   <input type="text" name="keywords" class="form-control @if($errors->has('keywords')) is-invalid @endif" value="{{ request()->old('keywords') }}">
+                  <small class="form-text text-muted">Seperate each keyword with comma. Ex: Microbiology, Molecular biology</small>
                   <div class="invalid-feedback">{{ $errors->first('keywords') }}</div>
                 </div>
               </div>

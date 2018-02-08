@@ -21,9 +21,9 @@
   <section class="body pb-5">
     <!-- NAV TAB -->
     <nav class="nav nav-tabs scrollable-nav" id="myTab" role="tablist">
-      <a class="nav-item nav-link @if(request('tab') == 'overview' || request('tab') == null) {{ 'active' }} @endif" id="nav-overview-tab" data-toggle="tab" href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
-      <a class="nav-item nav-link @if(request('tab') == 'details') {{ 'active' }} @endif" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false">Details</a>
-      <a class="nav-item nav-link @if(request('tab') == 'articles') {{ 'active' }} @endif" id="nav-articles-tab" data-toggle="tab" href="#nav-articles" role="tab" aria-controls="nav-articles" aria-selected="false">Articles</a>
+      <a class="nav-item nav-link @if(request('tab') == 'overview' || request('tab') == null) active @endif" id="nav-overview-tab" data-toggle="tab" href="#nav-overview" role="tab" aria-controls="nav-overview" aria-selected="true">Overview</a>
+      <a class="nav-item nav-link @if(request('tab') == 'details') active @endif" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="false">Details</a>
+      <a class="nav-item nav-link @if(request('tab') == 'articles') active @endif" id="nav-articles-tab" data-toggle="tab" href="#nav-articles" role="tab" aria-controls="nav-articles" aria-selected="false">Articles &nbsp;<span class="badge badge-primary">{{ $proceeding->total_articles }}</span></a>
     </nav> 
     <!-- NAV TAB CONTENTS -->
     <div class="tab-content" id="nav-tabContent">
