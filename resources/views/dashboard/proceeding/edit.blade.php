@@ -7,6 +7,7 @@
     <div class="row justify-content-between">
       <div class="col-md-10 mb-3 mb-md-0">
         <h2 class="m-0">Edit proceeding details</h2>
+        <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to proceedings</a>
       </div>
     </div>
   </section>
@@ -43,7 +44,7 @@
 							{{-- FIELD ALIAS --}}
 							<div class="form-group row">
 							  <div class="col-sm-4">
-							    <label for="alias">Conference's Alias</label>
+							    <label for="alias">Conference's short name</label>
 							    <input name="alias" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('alias')) is-invalid @endif" id="alias" value="{{ $proceeding->alias }}" required>
 							    <small id="aliasHelp" class="form-text text-muted">e.g. ICST 2017</small>
 							    <div class="invalid-feedback">{{ $errors->first('alias') }}</div>
