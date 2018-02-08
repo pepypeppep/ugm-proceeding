@@ -6,6 +6,242 @@
     },
     "basePath": "/api",
     "paths": {
+        "/articles/": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Get all articles with query",
+                "description": "Return collection of articles",
+                "operationId": "getAllarticles",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "keyword values that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "author",
+                        "in": "query",
+                        "description": "Author name that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Article's title that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/articles/{articleId}": {
+            "get": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Find article by Id",
+                "description": "Returns a single article with authors",
+                "operationId": "getArticleById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "ID of proceeding to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Proceeding not found"
+                    }
+                }
+            }
+        },
+        "/articles": {
+            "post": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Create a new article",
+                "description": "",
+                "operationId": "createNewArticle",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "proceeding_id",
+                        "in": "formData",
+                        "description": "Article's proceeding id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "title",
+                        "in": "formData",
+                        "description": "Article's title",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "abstract",
+                        "in": "formData",
+                        "description": "Article's abstract",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "start_page",
+                        "in": "formData",
+                        "description": "Article's start page",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "end_page",
+                        "in": "formData",
+                        "description": "Article's end page",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "formData",
+                        "description": "Article's keyword. Seperate with comma. Ex: Computer technology, Information, system",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "authors[0][name]",
+                        "in": "formData",
+                        "description": "First author's name",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "authors[0][email]",
+                        "in": "formData",
+                        "description": "First author's email",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "authors[0][affiliation]",
+                        "in": "formData",
+                        "description": "First author's affiliation",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "file_type",
+                        "in": "formData",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "pdf",
+                        "enum": [
+                            "pdf",
+                            "scopus",
+                            "doaj"
+                        ]
+                    },
+                    {
+                        "name": "file_link",
+                        "in": "formData",
+                        "description": "File link value. Required if file type not pdf",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_pdf",
+                        "in": "formData",
+                        "description": "Upload pdf file",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "doi",
+                        "in": "formData",
+                        "description": "DOI of the article",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/authors/": {
+            "get": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Get all authors",
+                "description": "Return collection of authors",
+                "operationId": "getAllProceedings",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "name values that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/institutions/": {
             "get": {
                 "tags": [
@@ -68,6 +304,50 @@
                 "operationId": "getAllProceedings",
                 "produces": [
                     "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "keyword",
+                        "in": "query",
+                        "description": "keyword values that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name of the proceeding that need to be considered for filter",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alias",
+                        "in": "query",
+                        "description": "Alias of the proceeding that need to be considered for filter. Ex: ICTA",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "subject id of the proceeding that need to be considered for filter. Ex: 3",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "date",
+                        "in": "query",
+                        "description": "Date of the conference ex: 2017-12",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
+                        "required": false,
+                        "type": "string"
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -249,22 +529,24 @@
                         "format": "int64"
                     },
                     {
-                        "name": "body",
-                        "in": "body",
-                        "description": "Proceeding object that needs to be added",
+                        "name": "subject_id[0]",
+                        "in": "query",
+                        "description": "Subject id",
                         "required": true,
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "properties": {
-                                    "subject_id": {
-                                        "description": "[updateCovers description]",
-                                        "type": "integer",
-                                        "example": 2
-                                    }
-                                }
-                            }
-                        }
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "action",
+                        "in": "query",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "attach",
+                        "enum": [
+                            "attach",
+                            "detach"
+                        ]
                     }
                 ],
                 "responses": {
@@ -354,13 +636,13 @@
                 ],
                 "summary": "Find subject by Id",
                 "description": "Returns a single subject",
-                "operationId": "getProceedingById",
+                "operationId": "getSubjectById",
                 "produces": [
                     "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "subjectsId",
+                        "name": "subjectId",
                         "in": "path",
                         "description": "ID of subject to return",
                         "required": true,
@@ -379,6 +661,101 @@
                         "description": "Proceeding not found"
                     }
                 }
+            }
+        },
+        "/subjects": {
+            "post": {
+                "tags": [
+                    "subjects"
+                ],
+                "summary": "Add new subject",
+                "description": "",
+                "operationId": "addSubjects",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Subjects object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Subjects"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/subjects/{subjectId}": {
+            "put": {
+                "tags": [
+                    "subjects"
+                ],
+                "summary": "Update existing subject",
+                "description": "",
+                "operationId": "updateSubject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "subjectId",
+                        "in": "path",
+                        "description": "ID of subject to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Subject object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "Forestry"
+                                },
+                                "created_at": {
+                                    "type": "date",
+                                    "example": "2017-10-26"
+                                },
+                                "updated_at": {
+                                    "type": "date",
+                                    "example": "2017-10-27"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/users/": {
@@ -459,6 +836,23 @@
                 }
             },
             "type": "object"
+        },
+        "Subjects": {
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Forestry"
+                },
+                "created_at": {
+                    "type": "date",
+                    "example": "2018-01-22"
+                },
+                "updated_at": {
+                    "type": "date",
+                    "example": "2018-01-22"
+                }
+            },
+            "type": "object"
         }
     },
     "securityDefinitions": {
@@ -474,16 +868,12 @@
             "description": "All proceeding operations"
         },
         {
-            "name": "article",
+            "name": "articles",
             "description": "All articles operations"
         },
         {
             "name": "user",
-            "description": "Operations about user",
-            "externalDocs": {
-                "description": "Find out more about our store",
-                "url": "http://swagger.io"
-            }
+            "description": "Operations about user"
         },
         {
             "name": "institutions",
@@ -492,6 +882,10 @@
         {
             "name": "subjects",
             "description": "All subject operations"
+        },
+        {
+            "name": "authors",
+            "description": "All author operations"
         }
     ]
 }

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Proceedings as ProceedingsResource;
 use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
 use App\Repositories\Api\ProceedingsRepository as Repository;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 
 class ProceedingController extends Controller
 {
@@ -19,6 +20,48 @@ class ProceedingController extends Controller
     *     operationId="getAllProceedings",
     *     tags={"proceedings"},
     *     produces={"application/json"},
+    *     @SWG\Parameter(
+     *         name="keyword",
+     *         in="query",
+     *         description="keyword values that need to be considered for filter",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Name of the proceeding that need to be considered for filter",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="alias",
+     *         in="query",
+     *         description="Alias of the proceeding that need to be considered for filter. Ex: ICTA",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="subject",
+     *         in="query",
+     *         description="subject id of the proceeding that need to be considered for filter. Ex: 3",
+     *         required=false,
+     *         type="integer",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="date",
+     *         in="query",
+     *         description="Date of the conference ex: 2017-12",
+     *         required=false,
+     *         type="string",
+     *     ),
+     *     @SWG\Parameter(
+     *         name="sort",
+     *         in="query",
+     *         description="you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
+     *         required=false,
+     *         type="string",
+     *     ),
     *     @SWG\Response(
     *         response=200,
     *         description="successful operation"
@@ -33,6 +76,7 @@ class ProceedingController extends Controller
             'alias' => 'string',
             'date' => 'string',
             'subject' => 'integer',
+            'status' => 'string',
             'sort' => [
                 'string', 
                 'regex:(asc|desc)',
@@ -108,11 +152,15 @@ class ProceedingController extends Controller
             'name' => 'required|string',
             'alias' => 'string',
             'organizer' => 'string',
+            'location' => 'string',
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
         ]);
 
-        return new ProceedingsResource(Proceeding::create($data));
+        $proceeding = Proceeding::create($data);
+        $proceeding->owner()->attach(request()->user()->id);
+        
+        return new ProceedingsResource($proceeding);
     }
 
     /**
@@ -165,9 +213,9 @@ class ProceedingController extends Controller
             'organizer' => 'required|string',
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
-            'introduction' => 'string|max:2500',
-            'isbn' => 'digits:13',
-            'issn' => 'digits:8',
+            'introduction' => 'nullable|string|max:2500',
+            'isbn' => 'nullable|digits:13',
+            'issn' => 'nullable|digits:8',
         ]);
 
         $proceeding->update($data);
@@ -184,6 +232,7 @@ class ProceedingController extends Controller
      *     tags={"proceedings"},
      *     consumes={"application/json"},
      *     summary="Update proceeding subjects",
+     *     produces="form",
      *     description="",
      *     operationId="updateSubjects",
      *     @SWG\Parameter(
@@ -194,18 +243,23 @@ class ProceedingController extends Controller
      *         required=true,
      *         type="integer"
      *     ),
-     *      @SWG\Parameter(
-     *          name="body",
-     *          in="body",
-     *          description="Proceeding object that needs to be added",
-     *          required=true,
-     *          @SWG\Schema(
-     *              type="array",
-     *              @SWG\Items(
-     *                  @SWG\Property(property="subject_id", type="integer", example=2)
-     *              )
-     *          ),      
-     *      ),
+     *     @SWG\Parameter(
+     *         description="Subject id",
+     *         format="int64",
+     *         in="query",
+     *         name="subject_id[0]",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *         name="action",
+     *         in="query",
+     *         description="File type values of the article",
+     *         required=true,
+     *         type="string",
+     *         enum={"attach", "detach"},
+     *         default="attach"
+     *     ),
      *     produces={"application/json"},
      *     @SWG\Response(
      *         response="200",
@@ -217,11 +271,11 @@ class ProceedingController extends Controller
     public function updateSubjects(Proceeding $proceeding)
     {
         $data = request()->validate([
-            '*.subject_id' => 'required|int|exists:subjects,id'
+            'subject_id.*' => 'required|int|exists:subjects,id',
+            'action' => 'required|string|in:attach,detach',
         ]);
 
-        $subjectsId = collect($data)->flatten();
-        $proceeding->subject()->sync($subjectsId);
+        $proceeding->subject()->{$data['action']}($data['subject_id']);
 
         return new ProceedingsResource($proceeding);
     }
@@ -276,6 +330,10 @@ class ProceedingController extends Controller
 
         collect($data)->map(function ($item, $key) use ($proceeding)
         {
+            if (Storage::exists($proceeding->{$key})) {
+                Storage::delete($proceeding->{$key});
+            }
+
             $path = request()->file($key)->store('proceedings/'.$proceeding->id);
             $proceeding->update([$key => $path]);
         });

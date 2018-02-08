@@ -22,10 +22,11 @@ class ProceedingsRepository extends Repository
 	* @var array('field' => 'query operator')
 	*/
 	protected $fields = [
-		'keyword' => 'like',
-		'name' => 'like',
 		'alias' => 'like',
 		'date' => 'like',
+		'keyword' => 'like',
+		'name' => 'like',
+		'status' => 'like',
 		'subject' => '=',
 	];
 	

@@ -1,0 +1,19 @@
+{
+    "name": "Onli",
+    "icons": [
+        {
+            "src": "img/favicons/android-chrome-192x192.png?v=3eKR9vjrYw",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "img/favicons/android-chrome-512x512.png?v=3eKR9vjrYw",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait"
+}

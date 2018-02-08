@@ -11,26 +11,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/redirect', function () {
-    $query = http_build_query([
-        'client_id' => 4,
-        'redirect_uri' => 'http://localhost:8000/callback',
-        'response_type' => 'code',
-        'scope' => '',
-    ]);
-
-    return redirect('http://localhost:8000/oauth/authorize?'.$query);
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/proceedings', 'HomeController@service');
 Route::get('/users', 'HomeController@apiService');
+Route::get('/users/{user}', 'HomeController@findUser');
 
 Route::get('/try-login', 'LoginController@store');
+
+Route::group(['prefix' => 'proceedings'], function(){
+	Route::get('/', 'Admin\ProceedingController@index')->name('proceeding.index');
+	Route::get('/create', 'Admin\ProceedingController@create')->name('proceeding.create');
+	Route::get('/{proceeding}', 'Admin\ProceedingController@show')->name('proceeding.show');
+	Route::get('/{proceeding}/edit', 'Admin\ProceedingController@edit')->name('proceeding.edit');
+	Route::put('/{proceeding}', 'Admin\ProceedingController@update')->name('proceeding.update');
+	Route::put('/{proceeding}/subjects', 'Admin\ProceedingController@updateSubjects')->name('proceeding.update.subjects');
+	Route::post('/{proceeding}/cover', 'Admin\ProceedingController@updateCover')->name('proceeding.cover');
+	Route::get('/{proceeding}/create-article', 'Admin\ArticleController@create')->name('article.create');
+	Route::post('/', 'Admin\ProceedingController@store')->name('proceeding.store');
+});
+
+Route::group(['prefix' => 'articles'], function(){
+	Route::post('/', 'Admin\ArticleController@store')->name('article.store');
+});
+

@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Exceptions\RequestFailed;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +67,25 @@ class GuzzleService
 	 * request response
 	 * @var array
 	 */
-	protected $response;
+	public $response;
+
+	/**
+	 * response data
+	 * @var collection
+	 */
+	public $data;
+
+	/**
+	 * response metadata
+	 * @var collection
+	 */
+	public $meta;
+
+	/**
+	 * Pagination response links
+	 * @var [type]
+	 */
+	public $links;
 	
 	/**
 	 * set base url and inisiate Guzzle client
@@ -77,8 +97,6 @@ class GuzzleService
 		$this->client = new Client([
 			'base_uri' => $this->base_uri
 		]);
-
-		$this->headers = $this->setHeaders();
 	}
 
 	/**
@@ -91,8 +109,16 @@ class GuzzleService
 	public function getResponse($method, $uri)
 	{
 		$this->setBody();
-		$response = $this->client->request($method, $uri, $this->body)->getBody();
+
+		// Make a request. Throw the RequestFailed exception if failed
+		$request = $this->client->request($method, $uri, $this->body);
+
+		// Get response body if success
+		$response = $request->getBody();
 		$this->response = collect(json_decode($response, true));
+
+		// Set data, meta, and links property
+		$this->setResponseData()->setResponseMeta()->setResponselinks();
 
 		return $this->response;
 	}
@@ -121,9 +147,7 @@ class GuzzleService
 			$body['multipart'] = $this->multipart;
 		}
 
-		if (!empty($this->headers)) {
-			$body['headers'] = $this->headers;
-		}
+		$body['headers'] = $this->setHeaders();
 
 		$this->body = $body;
 		return $this;
@@ -139,5 +163,78 @@ class GuzzleService
 			'Accept' => 'application/json',
 			'Authorization' => session('api_token', null),
 		];
+	}
+
+	/**
+	 * set response data property
+	 * if API body doesn't have data, set response as data instead
+	 */
+	protected function setResponseData()
+	{
+		if (!empty($this->response['data'])) {
+			$this->data = collect($this->response['data']);
+		} else {
+			$this->data = collect($this->response);
+		}
+
+		return $this;
+	}
+
+	/**
+	 * set response metadata
+	 */
+	protected function setResponseMeta()
+	{
+		if (!empty($this->response['meta'])) {
+			$this->meta = collect($this->response['meta']);
+		} else {
+			$this->meta = [];
+		}
+
+		return $this;
+	}
+
+	/**
+	 * set response links
+	 */
+	protected function setResponselinks()
+	{
+		if (!empty($this->response['links'])) {
+			$this->links = collect($this->response['links']);
+		} else {
+			$this->links = [];
+		}
+
+		return $this;
+	}
+
+	public function page($page)
+	{
+		return url()->current().'?'.http_build_query(request()->merge(['page' => $page])->all());
+	}
+
+	public function nextPage()
+	{
+		return $this->page($this->meta['current_page']+1);
+	}
+
+	public function previousPage()
+	{
+		return $this->page($this->meta['current_page']-1);
+	}
+
+	/**
+	 * Dynamically access the data's attributes.
+	 *
+	 * @param  string  $key
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+		if (is_array($this->data[$key])) {
+			return collect($this->data[$key]);
+		}
+
+	    return $this->data[$key];
 	}
 }

@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Exceptions\RequestFailed;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -48,6 +51,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ClientException) {
+            throw new RequestFailed($exception->getResponse());
+        }
+
+        if ($exception instanceof ServerException) {
+            throw new RequestFailed($exception->getResponse());
+        }
         return parent::render($request, $exception);
     }
 }
