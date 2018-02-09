@@ -109,7 +109,7 @@
               <div class="form-separator mt-4 sticky-top sticky-nav bg-white">
                 <div class="d-flex justify-content-between align-items-baseline author-custom">
                   <h5 >Author #1</h5>
-                  <button onClick="addAuthor()" type="button" class="btn btn-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
+                  <button onClick="addAuthor()" type="button" class="btn btn-outline-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
                 </div>
               </div>
               <div class="form-group row authors1">
@@ -140,9 +140,9 @@
                 </div>
               </div>
             </div>
-            <div class="card-footer bg-white" style="border: none;">
+            <div class="card-footer bg-white mt-5">
               <div class="text-right">
-                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-primary btn-block" type="submit">Save article</button>
               </div>
             </div>
           </div>

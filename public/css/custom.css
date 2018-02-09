@@ -40,6 +40,14 @@ body {
   border-bottom-left-radius: 3px;
 }
 
+.nav-tabs .nav-link.active span {
+    background-color: #3b77a4;
+}
+
+.nav-tabs .nav-link:hover span {
+    background-color: #3b77a4;
+}
+
 .nav.scrollable-nav {
     white-space: nowrap;
     overflow-x: auto;
