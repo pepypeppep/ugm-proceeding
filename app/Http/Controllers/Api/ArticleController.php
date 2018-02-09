@@ -222,4 +222,23 @@ class ArticleController extends Controller
         return new Articles($repository->create($request));
     }
 
+    public function update(Article $article, Repository $repository)
+    {
+        $request = $this->request()->validate([
+            'abstract' => 'required|string',
+            'abstract' => 'required|string',
+            'authors' => 'required|array',
+            'doi' => 'nullable|string',
+            'end_page' => 'required|integer',
+            'file_type' => 'required|string',
+            'file_link' => 'string|required_if:file_type,scopus,doaj',
+            'file_pdf' => 'mimes:pdf|required_if:file_type,pdf',
+            'keywords' => 'required|string',
+            'proceeding_id' => 'required|exists:proceedings,id',
+            'title' => 'required|string',
+        ]);
+
+        return new Articles($repository->update($article, $request));
+    }
+
 }

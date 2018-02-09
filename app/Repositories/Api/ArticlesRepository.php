@@ -85,4 +85,11 @@ class ArticlesRepository extends Repository
 
 		return $article->load('author');
 	}
+
+	public function update($article, $request)
+	{
+		$request = collect($request);
+
+		$article->update($request->except('doi', 'file_pdf'));
+	}
 }
