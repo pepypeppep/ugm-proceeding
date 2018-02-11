@@ -5,9 +5,11 @@ Online proceeding of Universitas Gadjah Mada
 1. Clone this repository to your local.
 2. run `composer install`
 3. Make new `.env` based on `.env.example`. Don't forget to modify the database connection on `.env`.
-4. run `php aritsan key:generate`
-5. run `php artisan migrate --seed`
-6. run `php artisan storage:link`
+4. run `php aritsan key:generate`.
+5. run `php artisan migrate --seed`.
+6. run `php artisan storage:link`.
+8. run `php artisan passport:install`. Copy passport grant `client id` and `client_secret` to your `.env`.
+9. If you are on local development using XAMPP, we recomend you to [make Virtual Host](http://valuebound.com/resources/blog/how-to-setup-virtual-host-windows-7-xampp-server).
 
 # Credits
 ## Contributors
