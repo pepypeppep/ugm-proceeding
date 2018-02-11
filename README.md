@@ -1,4 +1,4 @@
-# ugm-proceeding
+# UGM Online Proceeding
 Online proceeding of Universitas Gadjah Mada
 
 ## How to Install
@@ -11,10 +11,10 @@ Online proceeding of Universitas Gadjah Mada
 
 # Credits
 ## Contributors
-- @w1lldone
-- @pepypeppep
-- @davieiycode
-- @akhsin
+- [@w1lldone](https://github.com/w1lldone)
+- [@pepypeppep](https://github.com/pepypeppep)
+- [@davieiycode](https://github.com/davieiycode)
+- [@akhsin](https://github.com/akhsin)
 
 ## Development
 - Built with [Laravel 5.5 PHP](https://laravel.com) Framework
