@@ -17,7 +17,7 @@ Online proceeding of Universitas Gadjah Mada
 - [@akhsin](https://github.com/akhsin)
 
 ## Development
-- Built with [Laravel 5.5 PHP](https://laravel.com) Framework
+- Built with [Laravel 5.5](https://laravel.com) PHP Framework
 - [Passport](https://laravel.com/docs/5.5/passport) for API Security
 - [Swagger PHP](http://zircote.com/swagger-php/) and [L5-Swagger](https://github.com/DarkaOnLine/L5-Swagger) for API documentations
 - Frontend using [Bootstrap 4.0](http://getbootstrap.com/)
