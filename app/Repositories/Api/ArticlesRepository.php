@@ -90,6 +90,13 @@ class ArticlesRepository extends Repository
 	{
 		$request = collect($request);
 
-		$article->update($request->except('doi', 'file_pdf'));
+		$article->update($request->except('doi')->all());
+
+		$article->article_identifier()->first()->update([
+			'type' => 'doi',
+			'code' => $request['doi'],
+		]);
+
+		return $article;
 	}
 }
