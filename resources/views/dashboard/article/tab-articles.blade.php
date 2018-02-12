@@ -3,55 +3,36 @@
     <section class="body pb-5">
         <div class="row pt-4">
           <div class="col-md-10">
-            <div class="mb-4">
+            <div class="mb-2">
               <h4 class="text-primary">Abstract</h4>
-                Id reprehenderit animi voluptatum id. Dolorum beatae exercitationem blanditiis veniam. Excepturi dolor vel soluta iusto. Quo consequatur ex vitae enim. Vel velit porro dolorem eaque omnis quo. Ut est aut soluta accusamus. Repudiandae rem laborum commodi quas totam aut. Harum ea sequi saepe quo sit optio. Nihil totam sint ut soluta nulla accusamus ut.
+                {{ $articles->data['abstract'] }}
+            </div>
+            <div class="mb-4">
+              <b><span>Keywords</span></b> : {{ $articles->keywords }}
             </div>
             <div class="mb-3">
               <h4 class="text-primary">Article info</h4>
-              <div class="row mb-3">
-                <div class="col-sm-2 col-md-12">
-                  <table>
-                      <tr>
-                        <th>Keywords</th>
-                      </tr>
-                      <tr>
-                        <td>incidunt, aut, deserunt</td>
-                      </tr>
-                   </table>
-                </div>
-                <div class="clearfix visible-md-block"></div>
-              </div>
               <div class="row">
+              @foreach($articles->data['identifiers'] as $identifiers)
                 <div class="col-sm-6 col-md-2">
                   <table>
-                      <tr>
-                        <th>ISBN</th>
-                      </tr>
-                      <tr>
-                        <td>9785016356136</td>
-                      </tr>
+                    <tr>
+                      <th>{{ $identifiers['type'] }}</th>
+                    </tr>
+                    <tr>
+                      <td>{{ $identifiers['id'] }}</td>
+                    </tr>
                    </table>
                 </div>
                 <div class="clearfix visible-md-block"></div>
-                <div class="col-sm-6 col-md-2">
-                  <table>
-                      <tr>
-                        <th>DOI</th>
-                      </tr>
-                      <tr>
-                        <td>9796924948429</td>
-                      </tr>
-                   </table>
-                </div>
-                <div class="clearfix visible-md-block"></div>
+              @endforeach
                 <div class="col-sm-6 col-md-2">
                   <table>
                       <tr>
                         <th>Date Added</th>
                       </tr>
                       <tr>
-                        <td>29 January 2018</td>
+                        <td>{{ $articles->data['date_added'] }}</td>
                       </tr>
                    </table>
                 </div>
@@ -62,20 +43,25 @@
                         <th>Page(s)</th>
                       </tr>
                       <tr>
-                        <td>13 &ndash; 26</td>
+                        <td>{{ $articles->data['start_page'] }} &ndash; {{ $articles->data['end_page'] }}</td>
                       </tr>
                    </table>
                 </div>
                 <div class="clearfix visible-md-block"></div>
                 <div class="col-sm-2 col-md-1">
                   <table>
-                      <tr>
-                        <th>Indexed</th>
-                      </tr>
-                      <tr>
-                        <td>PDF</td>
-                        <td>Link</td>
-                      </tr>
+                    <tr>
+                      <th>Indexed</th>
+                    </tr>
+                    <tr>
+                      <td>
+                        @if ($articles->indexed)
+                          <img src="{{ $articles->img[$articles->file['type']] }}" class="img-fluid">
+                        @else
+                          <span>PDF</span>
+                        @endif
+                      </td>
+                    </tr>
                    </table>
                 </div>
                 <div class="clearfix visible-md-block"></div>

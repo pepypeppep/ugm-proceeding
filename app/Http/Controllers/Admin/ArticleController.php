@@ -33,9 +33,11 @@ class ArticleController extends Controller
         return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']))->with('success', 'You have successfully created an article!');
     }
 
-    public function show()
+    public function show($article)
     {
-        return view('dashboard.article.show');
+        $articles = $this->repository->find($article);
+        // return $articles->data;
+        return view('dashboard.article.show',compact('articles'));
     }
 
 }
