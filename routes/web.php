@@ -36,3 +36,4 @@ Route::group(['prefix' => 'articles'], function(){
 	Route::post('/', 'Admin\ArticleController@store')->name('article.store');
 });
 
+Route::get('/details', 'Admin\ArticleController@show')->name('article.show');

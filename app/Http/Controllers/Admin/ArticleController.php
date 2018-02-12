@@ -33,17 +33,9 @@ class ArticleController extends Controller
         return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']))->with('success', 'You have successfully created an article!');
     }
 
-    public function show(AuthorsRepository $authors)
+    public function show()
     {
-        $authors = $authors->get()->data;
-        // return $authors;
-        return view('dashboard.article.author', compact('authors'));
-    }
-
-    public function find(Request $request, AuthorsRepository $authors)
-    {
-        $authors = $authors->get()->data;
-        return $authors::search($request->get('name'));
+        return view('dashboard.article.show');
     }
 
 }
