@@ -4,7 +4,7 @@
     <div class="row pt-4">
       <div class="col-md-8">
         <div class="mb-3">
-          <h4 class="text-primary">Author info</h4>
+          <h4 class="text-primary">Authors info</h4>
           <div class="card article-card">
             <div class="card-body">
               @foreach($article->data['authors'] as $no => $author)
@@ -32,7 +32,6 @@
                 </div>
               </div>  
               @endforeach
-              <hr>   
             </div>
           </div>
         </div>
@@ -40,7 +39,7 @@
       <div class="col-md-4">
         <div class="mb-3">
           <h4 class="text-primary">Affiliation list</h4>
-          <div class="card article-card">
+          <div class="card">
             <div class="card-body">
               @foreach($article->data['authors'] as $no => $author)
               <span>{{ $no+1 }}.&emsp;{{ $author['affiliation'] }}</span><br>
