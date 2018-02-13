@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Author;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Authors;
 use App\Http\Resources\AuthorsCollection;
 use App\Repositories\Api\AuthorsRepository;
 use Illuminate\Http\Request;
@@ -37,5 +39,18 @@ class AuthorController extends Controller
     	]);
 
     	return new AuthorsCollection($repository->getAll($query));
+    }
+
+    public function update(Author $author)
+    {
+        $data = request()->validate([
+            'name' => 'required|string',
+            'affiliation' => 'required|string',
+            'email' => 'nullable|email'
+        ]);
+
+        $author->update($data);
+
+        return new Authors($author);
     }
 }

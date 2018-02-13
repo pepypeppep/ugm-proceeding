@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class ArticleController extends Controller
 {
     protected $repository;
+    protected $proceeding;
 
     function __construct(ArticlesRepository $repository, ProceedingsRepository $proceeding)
     {

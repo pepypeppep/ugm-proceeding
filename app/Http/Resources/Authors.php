@@ -22,4 +22,11 @@ class Authors extends Resource
             'email' => $this->email,
         ];
     }
+
+    public function with($request)
+    {
+        return [
+            'status' => 'success'
+        ];
+    }
 }
