@@ -34,5 +34,7 @@ Route::group(['prefix' => 'proceedings'], function(){
 
 Route::group(['prefix' => 'articles'], function(){
 	Route::post('/', 'Admin\ArticleController@store')->name('article.store');
+	Route::get('/{article}', 'Admin\ArticleController@show')->name('article.show');
+	Route::get('/{article}/edit', 'Admin\ArticleController@edit')->name('article.edit');
 });
 
