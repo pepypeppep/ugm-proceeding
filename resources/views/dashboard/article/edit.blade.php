@@ -6,8 +6,8 @@
 <section class="header py-5">
   <div class="row justify-content-between">
     <div class="col-md-6 mb-3 mb-md-0">
-      <h2 class="m-0">Edit Articles</h2>
-      <a href="{{ route('article.show', [$article->id]) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to article</a>
+      <h2 class="m-0">Edit Article</h2>
+      <a href="{{ route('article.show', [$article->id]) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to article details</a>
     </div>
   </div>
 </section>
