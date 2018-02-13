@@ -35,16 +35,16 @@ class ArticleController extends Controller
 
     public function show($article)
     {
-        $articles = $this->repository->find($article);
-        // return $articles->data;
-        return view('dashboard.article.show',compact('articles'));
+        $article = $this->repository->find($article);
+
+        return view('dashboard.article.show', compact('article'));
     }
 
     public function edit($article)
     {
-        $articles = $this->repository->find($article);
-        // return $articles->data;
-        return view('dashboard.article.edit',compact('articles'));
+        $article = $this->repository->find($article);
+
+        return view('dashboard.article.edit', compact('article'));
     }
 
 }
