@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ArticlesRepository;
+use App\Repositories\AuthorsRepository;
 use App\Repositories\ProceedingsRepository;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,20 @@ class ArticleController extends Controller
         $article = $this->repository->store(request()->all());
 
         return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']))->with('success', 'You have successfully created an article!');
+    }
+
+    public function show($article)
+    {
+        $articles = $this->repository->find($article);
+        // return $articles->data;
+        return view('dashboard.article.show',compact('articles'));
+    }
+
+    public function edit($article)
+    {
+        $articles = $this->repository->find($article);
+        // return $articles->data;
+        return view('dashboard.article.edit',compact('articles'));
     }
 
 }

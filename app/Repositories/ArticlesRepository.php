@@ -11,6 +11,11 @@ class ArticlesRepository extends GuzzleService
 		'base' => 'articles',
 	];
 
+	public $img = [
+		'scopus' => '/img/logos/scopus-logo.png',
+		'doaj' => 'http://doaj.com'
+	];
+
 	public function store($request)
 	{
 		$multipart = collect();
@@ -49,6 +54,13 @@ class ArticlesRepository extends GuzzleService
 
 		$this->multipart = $multipart->toArray();
 		$this->getResponse('POST', $this->uris['base']);
+
+		return $this;
+	}
+
+	public function find($id)
+	{
+		$this->getResponse('GET', $this->uris['base']."/$id");
 
 		return $this;
 	}
