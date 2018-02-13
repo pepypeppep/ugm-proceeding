@@ -60,3 +60,4 @@ Route::group(['prefix' => 'authors'], function(){
 	Route::group(['middleware' => 'auth:api'], function(){
 		Route::put('/{author}', 'Api\AuthorController@update');
 	});
+});
