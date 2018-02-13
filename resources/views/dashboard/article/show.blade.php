@@ -18,7 +18,7 @@
     <!-- NAV TAB -->
     <nav class="nav nav-tabs scrollable-nav" id="myTab" role="tablist">
       <a class="nav-item nav-link @if(request('tab') == 'articles' || request('tab') == null) active @endif" id="nav-articles-tab" data-toggle="tab" href="#nav-articles" role="tab" aria-controls="nav-articles" aria-selected="true">Articles</a>
-      <a class="nav-item nav-link @if(request('tab') == 'atuhors') active @endif" id="nav-authors-tab" data-toggle="tab" href="#nav-authors" role="tab" aria-controls="nav-authors" aria-selected="false">Authors</a>
+      <a class="nav-item nav-link @if(request('tab') == 'authors') active @endif" id="nav-authors-tab" data-toggle="tab" href="#nav-authors" role="tab" aria-controls="nav-authors" aria-selected="false">Authors</a>
     </nav> 
     <!-- NAV TAB CONTENTS -->
     <div class="tab-content" id="nav-tabContent">

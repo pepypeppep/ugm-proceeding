@@ -7,17 +7,22 @@
           <h4 class="text-primary">Author info</h4>
           <div class="card article-card">
             <div class="card-body">
+              @foreach($articles->data['authors'] as $no => $author)
               <div class="row justify-content-between">
                 <div class="col-lg-7 paper-info d-flex">
-                  <i class="far fa-file-alt fa-2x p-3"></i>
+                  <i class="far fa-user fa-2x p-3"></i>
                   <p class="m-0 pl-2">
-                    <a href="" class="text-primary"><b>Ms. Name Johnson</b></a> <br>
-                    Affiliation : <span class="badge badge-secondary">1</span><br>
-                    <span class="text-muted">Email : aweber@example.net</span>
+                    <a href="" class="text-primary"><b>{{ $author['name'] }}</b></a> <br>
+                    Affiliation : <span class="badge badge-secondary">{{ $no+1 }}</span><br>
+                    <span class="text-muted">Email : {{ $author['email'] }}</span>
                   </p>
                 </div>
                 <div class="col-lg-1">
-                  <span class="badge badge-primary">Correspondence</span>
+                  @if (!empty($author['email']))
+                    <span class="badge badge-primary">Correspondence</span>
+                  @else
+                    <span class="badge badge-secondary">Not Correspondence</span>
+                  @endif
                 </div>
                 <div class="col action text-right">
                   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -26,25 +31,8 @@
                   </div>
                 </div>
               </div>  
-              <hr>  
-              <div class="row justify-content-between">
-                <div class="col-lg-7 paper-info d-flex">
-                  <i class="far fa-file-alt fa-2x p-3"></i>
-                  <p class="m-0 pl-2">
-                    <a href="" class="text-primary"><b>Mrs. Name Jihnsin</b></a> <br>
-                    Affiliation : <span class="badge badge-secondary">2</span><br>
-                  </p>
-                </div>
-                <div class="col-lg-1">
-                  <span class="badge badge-secondary">Not Correspondence</span>
-                </div>
-                <div class="col action text-right">
-                  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a type="button" href="" class="btn btn-outline-secondary">Edit</a>
-                    <a type="button" href="" class="btn btn-outline-secondary">Delete</a>
-                  </div>
-                </div>
-              </div>   
+              @endforeach
+              <hr>   
             </div>
           </div>
         </div>
@@ -54,8 +42,9 @@
           <h4 class="text-primary">Affiliation list</h4>
           <div class="card article-card">
             <div class="card-body">
-              <span>1. Gulgowski-Schamberger</span><br>
-              <span>2. Schamberger-Gulgowski</span><br>
+              @foreach($articles->data['authors'] as $no => $author)
+              <span>{{ $no+1 }}.&emsp;{{ $author['affiliation'] }}</span><br>
+              @endforeach
             </div>
           </div>
         </div>

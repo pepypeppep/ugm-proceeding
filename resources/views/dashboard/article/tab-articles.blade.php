@@ -56,7 +56,9 @@
                     <tr>
                       <td>
                         @if ($articles->indexed)
-                          <img src="{{ $articles->img[$articles->file['type']] }}" class="img-fluid">
+                          <a href="{{ $articles->file['link'] }}">
+                            <img src="{{ $articles->img[$articles->file['type']] }}" class="img-fluid">
+                          </a>
                         @else
                           <span>PDF</span>
                         @endif
