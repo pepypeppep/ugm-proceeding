@@ -85,4 +85,18 @@ class ArticlesRepository extends Repository
 
 		return $article->load('author');
 	}
+
+	public function update($article, $request)
+	{
+		$request = collect($request);
+
+		$article->update($request->except('doi')->all());
+
+		$article->article_identifier()->first()->update([
+			'type' => 'doi',
+			'code' => $request['doi'],
+		]);
+
+		return $article;
+	}
 }

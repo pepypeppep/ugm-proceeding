@@ -79,6 +79,80 @@
                         "description": "Proceeding not found"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Update exsisting article",
+                "operationId": "updateArticle",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "Article's id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "description": "Article's title",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "abstract",
+                        "in": "query",
+                        "description": "Article's abstract",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "start_page",
+                        "in": "query",
+                        "description": "Article's start page",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "end_page",
+                        "in": "query",
+                        "description": "Article's end page",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "keywords",
+                        "in": "query",
+                        "description": "Article's keyword. Seperate with comma. Ex: Computer technology, Information, system",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "doij",
+                        "in": "query",
+                        "description": "DOI of the article",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/articles": {

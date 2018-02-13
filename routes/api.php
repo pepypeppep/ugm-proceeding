@@ -41,6 +41,7 @@ Route::group(['prefix' => 'articles'], function(){
 	Route::middleware(['auth:api'])->group(function ()
 	{
 		Route::post('/', 'Api\ArticleController@store');
+		Route::put('/{article}', 'Api\ArticleController@update');
 	});
 });
 
