@@ -41,6 +41,40 @@ class AuthorController extends Controller
     	return new AuthorsCollection($repository->getAll($query));
     }
 
+    /**
+     * @SWG\Put(
+     *      path="/authors/{authorId}",
+     *      tags={"authors"},
+     *      operationId="updateAuthors",
+     *      summary="Update existing author",
+     *      consumes={"application/json"},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *         description="ID of proceeding to return",
+     *         in="path",
+     *         name="authorId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Author object that needs to be updated",
+     *          required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="name", type="string", example="Wildan Ainurrahman"),
+     *              @SWG\Property(property="email", type="string", example="wildan@gmail.com"),
+     *              @SWG\Property(property="affiliation", type="string", example="BPP UGM")
+     *          ),      
+     *      ),
+     *      @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *      ),
+     *      security={{"Bearer":{}}}
+     * )
+     */
     public function update(Author $author)
     {
         $data = request()->validate([
