@@ -18,11 +18,11 @@
                   </p>
                 </div>
                 <div class="col-lg-1">
-                  @if (!empty($author['email']))
-                    <span class="badge badge-primary">Correspondence</span>
-                  @else
+                  @empty ($author['email'])
                     <span class="badge badge-secondary">Not Correspondence</span>
-                  @endif
+                  @else
+                    <span class="badge badge-primary">Correspondence</span>
+                  @endempty
                 </div>
                 <div class="col action text-right">
                   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
