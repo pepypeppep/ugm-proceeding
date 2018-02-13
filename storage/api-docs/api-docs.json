@@ -86,6 +86,9 @@
                 ],
                 "summary": "Update exsisting article",
                 "operationId": "updateArticle",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -98,49 +101,38 @@
                         "type": "integer"
                     },
                     {
-                        "name": "title",
-                        "in": "query",
-                        "description": "Article's title",
+                        "name": "body",
+                        "in": "body",
+                        "description": "Author object that needs to be updated",
                         "required": true,
-                        "type": "string",
-                        "format": "string"
-                    },
-                    {
-                        "name": "abstract",
-                        "in": "query",
-                        "description": "Article's abstract",
-                        "required": true,
-                        "type": "string",
-                        "format": "string"
-                    },
-                    {
-                        "name": "start_page",
-                        "in": "query",
-                        "description": "Article's start page",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "end_page",
-                        "in": "query",
-                        "description": "Article's end page",
-                        "required": true,
-                        "type": "integer"
-                    },
-                    {
-                        "name": "keywords",
-                        "in": "query",
-                        "description": "Article's keyword. Seperate with comma. Ex: Computer technology, Information, system",
-                        "required": true,
-                        "type": "string",
-                        "format": "string"
-                    },
-                    {
-                        "name": "doi",
-                        "in": "query",
-                        "description": "DOI of the article",
-                        "required": true,
-                        "type": "string"
+                        "schema": {
+                            "properties": {
+                                "abstract": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum dolores amet"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum dolores amet"
+                                },
+                                "start_page": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "end_page": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "keywords": {
+                                    "type": "string",
+                                    "example": "Lorem, Ipsum, Amet"
+                                },
+                                "doi": {
+                                    "type": "string",
+                                    "example": "doi.org/10.1037/arc0000014"
+                                }
+                            }
+                        }
                     }
                 ],
                 "responses": {
