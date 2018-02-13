@@ -37,7 +37,7 @@
       @foreach ($proceeding->articles as $article)
         <div class="row article-item">
           <div class="col-md-8">
-            <h5 class="text-primary m-0">{{ $article['title'] }}</h5>
+            <h5 class="text-primary m-0"><a href="{{ route('article.show', ['article' => $article['id']]) }}">{{ $article['title'] }}</a></h5>
             <span class="text-muted">
               {{ collect($article['authors'])->implode('name','; ') }}
             <br><small>Last updated: {{ \Carbon\Carbon::parse($article['updated_at'])->diffForHumans() }}</small></span>
