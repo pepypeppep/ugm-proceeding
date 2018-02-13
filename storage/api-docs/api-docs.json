@@ -136,7 +136,7 @@
                         "format": "string"
                     },
                     {
-                        "name": "doij",
+                        "name": "doi",
                         "in": "query",
                         "description": "DOI of the article",
                         "required": true,
