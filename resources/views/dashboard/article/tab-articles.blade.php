@@ -81,7 +81,7 @@
                   <a class="nav-link" href=""><i class="far fa-file-pdf fa-fw mr-2"></i>Download PDF</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href=""><i class="fas fa-edit fa-fw mr-2"></i>Edit</a>
+                  <a class="nav-link" href="{{ route('article.edit', ['article' => $articles->id]) }}"><i class="fas fa-edit fa-fw mr-2"></i>Edit</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="\"><i class="far fa-save fa-fw mr-2"></i>Save</a>
