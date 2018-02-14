@@ -38,3 +38,8 @@ Route::group(['prefix' => 'articles'], function(){
 	Route::get('/{article}/edit', 'Admin\ArticleController@edit')->name('article.edit');
 });
 
+Route::get('/token', function ()
+{
+	return session('api_token');
+});
+
