@@ -21,7 +21,7 @@
         <form id="form" method="POST" action="{{ route('article.update', [$article->id]) }}" enctype="multipart/form-data">
           {{ csrf_field() }}
           {{ method_field('PUT') }}
-          <input type="hidden" name="proceeding_id" value="">
+          <input type="hidden" name="proceeding_id" value="{{ $article->id }}">
           <div class="card">
             <div class="card-body" id="cardBody">
               <div class="form-separator">

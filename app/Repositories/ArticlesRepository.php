@@ -78,7 +78,7 @@ class ArticlesRepository extends GuzzleService
 		});
 
 		$this->multipart = $multipart->toArray();
-		$this->getResponse('POST', $this->uris['base']."/$id");
+		$this->getResponse('PUT', $this->uris['base']."/$id");
 
 		return $this;
 	}
