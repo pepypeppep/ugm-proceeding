@@ -39,7 +39,7 @@
           <tr>
             <td>{{ $loop->index+1 }}</td>
             <td>
-              <a href="#">{{ $article['title'] }}</a> <br> <span class="text-muted d-none d-md-block">{{ collect($article['authors'])->implode('name','; ') }}</span>
+              <a href="{{ route('article.show', [$article['id']]) }}">{{ $article['title'] }}</a> <br> <span class="text-muted d-none d-md-block">{{ collect($article['authors'])->implode('name','; ') }}</span>
             </td>
             <td>35 views</td>
           </tr>
