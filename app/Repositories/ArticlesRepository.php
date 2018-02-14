@@ -64,4 +64,22 @@ class ArticlesRepository extends GuzzleService
 
 		return $this;
 	}
+
+	public function update($request, $id)
+	{
+		$multipart = collect();
+
+		collect($request)->except('authors', '_token', 'file_pdf', 'file_link')->each(function ($item, $key) use ($multipart)
+		{
+			$multipart->push([
+				'name' => $key,
+				'contents' => $item,
+			]);
+		});
+
+		$this->multipart = $multipart->toArray();
+		$this->getResponse('POST', $this->uris['base']."/$id");
+
+		return $this;
+	}
 }

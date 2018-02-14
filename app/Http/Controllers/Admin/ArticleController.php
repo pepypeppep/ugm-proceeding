@@ -48,4 +48,11 @@ class ArticleController extends Controller
         return view('dashboard.article.edit', compact('article'));
     }
 
+    public function update($article)
+    {
+        $article = $this->repository->update(request()->all(), $article);
+
+        return redirect(route('article.edit', ['article' => $article->id]))->with('success', $article->name.' has been updated!');
+    }
+
 }

@@ -18,7 +18,7 @@
   <section class="body pb-5">
     <div class="row">
       <div class="col-lg-8">
-        <form id="form" method="POST" action="" enctype="multipart/form-data">
+        <form id="form" method="POST" action="{{ route('article.update', [$article->id]) }}" enctype="multipart/form-data">
           {{ csrf_field() }}
           {{ method_field('PUT') }}
           <input type="hidden" name="proceeding_id" value="">
@@ -182,68 +182,6 @@
 @endsection
 
 @section('script') 
-  <script type="text/javascript">
-    $(window).scroll(function() {
-      if($(this).scrollTop() > window.innerHeight*1.05)
-      {
-          $('.author-custom > h5').text('Authors');
-      } else {
-          $('.author-custom > h5').text('Author #1');
-      }
-    });
-      
-    function showLinkInput() {
-      $('#file_link').show();
-      $('#file_pdf').hide();
-    }
-
-    function showPdfInput() {
-      $('#file_link').hide();
-      $('#file_pdf').show();
-    }
-
-    function toggleInput(index) {
-      var inputOther = $('#inputOther'+index)
-      var radioOther = $('#radioOther'+index)
-
-      if (radioOther.is(':checked')) {
-        inputOther.attr("disabled", false)
-        inputOther.focus()
-      } else {
-        inputOther.attr("disabled", "disabled")
-        inputOther.val('')
-      }
-    }
-
-    var affiliations = [];
-    var index = 1
-
-    function addAuthor() {
-      var lastInput = $('#inputOther'+index).val();
-      index++
-
-      if (affiliations.indexOf(lastInput) == -1 && lastInput != '' && lastInput != undefined) {
-        affiliations.push(lastInput);
-      }
-
-      $('#cardBody').append('<div class="form-separator mt-4 bg-white authors'+index+'"><div class="d-flex justify-content-between align-items-baseline"><h5 >Author #'+index+'</h5><button type="button" class="close" aria-label="Close" onclick="deleteAuthor('+index+')"><span aria-hidden="true">&times;</span></button></div></div><div class="form-group row authors'+index+'"><label for="name" class="col-sm-2 col-form-label">Name</label><div class="col-md-5 col-12"><input type="text" name="authors['+index+'][name]" class="form-control"></div><div class="col-md-3 mt-md-2 mt-4"><div class="form-check"><input type="checkbox" class="form-check-input" id="checkbox'+index+'" onclick="toggleCorresponding('+index+')"><label class="form-check-label">Corresponding Author </label></div></div></div><div class="form-group row authors'+index+'" id="email_form'+index+'" style="display: none;"><label for="email" class="col-sm-2 col-form-label">Email</label><div class="col-md-5 col-12"><input type="email" name="authors['+index+'][email]" class="form-control"></div></div><div class="form-group row authors'+index+'"><label for="affiliation" class="col-sm-2 col-form-label">Affiliation</label><div class="col-sm-10" id="affiliationsGroup'+index+'"></div></div>')
-
-      function appendItems(item, key) {
-        $('#affiliationsGroup'+index).append('<div class="form-check mb-2"><input class="form-check-input" onChange="toggleInput('+index+')" name="authors['+index+'][affiliation]" type="radio" value="'+item+'" id="check'+index+'"><label class="form-check-label" for="check'+index+'">'+item+'</label></div>');
-      }
-
-      affiliations.forEach(appendItems)
-      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="authors['+index+'][affiliation]" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="authors['+index+'][affiliation]" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
-  }
-
-  function toggleCorresponding(id){
-    $("#email_form"+id).toggle();
-  }
-
-  function deleteAuthor(id){
-    $(".authors"+id).remove();
-  }
-</script>
   {{-- INITIALIZE TEXT EDITOR. INCLUDE THIS FOR EVERY FORM THAT NEED TEXT EDITOR --}}
   @include('layouts.summernote')
 @endsection
