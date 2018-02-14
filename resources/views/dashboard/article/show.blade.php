@@ -6,8 +6,8 @@
   <section class="header py-5">
     <div class="row justify-content-between">
       <div class="col-md-10 mb-3 mb-md-0">
-        <span class="text-muted">{{ $articles->proceeding['name'] }}</span>
-        <h2 class="m-0">{{ $articles->data['title'] }}</h2>
+        <a href="{{ route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles']) }}" class="text-muted">{{ $article->proceeding['name'] }}</a>
+        <h2 class="m-0">{{ $article->data['title'] }}</h2>
       </div>
     </div>
   </section>

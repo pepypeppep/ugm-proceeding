@@ -229,6 +229,7 @@ class ArticleController extends Controller
      *      operationId="updateArticle",
      *      summary="Update exsisting article",
      *      produces={"application/json"},
+     *      consumes={"application/json"},
      *      @SWG\Parameter(
      *         description="Article's id",
      *         in="path",
@@ -237,50 +238,19 @@ class ArticleController extends Controller
      *         type="integer"
      *     ),
      *     @SWG\Parameter(
-     *         description="Article's title",
-     *         format="string",
-     *         in="query",
-     *         name="title",
-     *         required=true,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         description="Article's abstract",
-     *         format="string",
-     *         in="query",
-     *         name="abstract",
-     *         required=true,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         description="Article's start page",
-     *         in="query",
-     *         name="start_page",
-     *         required=true,
-     *         type="integer"
-     *     ),
-     *     @SWG\Parameter(
-     *         description="Article's end page",
-     *         in="query",
-     *         name="end_page",
-     *         required=true,
-     *         type="integer"
-     *     ),
-     *     @SWG\Parameter(
-     *         description="Article's keyword. Seperate with comma. Ex: Computer technology, Information, system",
-     *         format="string",
-     *         in="query",
-     *         name="keywords",
-     *         required=true,
-     *         type="string"
-     *     ),
-     *     @SWG\Parameter(
-     *         name="doi",
-     *         in="query",
-     *         description="DOI of the article",
-     *         required=true,
-     *         type="string",
-     *     ),
+     *          name="body",
+     *          in="body",
+     *          description="Author object that needs to be updated",
+     *          required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="abstract", type="string", example="Lorem ipsum dolores amet"),
+     *              @SWG\Property(property="title", type="string", example="Lorem ipsum dolores amet"),
+     *              @SWG\Property(property="start_page", type="integer", example=2),
+     *              @SWG\Property(property="end_page", type="integer", example=2),
+     *              @SWG\Property(property="keywords", type="string", example="Lorem, Ipsum, Amet"),
+     *              @SWG\Property(property="doi", type="string", example="doi.org/10.1037/arc0000014"),
+     *          ),      
+     *      ),
      *      @SWG\Response(
      *         response=405,
      *         description="Invalid input"

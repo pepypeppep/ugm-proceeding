@@ -6,7 +6,7 @@
 <section class="header py-5">
   <div class="row justify-content-between">
     <div class="col-md-6 mb-3 mb-md-0">
-      <h2 class="m-0">Create Articles</h2>
+      <h2 class="m-0">Create  New Article</h2>
       <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to proceedings</a>
     </div>
   </div>

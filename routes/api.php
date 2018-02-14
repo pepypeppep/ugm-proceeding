@@ -57,4 +57,7 @@ Route::group(['prefix' => 'institutions'], function(){
 
 Route::group(['prefix' => 'authors'], function(){
 	Route::get('/', 'Api\AuthorController@index');
+	Route::group(['middleware' => 'auth:api'], function(){
+		Route::put('/{author}', 'Api\AuthorController@update');
+	});
 });

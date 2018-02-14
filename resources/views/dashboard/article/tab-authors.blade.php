@@ -4,10 +4,10 @@
     <div class="row pt-4">
       <div class="col-md-8">
         <div class="mb-3">
-          <h4 class="text-primary">Author info</h4>
+          <h4 class="text-primary">Authors info</h4>
           <div class="card article-card">
             <div class="card-body">
-              @foreach($articles->data['authors'] as $no => $author)
+              @foreach($article->data['authors'] as $no => $author)
               <div class="row justify-content-between">
                 <div class="col-lg-7 paper-info d-flex">
                   <i class="far fa-user fa-2x p-3"></i>
@@ -18,11 +18,11 @@
                   </p>
                 </div>
                 <div class="col-lg-1">
-                  @if (!empty($author['email']))
-                    <span class="badge badge-primary">Correspondence</span>
-                  @else
+                  @empty ($author['email'])
                     <span class="badge badge-secondary">Not Correspondence</span>
-                  @endif
+                  @else
+                    <span class="badge badge-primary">Correspondence</span>
+                  @endempty
                 </div>
                 <div class="col action text-right">
                   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
@@ -32,7 +32,6 @@
                 </div>
               </div>  
               @endforeach
-              <hr>   
             </div>
           </div>
         </div>
@@ -40,9 +39,9 @@
       <div class="col-md-4">
         <div class="mb-3">
           <h4 class="text-primary">Affiliation list</h4>
-          <div class="card article-card">
+          <div class="card">
             <div class="card-body">
-              @foreach($articles->data['authors'] as $no => $author)
+              @foreach($article->data['authors'] as $no => $author)
               <span>{{ $no+1 }}.&emsp;{{ $author['affiliation'] }}</span><br>
               @endforeach
             </div>
@@ -51,6 +50,4 @@
       </div>
     </div>
   </section>
-
-  
 </div>
