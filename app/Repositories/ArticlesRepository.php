@@ -13,7 +13,7 @@ class ArticlesRepository extends GuzzleService
 
 	public $img = [
 		'scopus' => '/img/logos/scopus-logo.png',
-		'doaj' => 'http://doaj.com'
+		'doaj' => '/img/logos/doaj-logo.png'
 	];
 
 	public function store($request)
