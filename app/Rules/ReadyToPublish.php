@@ -2,11 +2,14 @@
 
 namespace App\Rules;
 
+use App\Proceeding;
 use Illuminate\Contracts\Validation\Rule;
 
 class ReadyToPublish implements Rule
 {
-    public $message = [];
+    private $message;
+    private $checks;
+
 
     /**
      * Create a new rule instance.
@@ -27,11 +30,9 @@ class ReadyToPublish implements Rule
      */
     public function passes($attribute, $value)
     {
-        $proceeding = Proceeding::find($value);
+        $checklist = $this->runChecks($value);
 
-        $checklist = $this->checkList($proceeding);
-
-        return;
+        return $checklist;
     }
 
     /**
@@ -41,26 +42,143 @@ class ReadyToPublish implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return $this->getMessage();
     }
 
-    public function checkList()
+    /**
+     * Run proceeding ready to publish check
+     * @param  integer $proceedingId
+     * @return boolean
+     */
+    public function runChecks($proceedingId)
     {
-        
+        $proceeding = $this->getProceeding($proceedingId);
+
+        $check['published'] = $this->checkStatus($proceeding->status);
+        $check['introduction'] = $this->checkIntroduction($proceeding->introduction);
+        $check['identifiers'] = $this->checkIdentifiers($proceeding->identifiers);
+        $check['articles'] = $this->checkArticles($proceeding->article);
+
+        return collect($check)->values()->search(false) === false;
     }
 
-    public function checkArticles()
+    /**
+     * Get proceeding record
+     * @param  integer $id
+     * @return Illuminate\Database\Eloquent\Model
+     */
+    public function getProceeding($id)
     {
-        
+        return Proceeding::findOrFail($id);
     }
 
-    public function checkIdentifiers()
+    public function checkStatus($status)
     {
-        
+        if ($status == 'published') {
+            $this->setMessage('status', 'This Proceeding has already published!');
+
+            return false;
+        }
+
+        return true;
     }
 
-    public function setMessage($field, $message)
+    /**
+     * Check introduction value
+     * @param  string $introduction
+     * @return boolean
+     */
+    public function checkIntroduction($introduction = null)
     {
+        if (empty($introduction)) {
+           $this->setMessage('introduction');
+
+           return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check identifiers existense
+     * @param  Illuminate\Support\Collection $identifiers
+     * @return boolean
+     */
+    public function checkIdentifiers($identifiers)
+    {
+        if ($identifiers->where('type', 'issn')->isNotEmpty()) {
+            return true;
+        } elseif ($identifiers->where('type', 'print_isbn')->isNotEmpty() && $identifiers->where('type', 'online_isbn')->isNotEmpty()) {
+            return true;
+        }
+
+        $this->setMessage('identifiers');
+
+        return false;
+    }
+
+    /**
+     * Check article validation
+     * @param  Illuminate\Support\Collection $articles
+     * @return boolean
+     */
+    public function checkArticles($articles)
+    {
+        $empty = collect([
+            'doi' => collect(),
+            'link' => collect(),
+            'authors' => collect(),
+        ]);
+
+        foreach ($articles as $article) {
+            if (empty($article->article_identifier->first())) {
+                $empty['doi']->push($article->id);
+            }
+
+            if (!empty($article->indexation)) {
+                if (empty($article->indexation->link)) {
+                    $empty['link']->push($article->id);
+                }
+            }
+
+            if ($article->author->isEmpty()) {
+                $empty['authors']->push($article->id);
+            }
+        }
+
+        $validated = true;
+
+        foreach ($empty as $key => $value) {
+            if ($value->isNotEmpty()) {
+                $this->setMessage($key, $key.' on article '.$value->implode('; ').' is Empty');
+                $validated = false;
+            }
+        }
+
+        return $validated;
+    }
+
+    /**
+     * set message value
+     * @param string $field
+     * @param string $message
+     */
+    public function setMessage($field, $message = null)
+    {
+        if (empty($message)) {
+            $message = $field." is empty!";
+        }
+
         $this->message[$field] = $message;
     }
+
+    /**
+     * get message body
+     * @return string
+     */
+    public function getMessage()
+    {
+        return collect($this->message)->values()->implode('. ');
+    }
+
 }
