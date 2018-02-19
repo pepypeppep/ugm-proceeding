@@ -271,6 +271,7 @@ class ProceedingController extends Controller
     public function updateSubjects(Proceeding $proceeding)
     {
         $data = request()->validate([
+            'subject_id' => 'required|array',
             'subject_id.*' => 'required|int|exists:subjects,id',
             'action' => 'required|string|in:attach,detach',
         ]);
