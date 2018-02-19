@@ -58,6 +58,7 @@ class ReadyToPublish implements Rule
         $check['introduction'] = $this->checkIntroduction($proceeding->introduction);
         $check['identifiers'] = $this->checkIdentifiers($proceeding->identifiers);
         $check['articles'] = $this->checkArticles($proceeding->article);
+        $check['subjects'] = $this->checkSubjects($proceeding->subject);
 
         return collect($check)->values()->search(false) === false;
     }
@@ -156,11 +157,28 @@ class ReadyToPublish implements Rule
         foreach ($empty as $key => $value) {
             if ($value->isNotEmpty()) {
                 $this->setMessage($key, $key.' on article '.$value->implode('; ').' is Empty');
+
                 $validated = false;
             }
         }
 
         return $validated;
+    }
+
+    /**
+     * Check proceeding at least has one subject
+     * @param  Illuminate\Support\Collection $subjects
+     * @return boolean
+     */
+    public function checkSubjects($subjects)
+    {
+        if ($subjects->isEmpty()) {
+            $this->setMessage('Subjects');
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
