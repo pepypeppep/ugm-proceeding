@@ -604,7 +604,11 @@
                                     "type": "date",
                                     "example": "How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."
                                 },
-                                "isbn": {
+                                "print_isbn": {
+                                    "type": "integer",
+                                    "example": "9783161484100"
+                                },
+                                "online_isbn": {
                                     "type": "integer",
                                     "example": "9783161484100"
                                 },
