@@ -17,7 +17,7 @@ class CreateIndexationsTable extends Migration
             $table->increments('id');
             $table->integer('article_id')->unsigned();
             $table->string('type', 10);
-            $table->string('link', 250);
+            $table->string('link', 250)->nullable();
             $table->timestamps();
         });
     }
