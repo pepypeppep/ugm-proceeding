@@ -56,7 +56,7 @@
                   <div class="col-lg-8 paper-info d-flex">
                     <i class="far fa-file-alt fa-2x p-3"></i>
                     <p class="m-0 pl-2">
-                      <a href="/proceedings/{{ $proceeding['id'] }}" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
+                      <a href="{{ route('proceeding.show', [$proceeding['id']]) }}" class="text-primary"><b>{{ $proceeding['name'] }}</b></a> <br>
                       {{ $proceeding['date']['conference_start'] }}, {{ $proceeding['location'] }}. <br>
                       <span class="text-muted">Last updated: {{ \Carbon\Carbon::parse($proceeding['updated_at'])->diffForHumans() }}</span>
                     </p>

@@ -1,7 +1,7 @@
 <div class="tab-pane fade  @if(request('tab') == 'articles') {{ 'show active' }} @endif" id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
   <div class="row pt-4">
     <div class="col-md-5 mb-2">
-      <form class="form-inline" method="GET" action="/proceedings/{{ $proceeding->id }}">
+      <form class="form-inline" method="GET" action="{{ route('proceeding.show', [$proceeding->id]) }}">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." value="{{ request('keyword') }}" name="keyword">
           <div class="input-group-prepend">

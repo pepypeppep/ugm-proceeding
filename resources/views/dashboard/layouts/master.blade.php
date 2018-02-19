@@ -30,22 +30,30 @@
     <meta name="theme-color" content="#ffffff">
 
   </head>
+  
+  @yield('style')
+
   <body>
-    @include('dashboard.layouts.navbar')
+    @section('navbar')
+      @include('dashboard.layouts.navbar')
+    @show
     
-    <div class="container-fluid pt-5 px-md-5">
+    @section('body')
+      <div class="container-fluid pt-5 px-md-5">
 
-      <!-- HEADER -->
-      @yield('header')
+        <!-- HEADER -->
+        @yield('header')
 
-      {{-- FEEDBACK --}}
-      @include('dashboard.layouts.alerts')
+        {{-- FEEDBACK --}}
+        @include('dashboard.layouts.alerts')
 
-      <!-- BODY -->
-      @yield('content')
+        <!-- BODY -->
+        @yield('content')
 
-      
-    </div>
+        
+      </div>
+    @show
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
