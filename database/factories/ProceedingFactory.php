@@ -13,6 +13,7 @@ $factory->define(App\Proceeding::class, function (Faker $faker) {
         'front_cover' => $faker->imageUrl(344, 550, 'technics'),
         'back_cover' => $faker->imageUrl(344, 550, 'technics'),
         'isbn' => $faker->isbn13,
+        'online_isbn' => $faker->isbn13,
         'organizer' => $faker->company,
     ];
 });

@@ -60,8 +60,15 @@ class Proceeding extends Model
 
         if (!empty($this->isbn)) {
             $identifiers->push([
-                'type' => 'isbn',
+                'type' => 'print_isbn',
                 'id' => $this->isbn,
+            ]);
+        }
+
+        if (!empty($this->online_isbn)) {
+            $identifiers->push([
+                'type' => 'online_isbn',
+                'id' => $this->online_isbn,
             ]);
         }
 
