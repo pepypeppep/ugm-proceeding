@@ -194,7 +194,8 @@ class ProceedingController extends Controller
      *              @SWG\Property(property="conference_start", type="date", example="2017-10-26"),
      *              @SWG\Property(property="conference_end", type="date", example="2017-10-27"),
      *              @SWG\Property(property="introduction", type="date", example="How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."),
-     *              @SWG\Property(property="isbn", type="integer", example="9783161484100"),
+     *              @SWG\Property(property="print_isbn", type="integer", example="9783161484100"),
+     *              @SWG\Property(property="online_isbn", type="integer", example="9783161484100"),
      *              @SWG\Property(property="issn", type="integer", example="20149360"),
      *          ),      
      *      ),
@@ -214,7 +215,8 @@ class ProceedingController extends Controller
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
             'introduction' => 'nullable|string|max:2500',
-            'isbn' => 'nullable|digits:13',
+            'print_isbn' => 'nullable|digits:13',
+            'online_isbn' => 'nullable|digits:13',
             'issn' => 'nullable|digits:8',
         ]);
 
