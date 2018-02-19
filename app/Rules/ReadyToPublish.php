@@ -72,6 +72,11 @@ class ReadyToPublish implements Rule
         return Proceeding::findOrFail($id);
     }
 
+    /**
+     * check proceeding status
+     * @param  string $status
+     * @return boolean
+     */
     public function checkStatus($status)
     {
         if ($status == 'published') {
