@@ -84,12 +84,20 @@
 							<div class="form-separator mt-5">
 								<h5>Identifiers</h5>
 							</div>
-							{{-- FIELD ISBN IDENTIFIER --}}
+							{{-- FIELD ONLINE ISBN IDENTIFIER --}}
 							<div class="form-group row">
 							  <div class="col-sm-6">
-							    <label for="isbn">ISBN</label>
-							    <input name="isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('isbn')) is-invalid @endif" id="isbn" value="{{ $isbn }}">
-							    <div class="invalid-feedback">{{ $errors->first('isbn') }}</div>
+							    <label for="isbn">Online ISBN</label>
+							    <input name="online_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('online_isbn')) is-invalid @endif" id="onlineIsbn" value="{{ $isbn['online'] }}">
+							    <div class="invalid-feedback">{{ $errors->first('online_isbn') }}</div>
+							  </div>
+							</div>
+							{{-- FIELD PRINT ISBN IDENTIFIER --}}
+							<div class="form-group row">
+							  <div class="col-sm-6">
+							    <label for="isbn">Print ISBN</label>
+							    <input name="online_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('print_isbn')) is-invalid @endif" id="printIsbn" value="{{ $isbn['print'] }}">
+							    <div class="invalid-feedback">{{ $errors->first('print_isbn') }}</div>
 							  </div>
 							</div>
 							{{-- FIELD ISSN IDENTIFIER --}}
