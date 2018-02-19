@@ -59,7 +59,7 @@ class Proceedings extends Resource
             'date' => [
                 'conference_start' => $this->conference_start->toDateString(),
                 'conference_end' => $this->conference_end->toDateString(),
-                'published' => $this->published_at->toDateString(),
+                'published' => optional($this->published_at)->toDateString(),
             ],
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
