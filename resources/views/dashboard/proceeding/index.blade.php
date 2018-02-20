@@ -62,7 +62,7 @@
                     </p>
                   </div>
                   <div class="col-lg-1 text-right">
-                    <span class="badge badge-{{ $proceedings->getStatusColor($proceeding['status']) }}">{{ $proceeding['status'] }}</span>
+                    <span class="badge badge-secondary">{{ $proceeding['status'] }}</span>
                   </div>
                   <div class="col action text-right">
                     <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
