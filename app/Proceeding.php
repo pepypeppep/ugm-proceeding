@@ -10,7 +10,7 @@ class Proceeding extends Model
 {
 	use SoftDeletes;
 
-    protected $dates = ['deleted_at', 'conference_start', 'conference_end', 'published_at'];
+    protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
     protected $guarded = ['id'];
 
     /**

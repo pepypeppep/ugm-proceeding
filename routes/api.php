@@ -32,7 +32,6 @@ Route::group(['prefix' => 'proceedings'], function(){
 		Route::put('/{proceeding}', 'Api\ProceedingController@update');
 		Route::put('/{proceeding}/subjects', 'Api\ProceedingController@updateSubjects');
 		Route::post('/{proceeding}/covers', 'Api\ProceedingController@updateCovers');
-		Route::post('/publish', 'Api\PublishProceedingController@store');
 	});
 });
 
