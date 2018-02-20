@@ -738,6 +738,48 @@
                 ]
             }
         },
+        "/proceedings/publish": {
+            "post": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Publish existing proceeding",
+                "description": "",
+                "operationId": "publishProceeding",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Proceeding object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "proceeding_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/subjects/": {
             "get": {
                 "tags": [
