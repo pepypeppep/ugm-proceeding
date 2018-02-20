@@ -100,4 +100,13 @@ class ProceedingsRepository extends GuzzleService
 
 		return $this;
 	}
+
+    public function getStatusColor($status)
+    {
+        if ($status === 'published') {
+            return 'primary';
+        }
+
+        return 'secondary';
+    }
 }
