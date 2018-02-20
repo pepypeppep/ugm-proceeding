@@ -55,6 +55,7 @@ class ReadyToPublish implements Rule
         $proceeding = $this->getProceeding($proceedingId);
 
         $check['published'] = $this->checkStatus($proceeding->status);
+        $check['cover'] = $this->checkCover($proceeding->front_cover);
         $check['introduction'] = $this->checkIntroduction($proceeding->introduction);
         $check['identifiers'] = $this->checkIdentifiers($proceeding->identifiers);
         $check['articles'] = $this->checkArticles($proceeding->article);
@@ -71,6 +72,17 @@ class ReadyToPublish implements Rule
     public function getProceeding($id)
     {
         return Proceeding::findOrFail($id);
+    }
+
+    public function checkCover($cover)
+    {
+        if (empty($cover)) {
+            $this->setMessage('cover');
+
+            return false;
+        }
+
+        return true;
     }
 
     /**
