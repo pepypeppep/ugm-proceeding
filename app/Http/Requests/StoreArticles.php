@@ -29,7 +29,7 @@ class StoreArticles extends FormRequest
             'doi' => 'nullable|string',
             'end_page' => 'required|integer',
             'file_type' => 'required|string',
-            'file_link' => 'string|required_if:file_type,scopus,doaj',
+            'file_link' => 'string|nullable',
             'file_pdf' => 'mimes:pdf|required_if:file_type,pdf',
             'keywords' => 'required|string',
             'proceeding_id' => 'required|exists:proceedings,id',

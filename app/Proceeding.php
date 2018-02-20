@@ -58,10 +58,17 @@ class Proceeding extends Model
             ]);
         }
 
-        if (!empty($this->isbn)) {
+        if (!empty($this->print_isbn)) {
             $identifiers->push([
-                'type' => 'isbn',
-                'id' => $this->isbn,
+                'type' => 'print_isbn',
+                'id' => $this->print_isbn,
+            ]);
+        }
+
+        if (!empty($this->online_isbn)) {
+            $identifiers->push([
+                'type' => 'online_isbn',
+                'id' => $this->online_isbn,
             ]);
         }
 
