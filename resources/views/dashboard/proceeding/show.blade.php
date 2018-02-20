@@ -5,13 +5,18 @@
 @section('header')
   <section class="header py-5">
     <div class="row justify-content-between">
-      <div class="col-md-10 mb-3 mb-md-0">
+      <div class="col-md-9 mb-3 mb-md-0">
         <h2 class="m-0">{{ $proceeding->name }}</h2>
         <h3><span class="badge badge-secondary">{{ $proceeding->status }}</span></h3>
         <span class="text-muted">{{ $proceeding->alias }}, {{ $proceeding->date['conference_start'] }}, {{ $proceeding->location }}</span>
       </div>
-      <div class="col-md-2">
-        <a class="btn btn-block btn-primary" href="{{ route('proceeding.edit', [$proceeding->id]) }}" >Edit proceeding details</a>
+      <div class="col-md-3">
+        <div class="d-inline float-right">
+          <a class="btn btn-primary" href="{{ route('proceeding.edit', [$proceeding->id]) }}" >Edit proceeding details</a>
+          @if ($proceeding->status == 'draft')
+            <a href="#" class="btn btn-success ml-2">Publish</a>
+          @endif
+        </div>
       </div>
     </div>
   </section>

@@ -76,4 +76,9 @@ class ProceedingController extends Controller
 
         return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Cover has been updated!');
     }
+
+    public function publish($proceeding)
+    {
+        return view('dashboard.proceeding.publish');
+    }
 }
