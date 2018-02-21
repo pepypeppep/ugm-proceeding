@@ -101,6 +101,17 @@ class ProceedingsRepository extends GuzzleService
 		return $this;
 	}
 
+    public function publish($json)
+    {
+        $this->json = $json;
+
+        $this->getResponse('POST', $this->uris['base']."/publish");
+
+        return $this;
+    }
+
+    /*CUSTOM METHOD*/
+
     public function getStatusColor($status)
     {
         if ($status === 'published') {
@@ -108,5 +119,18 @@ class ProceedingsRepository extends GuzzleService
         }
 
         return 'secondary';
+    }
+
+    public function readyToPublish($proceeding)
+    {
+        $checkLists = collect([
+            !empty($proceeding->data['introduction']),
+            $proceeding->identifiers->isNotEmpty(),
+            $proceeding->subjects->isNotEmpty(),
+            !empty($proceeding->data['front_cover']),
+            $proceeding->articles->isNotEmpty(),
+        ]);
+
+        return $checkLists->search(false) === false;
     }
 }
