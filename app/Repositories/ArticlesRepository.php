@@ -13,7 +13,7 @@ class ArticlesRepository extends GuzzleService
 
 	public $img = [
 		'scopus' => '/img/logos/scopus-logo.png',
-		'doaj' => '/img/logos/doaj-logo.png'
+		'doaj' => '/img/logos/Clarivate_Analytics.png'
 	];
 
 	public function store($request)
@@ -67,17 +67,8 @@ class ArticlesRepository extends GuzzleService
 
 	public function update($request, $id)
 	{
-		$multipart = collect();
 
-		collect($request)->except('authors', '_token', 'file_pdf', 'file_link')->each(function ($item, $key) use ($multipart)
-		{
-			$multipart->push([
-				'name' => $key,
-				'contents' => $item,
-			]);
-		});
-
-		$this->multipart = $multipart->toArray();
+		$this->json = $request;
 		$this->getResponse('PUT', $this->uris['base']."/$id");
 
 		return $this;
