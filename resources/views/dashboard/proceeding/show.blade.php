@@ -13,9 +13,6 @@
       <div class="col-md-3">
         <div class="d-inline float-right">
           <a class="btn btn-primary" href="{{ route('proceeding.edit', [$proceeding->id]) }}" >Edit proceeding details</a>
-          @if ($proceeding->status == 'draft')
-            <a href="{{ route('proceeding.publish', $proceeding->id) }}" class="btn btn-success ml-2">Publish</a>
-          @endif
         </div>
       </div>
     </div>
