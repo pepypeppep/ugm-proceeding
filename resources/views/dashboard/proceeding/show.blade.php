@@ -7,7 +7,7 @@
     <div class="row justify-content-between">
       <div class="col-md-9 mb-3 mb-md-0">
         <h2 class="m-0">{{ $proceeding->name }}</h2>
-        <h3><span class="badge badge-secondary">{{ $proceeding->status }}</span></h3>
+        <h3><span class="badge badge-{{ $proceeding->getStatusColor($proceeding->status) }}">{{ $proceeding->status }}</span></h3>
         <span class="text-muted">{{ $proceeding->alias }}, {{ $proceeding->date['conference_start'] }}, {{ $proceeding->location }}</span>
       </div>
       <div class="col-md-3">
