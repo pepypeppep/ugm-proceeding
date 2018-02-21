@@ -85,11 +85,6 @@
             </li>
           </ul>
         </div>
-        <div class="mt-4">
-          <a href=""><i class="fas fa-print fa-2x btn btn-primary"></i></a>
-          <a href=""><i class="fas fa-file-pdf fa-2x btn btn-danger"></i></a>
-          <a href=""><i class="fas fa-edit btn fa-2x btn-warning"></i></a>
-        </div>
       </div>
     </div>
   </section>
