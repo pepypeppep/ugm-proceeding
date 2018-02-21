@@ -1,4 +1,4 @@
-<section class="px-3 py-5 bg-white pb-3 bordered-bottom">
+<section class="px-3 py-5 bg-white pb-3">
   <div class="row justify-content-between">
     <div class="col-lg-10">
       <div class="d-flex align-items-center">
@@ -22,7 +22,7 @@
             <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
             <div class="pl-3">
               <h4 class="m-0">Introduction text</h4>
-              <span class="text-muted">International conference of Southesast asia is an anuual conference that held...</span>
+              <span class="text-muted">{{ substr($proceeding->introduction, 0, 200) }}...</span>
             </div>
           </div>
         </div>
@@ -38,8 +38,12 @@
             <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
             <div class="pl-3">
               <h4 class="m-0">Identifiers</h4>
-              <span class="text-muted">Print ISBN: 1234488282</span> <br>
-              <span class="text-muted">Online ISBN: 1335599382</span>
+              @foreach ($proceeding->identifiers as $identifier)
+                <span class="text-muted">{{ $identifier['type'] }}: {{ $identifier['id'] }}</span>
+                @if (!$loop->last)
+                  <br>
+                @endif
+              @endforeach
             </div>
           </div>
         </div>
@@ -55,7 +59,7 @@
             <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
             <div class="pl-3">
               <h4 class="m-0">Subjects</h4>
-              <span class="text-muted">Forestry, Computer</span>
+              <span class="text-muted">{{ $proceeding->subjects->pluck('name')->implode(", ") }}</span>
             </div>
           </div>
         </div>
@@ -88,9 +92,12 @@
             <div class="pl-3">
               <h4 class="m-0">Articles</h4>
               <span class="text-muted">
-                8 articles indexed in Scopus <br>
-                4 articles are not indexed <br>
-                45 total authors
+                {{ $proceeding->articles->where('indexed', true)->count() }} articles indexed in Scopus <br>
+                {{ $proceeding->articles->where('indexed', false)->count() }} articles are not indexed <br>
+                {{ $proceeding->articles->pluck('authors')->map(function ($item)
+                {
+                  return collect($item)->count();
+                })->sum() }} total authors
               </span>
             </div>
           </div>
