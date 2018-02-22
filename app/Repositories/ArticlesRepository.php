@@ -13,7 +13,7 @@ class ArticlesRepository extends GuzzleService
 
 	public $img = [
 		'scopus' => '/img/logos/scopus-logo.png',
-		'doaj' => 'http://doaj.com'
+		'doaj' => '/img/logos/Clarivate_Analytics.png'
 	];
 
 	public function store($request)
@@ -61,6 +61,15 @@ class ArticlesRepository extends GuzzleService
 	public function find($id)
 	{
 		$this->getResponse('GET', $this->uris['base']."/$id");
+
+		return $this;
+	}
+
+	public function update($request, $id)
+	{
+
+		$this->json = $request;
+		$this->getResponse('PUT', $this->uris['base']."/$id");
 
 		return $this;
 	}

@@ -26,4 +26,10 @@ Route::group(['prefix' => 'articles'], function(){
     Route::post('/', 'Admin\ArticleController@store')->name('article.store');
     Route::get('/{article}', 'Admin\ArticleController@show')->name('article.show');
     Route::get('/{article}/edit', 'Admin\ArticleController@edit')->name('article.edit');
+    Route::put('/{article}', 'Admin\ArticleController@update')->name('article.update');
 });
+
+Route::group(['prefix' => 'authors'], function(){
+    Route::put('/{author}', 'Admin\AuthorController@update')->name('author.update');
+});
+

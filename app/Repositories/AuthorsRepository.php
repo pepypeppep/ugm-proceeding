@@ -24,4 +24,13 @@ class AuthorsRepository extends GuzzleService
 
 		return $this;
 	}
+
+	public function update($request, $id)
+	{
+
+		$this->json = $request;
+		$this->getResponse('PUT', $this->uris['base']."/$id");
+
+		return $this;
+	}
 }
