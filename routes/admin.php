@@ -2,7 +2,11 @@
 
 Route::get('/', function ()
 {
-    return redirect('login');
+    return redirect(route('home.index'));
+});
+
+Route::group(['prefix' => 'home'], function(){
+    Route::get('/', 'Admin\HomeController@index')->name('home.index');
 });
 
 Route::group(['prefix' => 'proceedings'], function(){
