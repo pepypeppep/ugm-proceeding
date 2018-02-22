@@ -15,7 +15,7 @@
                     <a href="" class="text-primary"><b>{{ $author['name'] }}</b></a> <br>
                     Affiliation : <span class="badge badge-secondary">{{ $no+1 }}</span><br>
                     <span class="text-muted">Email : {{ $author['email'] }}</span>
-                  </p>
+                  </p> 
                 </div>
                 <div class="col-lg-1">
                   @empty ($author['email'])
