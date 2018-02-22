@@ -11,13 +11,15 @@ class AuthorController extends Controller
 {
     protected $repository;
 
-    function __construct(ArticlesRepository $repository)
+    function __construct(AuthorsRepository $repository)
     {
     	$this->repository = $repository;
     }
 
     public function update($author)
     {
-        return request()->all();
+        $author = $this->repository->update(request()->except('article_id'), $author);
+
+        return redirect(route('article.show', [request('article_id'), 'tab' => 'authors']))->with('success', 'Author '.$author->name.' has successfully updated');
     }
 }
