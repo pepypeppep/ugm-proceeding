@@ -2,7 +2,11 @@
 
 Route::get('/', function ()
 {
-    return redirect('login');
+    return redirect(route('home.index'));
+});
+
+Route::group(['prefix' => 'home'], function(){
+    Route::get('/', 'Admin\HomeController@index')->name('home.index');
 });
 
 Route::group(['prefix' => 'proceedings'], function(){
@@ -15,6 +19,7 @@ Route::group(['prefix' => 'proceedings'], function(){
     Route::post('/{proceeding}/cover', 'Admin\ProceedingController@updateCover')->name('proceeding.cover');
     Route::get('/{proceeding}/create-article', 'Admin\ArticleController@create')->name('article.create');
     Route::post('/', 'Admin\ProceedingController@store')->name('proceeding.store');
+    Route::post('/publish', 'Admin\ProceedingController@publish')->name('proceeding.publish');
 });
 
 Route::group(['prefix' => 'articles'], function(){
