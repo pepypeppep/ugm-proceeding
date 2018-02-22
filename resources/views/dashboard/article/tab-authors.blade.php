@@ -26,7 +26,7 @@
                 </div>
                 <div class="col action text-right">
                   <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-                    <a type="button" href="{{ route('author.edit', [$article->id]) }}" class="btn btn-outline-secondary">Edit</a>
+                    <a type="button" href="" class="btn btn-outline-secondary">Edit</a>
                     <a type="button" href="" class="btn btn-outline-secondary">Delete</a>
                   </div>
                 </div>

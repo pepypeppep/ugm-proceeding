@@ -27,7 +27,14 @@
               <div class="form-separator">
                 <h5>Author details</h5>
               </div>
-              @foreach ($article->data['authors'] as $author)
+              @foreach ($author->data['authors'] as $author)
+              <div class="form-group row" id="name">
+                <label for="name" class="col-sm-2 col-form-label">ID</label>
+                <div class="col-md-8 col-12">
+                  <input type="text" name="name" class="form-control @if($errors->has('name')) is-invalid @endif" value="{{ $author['id'] }}">
+                  <div class="invalid-feedback">{{ $errors->first('name') }}</div>
+                </div>
+              </div>
               <div class="form-group row" id="name">
                 <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-md-8 col-12">

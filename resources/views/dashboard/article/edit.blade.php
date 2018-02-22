@@ -18,7 +18,7 @@
   <section class="body pb-5">
     <div class="row">
       <div class="col-lg-8">
-        <form id="form" method="POST" action="{{ route('article.update', [$article->id]) }}" enctype="multipart/form-data">
+        <form id="form" method="POST" action="{{ route('article.update', [$article->id]) }}">
           {{ csrf_field() }}
           {{ method_field('PUT') }}
           <input type="hidden" name="proceeding_id" value="{{ $article->id }}">
