@@ -24,3 +24,7 @@ Route::group(['prefix' => 'articles'], function(){
     Route::put('/{article}', 'Admin\ArticleController@update')->name('article.update');
 });
 
+Route::group(['prefix' => 'authors'], function(){
+    Route::put('/{author}', 'Admin\AuthorController@update')->name('author.update');
+});
+

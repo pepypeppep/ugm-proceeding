@@ -17,4 +17,9 @@ class AuthorController extends Controller
     	$this->repository = $repository;
     	$this->author = $author;
     }
+
+    public function update($author)
+    {
+        return request()->all();
+    }
 }
