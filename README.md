@@ -28,4 +28,5 @@ Online proceeding of Universitas Gadjah Mada
 - UGM Proceeding logo by [M Rafieiy](https://www.instagram.com/rafieiy/)
 - Empty search ilustration by [Freepik](https://www.freepik.com/free-vector/businessman-with-magnifying-glass_1091811.htm)
 - Error with laptop by [Freepik](https://www.freepik.com/free-vector/404-error-concept-with-laptop_1534899.htm)
+- Under construction ilustration by [Freepik](https://www.freepik.com/free-vector/under-construction-template-in-flat-style_1723659.htm)
 - Icons by [Fontawesome](https://github.com/FortAwesome/Font-Awesome)
