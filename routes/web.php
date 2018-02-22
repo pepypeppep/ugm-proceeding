@@ -13,13 +13,12 @@
 
 Auth::routes();
 
+Route::get('/', function ()
+{
+    return view('public.home.index');
+});
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users', 'HomeController@apiService');
 Route::get('/users/{user}', 'HomeController@findUser');
-
-Route::get('/token', function ()
-{
-	return session('api_token');
-});
-
