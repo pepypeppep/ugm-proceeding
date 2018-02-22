@@ -22,4 +22,7 @@ Route::group(['prefix' => 'articles'], function(){
     Route::get('/{article}', 'Admin\ArticleController@show')->name('article.show');
     Route::get('/{article}/edit', 'Admin\ArticleController@edit')->name('article.edit');
     Route::put('/{article}', 'Admin\ArticleController@update')->name('article.update');
+    Route::get('/{article}/authors', 'Admin\AuthorController@edit')->name('author.edit');
 });
+
+
