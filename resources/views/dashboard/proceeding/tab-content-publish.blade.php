@@ -3,7 +3,7 @@
     @if ($errors->has('proceeding_id'))
       <div class="col-lg-10">
         <div class="d-flex align-items-center">
-          <i class="fas fa-exclamation-circle fa-fw" style="font-size: 2rem"></i>
+          <i class="fas fa-exclamation-circle fa-fw text-danger" style="font-size: 2rem"></i>
           <h5 class="m-0 pl-3">Sorry, you can't publish this proceeding yet. Please fix the problem below: <br> <small class="">{{ $errors->first('proceeding_id') }}</small></h5>
         </div>
       </div>
