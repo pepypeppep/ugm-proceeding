@@ -22,7 +22,7 @@ class ArticleController extends Controller
     public function create($proceeding)
     {
         $proceeding = $this->proceeding->find($proceeding);
-    	$lastArticle = $proceeding->articles->sortBy('created_at')->first();
+    	$lastArticle = $proceeding->articles->sortByDesc('created_at')->first();
     	
         return view('dashboard.article.create', compact('lastArticle', 'proceeding'));
     } 
