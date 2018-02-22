@@ -52,7 +52,7 @@ class ArticleController extends Controller
     {
         $article = $this->repository->update(request()->all(), $article);
 
-        redirect(route('article.show'));
+        return redirect(route('article.show', [$article->id]));
     }
 
 }
