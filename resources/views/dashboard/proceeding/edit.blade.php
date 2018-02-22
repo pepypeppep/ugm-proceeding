@@ -96,7 +96,7 @@
 							<div class="form-group row">
 							  <div class="col-sm-6">
 							    <label for="isbn">Print ISBN</label>
-							    <input name="online_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('print_isbn')) is-invalid @endif" id="printIsbn" value="{{ $isbn['print'] }}">
+							    <input name="print_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('print_isbn')) is-invalid @endif" id="printIsbn" value="{{ $isbn['print'] }}">
 							    <div class="invalid-feedback">{{ $errors->first('print_isbn') }}</div>
 							  </div>
 							</div>

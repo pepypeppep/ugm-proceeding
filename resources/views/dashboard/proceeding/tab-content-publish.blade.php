@@ -50,7 +50,7 @@
               <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
               <div class="pl-3">
                 <h4 class="m-0">Introduction text</h4>
-                <span>{{ substr($proceeding->introduction, 0, 200) }}...</span>
+                <span>{!! substr($proceeding->introduction, 0, 200) !!}...</span>
               </div>
             @endisset
           </div>
