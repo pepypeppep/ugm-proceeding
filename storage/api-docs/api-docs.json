@@ -365,6 +365,69 @@
                 ]
             }
         },
+        "/articles/{articleId}/file": {
+            "post": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Update article file",
+                "description": "",
+                "operationId": "updateArticleFile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "Article's id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "file_type",
+                        "in": "formData",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "pdf",
+                        "enum": [
+                            "pdf",
+                            "scopus",
+                            "doaj"
+                        ]
+                    },
+                    {
+                        "name": "file_link",
+                        "in": "formData",
+                        "description": "File link value. Required if file type not pdf",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_pdf",
+                        "in": "formData",
+                        "description": "Upload pdf file",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/institutions/": {
             "get": {
                 "tags": [
