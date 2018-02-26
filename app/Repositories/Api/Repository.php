@@ -34,6 +34,13 @@ class Repository
 		$this->fields = collect($fields);
 	}
 
+	public function setModel($model)
+	{
+		$this->model = $model;
+
+		return $this;
+	}
+
 	public function filterSort($query)
 	{
 		$this->query = $query;
