@@ -36,6 +36,10 @@ Route::group(['prefix' => 'proceedings'], function(){
 	});
 });
 
+Route::group(['prefix' => 'books'], function(){
+	Route::post('/', 'Api\BookController@store');
+});
+
 Route::group(['prefix' => 'articles'], function(){
 	Route::get('/', 'Api\ArticleController@index');
 	Route::get('/{article}', 'Api\ArticleController@show');
