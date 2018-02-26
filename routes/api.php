@@ -43,6 +43,7 @@ Route::group(['prefix' => 'articles'], function(){
 	{
 		Route::post('/', 'Api\ArticleController@store');
 		Route::put('/{article}', 'Api\ArticleController@update');
+		Route::post('/{article}/file', 'Api\IndexationController@update');
 	});
 });
 

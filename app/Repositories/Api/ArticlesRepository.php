@@ -22,7 +22,7 @@ class ArticlesRepository extends Repository
 	
 	function __construct(Article $article)
 	{
-		$this->model = $article;
+		$this->setModel($article);
 	}
 
 	/**
@@ -66,8 +66,7 @@ class ArticlesRepository extends Repository
 		// upload file if article is not indexed 
 		// or create indexation if article is indexed
 		if ($request->file_type == 'pdf') {
-			$path = $request->file('file_pdf')->store('proceedings/'.$article->proceeding_id.'/articles');
-			$article->update(['file' => $path]);
+			$article->uploadAndUpdateFile($request->file('file_pdf'));
 		} else {
 			$article->indexation()->create([
 				'type' => $request->file_type,
@@ -98,5 +97,30 @@ class ArticlesRepository extends Repository
 		]);
 
 		return $article;
+	}
+
+	/**
+	 * Update indexation on existing Article
+	 * @param  Eloquent $article
+	 * @param  Request $request
+	 * @return boolean
+	 */
+	public function updateIndexation($article, $request)
+	{
+		if ($request->file_type == 'pdf') {
+			$article->removeOldFile();
+			$article->uploadAndUpdateFile($request->file('file_pdf'));
+
+			$article->indexation->delete();
+		} else {
+			$article->indexation()->create([
+				'type' => $request->file_type,
+				'link' => $request->file_link,
+			]);
+
+			$article->update(['file' => null]);
+		}
+		
+		return true;
 	}
 }
