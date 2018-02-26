@@ -77,6 +77,33 @@ class Article extends Model
         ];
     }
 
+    /**
+     * Remove old file
+     * @return [type] [description]
+     */
+    public function removeOldFile()
+    {
+        if (Storage::exists($this->file)) {
+            Storage::delete($this->file);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Upload a file and update File coloumn with file path value
+     * @param  request()->file('file') $file File method form request()
+     * @return string
+     */
+    public function uploadAndUpdateFile($file)
+    {
+      $path = $file->store('proceedings/'.$this->proceeding_id.'/articles');
+
+      return $this->update(['file' => $path]);
+    }
+
     /*
     CUSTOM ATTRIBUTE SECTION
      */

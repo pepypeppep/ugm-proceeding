@@ -135,12 +135,23 @@ class ReadyToPublish implements Rule
         return false;
     }
 
+    public function checkArticles($articles)
+    {
+        if ($articles->isEmpty()) {
+            $this->setMessage('articles');
+
+            return false;
+        }
+
+        return true;
+    }
+
     /**
-     * Check article validation
+     * Check article validation. NOT USED BY NOW
      * @param  Illuminate\Support\Collection $articles
      * @return boolean
      */
-    public function checkArticles($articles)
+    public function checkArticlesAdvanced($articles)
     {
         $empty = collect([
             'doi' => collect(),
