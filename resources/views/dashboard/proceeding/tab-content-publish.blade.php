@@ -17,31 +17,33 @@
     <div class="col-lg-2 pt-md-0 pt-2">
       <div class="d-inline float-right">
         <!-- The Modal -->
-        {{-- <div class="modal fade" id="publish_confirmation_modal">
+        <div class="modal fade" id="publish_confirmation_modal">
           <div class="modal-dialog" style="margin-top: 260.5px;">
-            <div class="modal-content col-3 col-md-12"> --}}
-              <!-- Modal Header -->
-              {{-- <div class="modal-header">
-                <h4 class="modal-title">Publish proceeding?</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div> --}}
-              <!-- Modal footer -->
-              {{-- <div class="modal-footer">
-                <form action="{{ route('proceeding.publish') }}" method="POST">
-                {{ csrf_field() }}
-                <input type="hidden" name="proceeding_id" value="{{ $proceeding->id }}">
-                <button type="submit" class="btn btn-primary" data-dismiss="modal">Yes</button>
-                </form>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-              </div>
-            </div>
-          </div>
-        </div> --}}
-        <form action="{{ route('proceeding.publish') }}" method="POST" onsubmit="return confirm('Publish proceeding?');">
+            <div class="modal-content col-3 col-md-12">
+              <form action="{{ route('proceeding.publish') }}" method="POST">
           {{ csrf_field() }}
           <input type="hidden" name="proceeding_id" value="{{ $proceeding->id }}">
-          <button type="submit" class="btn btn-sm btn-primary">Publish now</button>
-        </form>
+              <div class="modal-header">
+                <h4 class="modal-title">Publish proceeding?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <h5>Total Articles : {{ $proceeding->articles->count() }} </h5>
+                <span>*If proceedings have been published, articles can't be changed</span>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Publish</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        {{-- <form action="{{ route('proceeding.publish') }}" method="POST">
+          {{ csrf_field() }} --}}
+          <input type="hidden" name="proceeding_id" value="{{ $proceeding->id }}">
+          <button type="button" class="btn btn-sm btn-primary" onclick="confirmPublish()">Publish now</button>
+        {{-- </form> --}}
       </div>
     </div>
     @else
