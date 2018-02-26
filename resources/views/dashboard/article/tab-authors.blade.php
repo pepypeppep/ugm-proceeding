@@ -15,12 +15,14 @@
                   <div class="col-lg-7 paper-info d-flex">
                     <i class="far fa-user fa-2x p-3"></i>
                     <div class="m-0 pl-2 row">
+                      <div class="col-md-12">
                       <label class="col-md-2 pl-0">Name</label>
-                      <input type="text" name="name" class="form-control form-control-sm col-md-10" id="nameForm" value="{{ $author['name'] }}">
+                      <input type="text" name="name" class="form-control form-control-sm col-md-4" id="nameForm" value="{{ $author['name'] }}">
+                      </div>
                       <label class="col-md-2 pl-0 mt-1">Affiliation</label>
-                      <input type="text" name="affiliation" class="form-control form-control-sm col-md-10" id="affiliationForm" value="{{ $author['affiliation'] }}">
+                      <input type="text" name="affiliation" class="form-control form-control-sm col-md-4" id="affiliationForm" value="{{ $author['affiliation'] }}">
                       <label class="col-md-2 pl-0 mt-1">Email</label>
-                      <input type="email" name="email" class="form-control form-control-sm col-md-10" id="emailForm" value="{{ $author['email'] }}">
+                      <input type="email" name="email" class="form-control form-control-sm col-md-4" id="emailForm" value="{{ $author['email'] }}">
                     </div>
                   </div>
                   <div class="col text-right">
