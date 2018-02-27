@@ -30,6 +30,33 @@ class BookController extends Controller
     }
 
     /**
+    * @SWG\Get(
+    *     path="/books/{bookId}",
+    *     summary="Get book by ID",
+    *     description="Return single record of book",
+    *     operationId="getProceedingById",
+    *     tags={"books"},
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+     *         description="ID of book to return",
+     *         in="path",
+     *         name="bookId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="successful operation"
+    *     )
+    * )
+    */
+    public function show(Book $book)
+    {
+        return new Books($book);
+    }
+
+    /**
      * @SWG\Post(
      *      path="/books",
      *      tags={"books"},
@@ -73,6 +100,17 @@ class BookController extends Controller
         ]);
 
         $book = Book::create($data);
+
+        return new Books($book);
+    }
+
+    public function storeAuthor(Request $request, Book $book)
+    {
+        $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $book->author()->attach($request->user_id);
 
         return new Books($book);
     }

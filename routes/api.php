@@ -38,8 +38,10 @@ Route::group(['prefix' => 'proceedings'], function(){
 
 Route::group(['prefix' => 'books'], function(){
 	Route::get('/', 'Api\BookController@index');
+	Route::get('/{book}', 'Api\BookController@show');
 	Route::group(['middleware' => 'auth:api'], function(){
 		Route::post('/', 'Api\BookController@store');
+		Route::post('/{book}/author', 'Api\BookController@storeAuthor');
 	});
 });
 
