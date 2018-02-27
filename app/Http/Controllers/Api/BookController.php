@@ -30,6 +30,33 @@ class BookController extends Controller
     }
 
     /**
+    * @SWG\Get(
+    *     path="/books/{bookId}",
+    *     summary="Get book by ID",
+    *     description="Return single record of book",
+    *     operationId="getProceedingById",
+    *     tags={"books"},
+    *     produces={"application/json"},
+    *     @SWG\Parameter(
+     *         description="ID of book to return",
+     *         in="path",
+     *         name="bookId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+    *     @SWG\Response(
+    *         response=200,
+    *         description="successful operation"
+    *     )
+    * )
+    */
+    public function show(Book $book)
+    {
+        return new Books($book);
+    }
+
+    /**
      * @SWG\Post(
      *      path="/books",
      *      tags={"books"},
@@ -73,6 +100,50 @@ class BookController extends Controller
         ]);
 
         $book = Book::create($data);
+
+        return new Books($book);
+    }
+
+    /**
+     * @SWG\Post(
+     *      path="/books/{bookId}/author",
+     *      tags={"books"},
+     *      operationId="addBookAuthor",
+     *      summary="Add an author to book",
+     *      description="",
+     *      consumes={"application/json"},
+     *      produces={"application/json"},
+     *      @SWG\Parameter(
+     *         description="ID of book to return",
+     *         in="path",
+     *         name="bookId",
+     *         required=true,
+     *         type="integer",
+     *         format="int64"
+     *     ),
+     *      @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Book object that needs to be added",
+     *          required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="user_id", type="integer", example=2),
+     *          ),      
+     *      ),
+     *      @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *      ),
+     *      security={{"Bearer":{}}}
+     * )
+     */
+    public function storeAuthor(Request $request, Book $book)
+    {
+        $data = $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        $book->author()->syncWithoutDetaching($request->user_id);
 
         return new Books($book);
     }

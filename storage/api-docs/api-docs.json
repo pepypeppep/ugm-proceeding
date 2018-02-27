@@ -383,6 +383,34 @@
                 }
             }
         },
+        "/books/{bookId}": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Get book by ID",
+                "description": "Return single record of book",
+                "operationId": "getProceedingById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of book to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
         "/books": {
             "post": {
                 "tags": [
@@ -432,6 +460,56 @@
                                 "publisher": {
                                     "type": "string",
                                     "example": "UGM Press"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/books/{bookId}/author": {
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Add an author to book",
+                "description": "",
+                "operationId": "addBookAuthor",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of book to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Book object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "user_id": {
+                                    "type": "integer",
+                                    "example": 2
                                 }
                             }
                         }

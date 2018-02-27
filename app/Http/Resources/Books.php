@@ -17,6 +17,7 @@ class Books extends Resource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'category' => [
                 $this->category,
             ],
@@ -24,10 +25,12 @@ class Books extends Resource
             'pages' => $this->pages,
             'publication_year' => $this->publication_year,
             'publisher' => $this->publisher,
-            'authors' => $this->author,
+            'authors' => BookAuthors::collection($this->author),
             'identifiers' => [
-                'type' => 'isbn',
-                'id' => $this->isbn,
+                [
+                    'type' => 'isbn',
+                    'id' => $this->isbn,
+                ],
             ],
             'download' => $this->file,
         ];
