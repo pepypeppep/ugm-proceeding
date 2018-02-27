@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Books;
 use App\Http\Resources\BooksCollection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {   
@@ -54,6 +55,18 @@ class BookController extends Controller
     public function show(Book $book)
     {
         return new Books($book);
+    }
+
+    public function showFile(Book $book)
+    {
+        if (Storage::disk('local')->exists($book->file)) {
+            // $path = Storage::disk('local')->get($book->file);
+            $path = storage_path("app/$book->file");
+            $headers = array('Content-Type: application/pdf');
+            return response()->download($path, $headers);
+        }
+
+        return "File doesn't exsist";
     }
 
     /**
@@ -144,6 +157,18 @@ class BookController extends Controller
         ]);
 
         $book->author()->syncWithoutDetaching($request->user_id);
+
+        return new Books($book);
+    }
+
+
+    public function storeFile(Request $request, Book $book)
+    {
+        $request->validate([
+            'file' => 'mimes:pdf|required',
+        ]);
+
+        $book->uploadAndUpdateFile($request->file('file'));
 
         return new Books($book);
     }
