@@ -365,6 +365,90 @@
                 ]
             }
         },
+        "/books/": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Get all books",
+                "description": "Return collection of books",
+                "operationId": "getAllProceedings",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/books": {
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Create a new Book",
+                "description": "",
+                "operationId": "createBook",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Book object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "Menuju Negara Maju: Apakah Indonesia bergerak ke arah yang benar?"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Indonesia termasuk dalam negara 20 besar perekonomian dunia yakni pendapatan Domestik Bruto terbesar ke-16 menggunakan standar current US$ dan negara dengan total PDB terbesat ke-10 menurut perhitungan alternatif menggunakan Purchasing Power Parity (PPP) (Worldbank, 2013). Indonesia juga telah berhasil keluar dari kelompok negara-negara berpendapatan bawah menjadi negara berpendapatan menengah. Namu, sebagian pakar mengatakan kemungkinan Indonesia masuk dalam jebakan pendapatan menengah (middle income trap). Buku ini bertujuan untuk memberikan gambaran tentang perkembangan capaian indikator sosial ekonomi Indonesia untuk melakukan lompatan atau catch up untuk mengejar negara-negara maju."
+                                },
+                                "category": {
+                                    "type": "string",
+                                    "example": "Economy"
+                                },
+                                "edition": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "pages": {
+                                    "type": "integer",
+                                    "example": 151
+                                },
+                                "publication_year": {
+                                    "type": "integer",
+                                    "example": 2015
+                                },
+                                "publisher": {
+                                    "type": "string",
+                                    "example": "UGM Press"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/articles/{articleId}/file": {
             "post": {
                 "tags": [
@@ -1102,6 +1186,10 @@
         {
             "name": "articles",
             "description": "All articles operations"
+        },
+        {
+            "name": "books",
+            "description": "All book operations"
         },
         {
             "name": "user",

@@ -37,7 +37,10 @@ Route::group(['prefix' => 'proceedings'], function(){
 });
 
 Route::group(['prefix' => 'books'], function(){
-	Route::post('/', 'Api\BookController@store');
+	Route::get('/', 'Api\BookController@index');
+	Route::group(['middleware' => 'auth:api'], function(){
+		Route::post('/', 'Api\BookController@store');
+	});
 });
 
 Route::group(['prefix' => 'articles'], function(){
