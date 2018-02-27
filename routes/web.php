@@ -13,12 +13,15 @@
 
 Auth::routes();
 
-Route::get('/', function ()
-{
-    return view('public.home.index');
-});
+// Route::get('/', function ()
+// {
+//     return view('public.home.index');
+// });
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users', 'HomeController@apiService');
 Route::get('/users/{user}', 'HomeController@findUser');
+
+Route::get('/', 'Site\ProceedingController@index')->name('public.index');
+Route::get('/{article}', 'Site\ArticleController@show')->name('public.article.show');

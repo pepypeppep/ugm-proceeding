@@ -16,6 +16,14 @@ class ArticlesRepository extends GuzzleService
 		'doaj' => '/img/logos/Clarivate_Analytics.png'
 	];
 
+	public function get()
+	{
+
+		$this->getResponse('GET', $this->uris['base']);
+
+		return $this;
+	}
+
 	public function store($request)
 	{
 		$multipart = collect();
