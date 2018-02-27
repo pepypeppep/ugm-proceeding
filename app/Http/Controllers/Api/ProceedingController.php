@@ -164,8 +164,6 @@ class ProceedingController extends Controller
     }
 
     /**
-     * @param  Repository
-     * @return Eloquent
      * @SWG\Put(
      *      path="/proceedings/{proceedingId}",
      *      tags={"proceedings"},
