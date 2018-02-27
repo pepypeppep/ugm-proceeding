@@ -40,6 +40,10 @@ class Controller extends BaseController
      *   description="All articles operations"
      * )
      * @SWG\Tag(
+     *   name="books",
+     *   description="All book operations",
+     * )
+     * @SWG\Tag(
      *   name="user",
      *   description="Operations about user",
      * )
