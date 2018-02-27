@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-primary bg-light fixed-top">
-	<a class="navbar-brand" href="./index.html">
-		<img src="img/webkit/icotext-clr.svg" height="30px" alt="Online Library">
+	<a class="navbar-brand" href="{{ route('public.index') }}">
+		<img src="/img/webkit/icotext-clr.svg" height="30px" alt="Online Library">
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navHead" aria-controls="navHead" aria-expanded="false"
 	aria-label="Toggle navigation">

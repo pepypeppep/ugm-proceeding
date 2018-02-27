@@ -5,7 +5,7 @@
 @section('content')
 <!--article-->
   <div class="container pt-md-4">
-    <section class="row mt-md-5">
+    <section class="row mt-md-5 mh-body">
       <!--contents-->
       <div class="col-lg-9 py-3">
         <h5>{{ $article->data['title'] }}</h5>

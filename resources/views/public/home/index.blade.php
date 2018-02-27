@@ -65,7 +65,7 @@
 			<div class="col-sm-4 pb-5">
 				<h4 class="text-uppercase">Latest proceedings</h4>
 				<p>View the latest published proceedings from our international and national conferences.</p>
-				<a href="../onli/bookshelf.html">
+				<a href="{{ route('public.proceeding.index') }}">
 					<button type="button m-sm-0" class="btn btn-none-primary">View all
 						<i class="fa fa-chevron-circle-right pl-3"></i>
 					</button>

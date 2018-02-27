@@ -7,7 +7,7 @@ use App\Repositories\ArticlesRepository;
 use App\Repositories\ProceedingsRepository;
 use Illuminate\Http\Request;
 
-class ProceedingController extends Controller
+class HomeController extends Controller
 {
     protected $repository;
     protected $article;
@@ -23,6 +23,6 @@ class ProceedingController extends Controller
         $proceedings = $this->repository->get();
         $articles = $this->article->get();
 
-    	return view('public.home.proceedings', compact('proceedings','articles'));
+    	return view('public.home.index', compact('proceedings','articles'));
     }
 }

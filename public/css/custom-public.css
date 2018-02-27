@@ -270,4 +270,8 @@ select.form-control-dark-lg:not([size]):not([multiple]), .input-group-lg > selec
   height: calc(2.875rem + 2px);
 }
 
+.mh-body{
+  min-height: 81vh;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */
