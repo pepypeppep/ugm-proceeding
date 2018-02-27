@@ -25,7 +25,7 @@ class Books extends Resource
             'pages' => $this->pages,
             'publication_year' => $this->publication_year,
             'publisher' => $this->publisher,
-            'authors' => $this->author,
+            'authors' => BookAuthors::collection($this->author),
             'identifiers' => [
                 [
                     'type' => 'isbn',
