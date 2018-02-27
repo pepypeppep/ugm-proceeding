@@ -33,8 +33,8 @@
                 </div>
                 <div class="form-group">
                   <label><strong>Password</strong></label>
-                  <input type="password" name="password" class="form-control">
-                  <a href="#" style="text-decoration: none;" class="form-text text-primary text-right"><i class="fas fa-eye fa-fw"></i> Show</a>
+                  <input type="password" name="password" class="form-control" id="password">
+                  <a href="#" style="text-decoration: none;" class="form-text text-primary text-right" onclick="showHidePaswd()"><i class="fas fa-eye fa-fw" id="eyeIcon"></i> Show</a>
                 </div>
                 <div class="form-group">
                   <button class="btn btn-block btn-primary" type="submit">Login</button>
@@ -49,4 +49,22 @@
       </div>
     </div>
   </section>
+@endsection
+
+@section('script')
+  <script type="text/javascript">
+  function showHidePaswd() {
+    var pwd = document.getElementById("password");
+    var eye = document.getElementById("eyeIcon");
+    if (pwd.type === "password") {
+        pwd.type = "text";
+        eye.classList.remove("fa-eye");
+        eye.classList.add("fa-eye-slash");
+    } else {
+        pwd.type = "password";
+        eye.classList.remove("fa-eye-slash");
+        eye.classList.add("fa-eye");
+    }
+  }
+  </script>
 @endsection
