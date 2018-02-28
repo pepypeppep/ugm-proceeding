@@ -27,8 +27,27 @@ class Book extends Model
      */
     public function uploadAndUpdateFile($file)
     {
-      $path = $file->store('books', 'local');
+      $path = $file->store($this->getStorageLocation(), $this->getStorageDisk());
 
       return $this->update(['file' => $path]);
+    }
+
+    public function getStorageLocation()
+    {
+        return 'books';
+    }
+
+    public function getStorageDisk()
+    {
+        return 'local';
+    }
+
+    public function hasAuthor($userId = null)
+    {
+        if (empty($userId)) {
+            return false;
+        }
+
+        return $this->author()->where('user_id', $userId)->get()->isNotEmpty();
     }
 }
