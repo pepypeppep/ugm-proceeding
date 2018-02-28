@@ -3,7 +3,7 @@
   <section class="body pb-5">
     <div class="row pt-3 justify-content-end">
       <div class="col-md-2">
-        <button class="btn btn-primary btn-block"><i class="fa fa-plus fa-fw mr-2"></i>Add Author</button>
+        <button data-toggle="modal" data-target="#addAuthorModal" class="btn btn-primary btn-block"><i class="fa fa-plus fa-fw mr-2"></i>Add Author</button>
       </div>
     </div>
     <div class="row pt-3">
@@ -42,6 +42,32 @@
       </div>
     </div>
   </section>
+  {{-- ADD AUTHOR MODAL --}}
+  <div class="modal"  id="addAuthorModal" tabindex="-1" role="dialog" aria-labelledby="addAuthorModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add Author</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{ route('book.store.author', $book->id) }}" method="POST">
+          {{ csrf_field() }}
+          <div class="modal-body">
+            <div class="form-group">
+              <label class="form-label">Author email</label>
+              <input required type="email" name="user_email" class="form-control">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 @section('script')

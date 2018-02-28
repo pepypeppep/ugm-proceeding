@@ -36,4 +36,15 @@ class BooksRepository extends GuzzleService
 
         return $this;
     }
+
+    public function storeAuthor($book, $email)
+    {
+        $this->json = [
+            'user_email' => $email,
+        ];
+
+        $this->getResponse('POST', $this->uris['base']."/$book/author");
+
+        return $this;
+    }
 }

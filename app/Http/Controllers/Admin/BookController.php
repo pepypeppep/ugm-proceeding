@@ -37,4 +37,11 @@ class BookController extends Controller
 
         return redirect(route('book.show', $book->id));
     }
+
+    public function storeAuthor($book, Request $request)
+    {
+        $book = $this->repository->storeAuthor($book, $request->user_email);
+
+        return redirect(route('book.show', [$book->id, 'tab' => 'authors']))->with('success', 'The Author has been added!');
+    }
 }
