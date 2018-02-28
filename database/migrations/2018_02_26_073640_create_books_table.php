@@ -24,6 +24,7 @@ class CreateBooksTable extends Migration
             $table->string('publisher', 200);
             $table->string('file', 300)->nullable();
             $table->integer('isbn')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
