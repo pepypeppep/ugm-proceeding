@@ -22,7 +22,8 @@ class BookController extends Controller
         *     @SWG\Response(
         *         response=200,
         *         description="successful operation"
-        *     )
+        *     ),
+        *     security={{"Bearer":{}}}
         * )
         */
     public function index(Book $book)
@@ -49,7 +50,8 @@ class BookController extends Controller
     *     @SWG\Response(
     *         response=200,
     *         description="successful operation"
-    *     )
+    *     ),
+    *     security={{"Bearer":{}}}
     * )
     */
     public function show(Book $book)
