@@ -517,9 +517,9 @@
                         "required": true,
                         "schema": {
                             "properties": {
-                                "user_id": {
-                                    "type": "integer",
-                                    "example": 2
+                                "user_email": {
+                                    "type": "string",
+                                    "example": "ugm.proceeding@mail.com"
                                 }
                             }
                         }

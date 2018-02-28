@@ -6,6 +6,7 @@ use App\Book;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Books;
 use App\Http\Resources\BooksCollection;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -142,7 +143,7 @@ class BookController extends Controller
      *          description="Book object that needs to be added",
      *          required=true,
      *          @SWG\Schema(
-     *              @SWG\Property(property="user_id", type="integer", example=2),
+     *              @SWG\Property(property="user_email", type="string", example="ugm.proceeding@mail.com"),
      *          ),      
      *      ),
      *      @SWG\Response(
@@ -154,11 +155,13 @@ class BookController extends Controller
      */
     public function storeAuthor(Request $request, Book $book)
     {
-        $data = $request->validate([
-            'user_id' => 'required|exists:users,id',
+        $request->validate([
+            'user_email' => 'required|exists:users,email',
         ]);
 
-        $book->author()->syncWithoutDetaching($request->user_id);
+        $user = User::where('email', $request->user_email)->first();
+
+        $book->author()->syncWithoutDetaching($user->id);
 
         return new Books($book);
     }
