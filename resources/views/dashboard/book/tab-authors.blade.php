@@ -1,9 +1,9 @@
 <div class="tab-pane fade @if(request('tab') == 'authors') {{ 'show active' }} @endif" id="nav-authors" role="tabpanel" aria-labelledby="nav-authors-tab">
   <!-- ARTICLES -->
   <section class="body pb-5">
-    <div class="row pt-3">
-      <div class="col">
-        <button class="btn btn-primary float-right"><i class="fa fa-plus fa-fw"></i>Add Author</button>
+    <div class="row pt-3 justify-content-end">
+      <div class="col-md-2">
+        <button class="btn btn-primary btn-block"><i class="fa fa-plus fa-fw mr-2"></i>Add Author</button>
       </div>
     </div>
     <div class="row pt-3">
@@ -13,7 +13,7 @@
             <div class="card-body">
               @empty ($book->data['authors'])
                 <div class="mx-3 my-4 text-center">
-                  <h4>This Book doesn't have any authors.</h4>
+                  <h4>This book doesn't have any authors.</h4>
                   <span>Please add one by clicking the Add Author Button.</span> <br>
                 </div>
               @else
