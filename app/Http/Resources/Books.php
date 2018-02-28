@@ -25,6 +25,7 @@ class Books extends Resource
             'pages' => $this->pages,
             'publication_year' => $this->publication_year,
             'publisher' => $this->publisher,
+            'file' => $this->when(optional(auth('api')->user())->isSuperAdmin(), $this->file),
             'authors' => BookAuthors::collection($this->author),
             'identifiers' => [
                 [
