@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.master')
 
-@section('title', 'Proceedings Management')
+@section('title', 'Books Management')
 
 @section('header')
   <section class="header py-5">
@@ -9,7 +9,7 @@
         <h2>Books Management</h2>
       </div>
       <div class="col-md-2">
-        <a class="btn btn-block btn-primary" href="{{ route('proceeding.create') }}" >Create new book</a>
+        <a class="btn btn-block btn-primary" href="{{ route('book.create') }}" >Create new book</a>
       </div>
     </div>
   </section>
