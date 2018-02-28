@@ -18,6 +18,7 @@ class Books extends Resource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'cover' => $this->cover,
             'category' => [
                 $this->category,
             ],
