@@ -8,7 +8,7 @@
 </button>
 <div class="collapse navbar-collapse" id="navHead">
 	<ul class="navbar-nav ml-auto">
-		<li class="nav-item dropdown">
+		{{-- <li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Topics</a>
 			<div class="dropdown-menu" aria-labelledby="dropdown01">
 				<a class="dropdown-item" href="#">Agroforestry</a>
@@ -16,9 +16,15 @@
 				<a class="dropdown-item" href="#">Social Humaniora</a>
 				<a class="dropdown-item" href="#">STEM</a>
 			</div>
+		</li> --}} 
+		<li class="nav-item">
+			<a class="nav-link" href="{{ route('public.proceeding.index') }}">Proceedings</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" href="#">Explore</a>
+			<a class="nav-link" href="#">Articles</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="{{ route('public.book.index') }}">Books</a>
 		</li>
 		<li class="nav-item">
 			<a href="../onli/sign.html"><button type="button" class="btn btn-primary">Sign in</button></a>

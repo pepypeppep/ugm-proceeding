@@ -28,3 +28,5 @@ Route::get('/', 'Site\HomeController@index')->name('public.index');
 Route::get('/article/{article}', 'Site\ArticleController@show')->name('public.article.show');
 Route::get('/proceedings', 'Site\ProceedingController@index')->name('public.proceeding.index');
 Route::get('/proceeding/{proceeding}', 'Site\ProceedingController@show')->name('public.proceeding.show');
+Route::get('/books', 'Site\BookController@index')->name('public.book.index');
+Route::get('/book/{book}', 'Site\BookController@show')->name('public.book.show');
