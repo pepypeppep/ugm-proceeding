@@ -33,6 +33,8 @@ class Books extends Resource
                 ],
             ],
             'download' => $this->getDownloadLink(),
+            'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at' => $this->updated_at->toDateTimeString(),
         ];
     }
 
