@@ -10,6 +10,9 @@
       <li class="nav-item @if(request()->is('*proceedings*')) active @endif">
         <a class="nav-link" href="{{ route('proceeding.index') }}">Proceedings</a>
       </li>
+      <li class="nav-item @if(request()->is('*books*')) active @endif">
+        <a class="nav-link" href="{{ route('book.index') }}">Books</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Users</a>
       </li>
