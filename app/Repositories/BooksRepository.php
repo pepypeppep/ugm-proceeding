@@ -20,4 +20,11 @@ class BooksRepository extends GuzzleService
 
         return $this;
     }
+
+    public function find($book)
+    {
+        $this->getResponse('GET', $this->uris['base']."/$book");
+
+        return $this;
+    }
 }
