@@ -39,7 +39,7 @@ Route::group(['prefix' => 'proceedings'], function(){
 Route::group(['prefix' => 'books'], function(){
 	Route::get('/', 'Api\BookController@index');
 	Route::get('/{book}', 'Api\BookController@show');
-	Route::get('/{book}/download', 'Api\BookController@showFile');
+	Route::get('/{book}/download', 'Api\BookController@showFile')->name('api.book.download');
 	
 	Route::group(['middleware' => 'auth:api'], function(){
 		Route::post('/', 'Api\BookController@store');

@@ -380,7 +380,12 @@
                     "200": {
                         "description": "successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/books/{bookId}": {
@@ -408,7 +413,12 @@
                     "200": {
                         "description": "successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/books": {
