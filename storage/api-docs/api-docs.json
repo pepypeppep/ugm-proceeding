@@ -380,7 +380,12 @@
                     "200": {
                         "description": "successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/books/{bookId}": {
@@ -408,7 +413,12 @@
                     "200": {
                         "description": "successful operation"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/books": {
@@ -695,6 +705,20 @@
                         "description": "you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of the proceeding",
+                        "required": false,
+                        "type": "string",
+                        "default": "all",
+                        "enum": [
+                            "published",
+                            "draft",
+                            "trashed",
+                            "all"
+                        ]
                     }
                 ],
                 "responses": {

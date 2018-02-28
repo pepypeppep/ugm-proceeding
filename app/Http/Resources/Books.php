@@ -32,7 +32,7 @@ class Books extends Resource
                     'id' => $this->isbn,
                 ],
             ],
-            'download' => $this->file,
+            'download' => $this->getDownloadLink(),
         ];
     }
 
@@ -41,5 +41,16 @@ class Books extends Resource
         return [
             'status' => 'success',
         ];
+    }
+
+    public function getDownloadLink()
+    {
+        $user = optional(auth('api')->user())->id;
+
+        if ($this->hasAuthor($user)) {
+            return route('api.book.download', $this->id);
+        }
+
+        return null;
     }
 }
