@@ -34,6 +34,7 @@ Route::group(['prefix' => 'books'], function(){
     Route::get('/create', 'Admin\BookController@create')->name('book.create');
     Route::get('/{book}', 'Admin\BookController@show')->name('book.show');
     Route::post('/', 'Admin\BookController@store')->name('book.store');
+    Route::get('/{book}/edit', 'Admin\BookController@edit')->name('book.edit');
 });
 
 Route::group(['prefix' => 'authors'], function(){

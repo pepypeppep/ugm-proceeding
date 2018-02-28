@@ -23,11 +23,18 @@ class BookController extends Controller
     {
         $book = $this->repository->find($book);
 
-        return $book->data;
+        return view('dashboard.book.show', compact('book'));
     }
 
     public function create()
     {
         return view('dashboard.book.create');
+    }
+
+    public function store(Request $request)
+    {
+        $book = $this->repository->store($request->all());
+
+        return redirect(route('book.show', $book->id));
     }
 }
