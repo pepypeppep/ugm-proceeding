@@ -29,6 +29,15 @@ Route::group(['prefix' => 'articles'], function(){
     Route::put('/{article}', 'Admin\ArticleController@update')->name('article.update');
 });
 
+Route::group(['prefix' => 'books'], function(){
+    Route::get('/', 'Admin\BookController@index')->name('book.index');
+    Route::get('/create', 'Admin\BookController@create')->name('book.create');
+    Route::get('/{book}', 'Admin\BookController@show')->name('book.show');
+    Route::post('/', 'Admin\BookController@store')->name('book.store');
+    Route::get('/{book}/edit', 'Admin\BookController@edit')->name('book.edit');
+    Route::post('/{book}/author', 'Admin\BookController@storeAuthor')->name('book.store.author');
+});
+
 Route::group(['prefix' => 'authors'], function(){
     Route::put('/{author}', 'Admin\AuthorController@update')->name('author.update');
 });
