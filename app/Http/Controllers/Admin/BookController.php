@@ -18,4 +18,16 @@ class BookController extends Controller
         $books = $this->repository->getAll();
         return view('dashboard.book.index', compact('books'));
     }
+
+    public function show($book)
+    {
+        $book = $this->repository->find($book);
+
+        return $book->data;
+    }
+
+    public function create()
+    {
+        return view('dashboard.book.create');
+    }
 }

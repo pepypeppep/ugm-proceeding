@@ -31,7 +31,9 @@ Route::group(['prefix' => 'articles'], function(){
 
 Route::group(['prefix' => 'books'], function(){
     Route::get('/', 'Admin\BookController@index')->name('book.index');
+    Route::get('/create', 'Admin\BookController@create')->name('book.create');
     Route::get('/{book}', 'Admin\BookController@show')->name('book.show');
+    Route::post('/', 'Admin\BookController@store')->name('book.store');
 });
 
 Route::group(['prefix' => 'authors'], function(){
