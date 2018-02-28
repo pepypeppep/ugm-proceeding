@@ -6,7 +6,9 @@ use App\Book;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Books;
 use App\Http\Resources\BooksCollection;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {   
@@ -21,7 +23,8 @@ class BookController extends Controller
         *     @SWG\Response(
         *         response=200,
         *         description="successful operation"
-        *     )
+        *     ),
+        *     security={{"Bearer":{}}}
         * )
         */
     public function index(Book $book)
@@ -48,12 +51,25 @@ class BookController extends Controller
     *     @SWG\Response(
     *         response=200,
     *         description="successful operation"
-    *     )
+    *     ),
+    *     security={{"Bearer":{}}}
     * )
     */
     public function show(Book $book)
     {
         return new Books($book);
+    }
+
+    public function showFile(Book $book)
+    {
+        if (Storage::disk('local')->exists($book->file)) {
+            // $path = Storage::disk('local')->get($book->file);
+            $path = storage_path("app/$book->file");
+            $headers = array('Content-Type: application/pdf');
+            return response()->download($path, $headers);
+        }
+
+        return "File doesn't exsist";
     }
 
     /**
@@ -127,7 +143,7 @@ class BookController extends Controller
      *          description="Book object that needs to be added",
      *          required=true,
      *          @SWG\Schema(
-     *              @SWG\Property(property="user_id", type="integer", example=2),
+     *              @SWG\Property(property="user_email", type="string", example="ugm.proceeding@mail.com"),
      *          ),      
      *      ),
      *      @SWG\Response(
@@ -139,11 +155,25 @@ class BookController extends Controller
      */
     public function storeAuthor(Request $request, Book $book)
     {
-        $data = $request->validate([
-            'user_id' => 'required|exists:users,id',
+        $request->validate([
+            'user_email' => 'required|exists:users,email',
         ]);
 
-        $book->author()->syncWithoutDetaching($request->user_id);
+        $user = User::where('email', $request->user_email)->first();
+
+        $book->author()->syncWithoutDetaching($user->id);
+
+        return new Books($book);
+    }
+
+
+    public function storeFile(Request $request, Book $book)
+    {
+        $request->validate([
+            'file' => 'mimes:pdf|required',
+        ]);
+
+        $book->uploadAndUpdateFile($request->file('file'));
 
         return new Books($book);
     }
