@@ -36,6 +36,18 @@ Route::group(['prefix' => 'proceedings'], function(){
 	});
 });
 
+Route::group(['prefix' => 'books'], function(){
+	Route::get('/', 'Api\BookController@index');
+	Route::get('/{book}', 'Api\BookController@show');
+	Route::get('/{book}/download', 'Api\BookController@showFile')->name('api.book.download');
+	
+	Route::group(['middleware' => 'auth:api'], function(){
+		Route::post('/', 'Api\BookController@store');
+		Route::post('/{book}/author', 'Api\BookController@storeAuthor');
+		Route::post('/{book}/file', 'Api\BookController@storeFile');
+	});
+});
+
 Route::group(['prefix' => 'articles'], function(){
 	Route::get('/', 'Api\ArticleController@index');
 	Route::get('/{article}', 'Api\ArticleController@show');

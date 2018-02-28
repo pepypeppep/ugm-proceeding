@@ -62,6 +62,15 @@ class ProceedingController extends Controller
      *         required=false,
      *         type="string",
      *     ),
+     *     @SWG\Parameter(
+     *         name="status",
+     *         in="query",
+     *         description="Status of the proceeding",
+     *         required=false,
+     *         type="string",
+     *         enum={"published", "draft", "trashed", "all"},
+     *         default="all"
+     *     ),
     *     @SWG\Response(
     *         response=200,
     *         description="successful operation"
@@ -164,8 +173,6 @@ class ProceedingController extends Controller
     }
 
     /**
-     * @param  Repository
-     * @return Eloquent
      * @SWG\Put(
      *      path="/proceedings/{proceedingId}",
      *      tags={"proceedings"},
