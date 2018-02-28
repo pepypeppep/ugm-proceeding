@@ -27,3 +27,4 @@ Route::get('/users/{user}', 'HomeController@findUser');
 Route::get('/', 'Site\HomeController@index')->name('public.index');
 Route::get('/article/{article}', 'Site\ArticleController@show')->name('public.article.show');
 Route::get('/proceedings', 'Site\ProceedingController@index')->name('public.proceeding.index');
+Route::get('/proceeding/{proceeding}', 'Site\ProceedingController@show')->name('public.proceeding.show');

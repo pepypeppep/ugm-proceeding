@@ -9,9 +9,13 @@
       <!--contents-->
       <div class="col-lg-9 py-3">
         <h5>{{ $article->data['title'] }}</h5>
-        <small class="text-primary">Edward Christopher Sheeran<sup>1</sup>; Fiona Mackay Barclay Bevan<sup>2</sup></small><br>
-        <small><sup>1</sup> Sony/ATV Music Publishing LLC<br>
-          <sup>2</sup> Imagem Music Inc</small>
+        @foreach($article->data['authors'] as $author)
+        <small class="text-primary">{{ collect($author['name'])->implode('name', '') }}<sup>{{ $author['id'] }}</sup></small>
+        @endforeach
+        <br>
+        @foreach($article->data['authors'] as $author)
+          <small><sup>{{ $author['id'] }}</sup>{{ collect($author['affiliation'])->implode('name', '') }}</small><br>
+        @endforeach
         <h5 class="pt-3">Abstract</h5>
         <p>{{ $article->data['abstract'] }}
         </p>
