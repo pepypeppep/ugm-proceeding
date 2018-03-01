@@ -18,7 +18,7 @@ class BookAuthors extends Resource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
-            'affiliation' => $this->institution->name,
+            'affiliation' => 'Badan Penerbit dan Publikasi',
         ];
     }
 }
