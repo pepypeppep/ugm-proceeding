@@ -27,7 +27,7 @@
 			<a class="nav-link" href="{{ route('public.book.index') }}">Books</a>
 		</li>
 		<li class="nav-item">
-			<a href="../onli/sign.html"><button type="button" class="btn btn-primary">Sign in</button></a>
+			<a href="{{ route('login') }}"><button type="button" class="btn btn-primary">Sign in</button></a>
 		</li>
 	</ul>
 </div>
