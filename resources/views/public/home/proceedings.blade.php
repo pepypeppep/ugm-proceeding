@@ -68,7 +68,7 @@
 				<div class="card-deck">
 					@foreach($proceedings->data->take(20) as $proceeding)
 					<div class="card book">
-						<a href="./docs/201709.html"><img class="card-img-top" src="{{ $proceeding['front_cover'] }}" alt="{{ $proceeding['alias'] }}" title="{{ $proceeding['name'] }}"></a>
+						<a href="{{ route('public.proceeding.show', $proceeding['id']) }}"><img class="card-img-top" src="{{ $proceeding['front_cover'] }}" alt="{{ $proceeding['alias'] }}" title="{{ $proceeding['name'] }}"></a>
 					</div>
 					@endforeach
 				</div>
