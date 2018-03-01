@@ -9,7 +9,7 @@
             <span>No image available</span>
           </div>
         @else
-          <img src="{{ $book->cover }}" class="rounded img-fluid mb-3">
+          <img src="{{ $book->cover }}" alt="{{ $book->title }}" class="rounded img-fluid mb-3">
         @endif
         <label class="btn btn-primary btn-block btn-file">
           Upload cover 
