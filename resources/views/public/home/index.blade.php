@@ -75,7 +75,7 @@
 				<div class="card-deck">
 					@foreach($proceedings->data->take(4) as $proceeding)
 					<div class="card">
-						<a href="./docs/201707.html">
+						<a href="{{ route('public.proceeding.show',[$proceeding['id']]) }}">
 							<img class="card-img-top" src="{{ $proceeding['front_cover'] }}" alt="{{ $proceeding['alias'] }}" title="{{ $proceeding['name'] }}">
 						</a>
 					</div>
