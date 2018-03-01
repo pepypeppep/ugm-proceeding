@@ -44,4 +44,11 @@ class BookController extends Controller
 
         return redirect(route('book.show', [$book->id, 'tab' => 'authors']))->with('success', 'The Author has been added!');
     }
+
+    public function storeFile($book, Request $request)
+    {
+        $this->repository->storefile($book, $request->file('file'));
+
+        return redirect(route('book.show', $book))->with('success', 'The file has been stored!');
+    }
 }
