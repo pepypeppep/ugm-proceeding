@@ -66,32 +66,11 @@
 			<!--bookshelf-->
 			<div class="container col-sm-8">
 				<div class="card-deck">
+				@foreach($books->data as $book)
 					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig1.jpg" alt="ICST 2017 Proceeding" title="Proceeding of the 3rd International Conference on Science and Technology"></a>
+						<a href="{{ route('public.book.show', [$book['id']]) }}"><img class="card-img-top" src="../img/books/fig4.jpg" alt="{{ $book['title'] }}" title="{{ $book['title'] }}"></a>
 					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig2.jpg" alt="ICHS 2017 Proceeding" title="Proceeding of the 2nd International Conference on Health Sciences"></a>
-					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig3.jpg" alt="ICSEAS 2017 Proceeding" title="Proceeding of the 2nd International Conference on South East Asia Studies"></a>
-					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig4.jpg" alt="ICTA 2017 Proceeding" title="Proceeding of the 2nd International Conference on Tropical Agriculture"></a>
-					</div>
-				</div>
-				<div class="card-deck">
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig1.jpg" alt="ICST 2017 Proceeding" title="Proceeding of the 3rd International Conference on Science and Technology"></a>
-					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig2.jpg" alt="ICHS 2017 Proceeding" title="Proceeding of the 2nd International Conference on Health Sciences"></a>
-					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig3.jpg" alt="ICSEAS 2017 Proceeding" title="Proceeding of the 2nd International Conference on South East Asia Studies"></a>
-					</div>
-					<div class="card book">
-						<a href="{{ route('public.book.show', [1]) }}"><img class="card-img-top" src="../img/books/fig4.jpg" alt="ICTA 2017 Proceeding" title="Proceeding of the 2nd International Conference on Tropical Agriculture"></a>
-					</div>
+				@endforeach
 				</div>
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center py-4">
