@@ -59,4 +59,16 @@ class BooksRepository extends GuzzleService
 
         return $this;
     }
+
+    public function storeCover($book, $file)
+    {
+        $this->multipart= array([
+            'name' => 'cover',
+            'contents' => fopen($file, 'r'),
+        ]);
+
+        $this->getResponse('POST', $this->uris['base']."/$book/cover");
+
+        return $this;
+    }
 }

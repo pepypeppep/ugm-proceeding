@@ -25,20 +25,31 @@ class Book extends Model
      * @param  request()->file('file') $file File method form request()
      * @return string
      */
-    public function uploadAndUpdateFile($file)
+    public function addFile($coloumn, $file, $disk = 'local')
     {
-      $path = $file->store($this->getStorageLocation(), $this->getStorageDisk());
+        return $this->update([
+            $coloumn => $this->uploadFile($file, $disk),
+        ]);
+    }
+    
+    public function uploadFile($file, $disk)
+    {
+        $path = $file->store($this->getStorageLocation(), $this->getStorageDisk($disk));
 
-      return $this->update(['file' => $path]);
+        return $path;
     }
 
-    public function getStorageLocation()
+    public function getStorageLocation($path = '')
     {
-        return 'books';
+        return 'books'.$path;
     }
 
-    public function getStorageDisk()
+    public function getStorageDisk($disk)
     {
+        if (!empty($disk)) {
+            return $disk;
+        }
+        
         return 'local';
     }
 

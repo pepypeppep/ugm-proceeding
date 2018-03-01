@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Illuminate\Support\Facades\Storage;
 
 class Books extends Resource
 {
@@ -18,7 +19,7 @@ class Books extends Resource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'cover' => $this->cover,
+            'cover' => Storage::url($this->cover),
             'category' => [
                 $this->category,
             ],

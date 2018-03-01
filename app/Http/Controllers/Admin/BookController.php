@@ -51,4 +51,11 @@ class BookController extends Controller
 
         return redirect(route('book.show', $book))->with('success', 'The file has been stored!');
     }
+
+    public function storeCover($book, Request $request)
+    {
+        $this->repository->storeCover($book, $request->file('cover'));
+
+        return redirect(route('book.show', $book))->with('success', 'The Cover has been stored!');
+    }
 }

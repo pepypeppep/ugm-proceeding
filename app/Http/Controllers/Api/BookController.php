@@ -173,7 +173,18 @@ class BookController extends Controller
             'file' => 'mimes:pdf|required',
         ]);
 
-        $book->uploadAndUpdateFile($request->file('file'));
+        $book->addFile('file', $request->file('file'));
+
+        return new Books($book);
+    }
+
+    public function storeCover(Request $request, Book $book)
+    {
+        $request->validate([
+            'cover' => 'required|image',
+        ]);
+
+        $book->addFile('cover', $request->file('cover'), 'public');
 
         return new Books($book);
     }
