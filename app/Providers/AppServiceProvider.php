@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Repositories\ProceedingsRepository;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        View::composer('public.layouts.latest-proceeding', function ($view) {
+            $repository = new ProceedingsRepository;
+            $view->with('latestProceedings', $repository->get()->data->take(4));
+        });
     }
 
     /**
