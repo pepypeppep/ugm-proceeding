@@ -65,8 +65,8 @@ class BookController extends Controller
         if (Storage::disk('local')->exists($book->file)) {
             // $path = Storage::disk('local')->get($book->file);
             $path = storage_path("app/$book->file");
-            $headers = array('Content-Type: application/pdf');
-            return response()->download($path, $headers);
+            // $headers = array('Content-Type: application/pdf');
+            return response()->download($path);
         }
 
         return "File doesn't exsist";
