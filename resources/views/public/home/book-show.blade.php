@@ -8,41 +8,36 @@
 		<div class="col-sm-3 pt-5 d-none d-lg-block">
 			<img class="card-img-top" src="../img/books/fig4.jpg" alt="ICST 2017 Proceeding" title="Proceeding of the 2nd International Conference on South East Asia Studies">
 		</div>
-		<div class="col-sm-9 pt-5">
-			<h5>Books of Lorem Ipsum</h5>
-			<p class="text-justify">Lorem ipsum dolor sit amet, eu oportere sententiae complectitur his. Brute harum sea eu, ne usu euripidis instructior. No cum tempor labore nostrud, id his magna error essent. Dictas splendide ne vim, aeque utinam pro an, denique dignissim has ex.
-				Mei cu affert tempor, menandri principes an vix. At lorem iudicabit mea, ad impetus virtute nam, facilis delicata an quo. Tollit aliquam eum ea. Id facer elaboraret eos, persius eripuit ocurreret sed ne. Per et congue fastidii, ne vel veritus lobortis
-			periculis. Mel at idque forensibus suscipiantur, decore eleifend cu vix. Eos eu tale dolorum. Eu sed commodo nominati reprehendunt. Vix ei veri everti debitis. Propriae posidonium sit te. In illum signiferumque sit. Primis consulatu ut vim.</p>
-			<table class="small">
-				<tr>
-					<td><strong>Editor in chief</strong></td>
-					<td><strong>:</strong></td>
-					<td>Prof. Coba Coba Dulu</td>
-				</tr>
-				<tr>
-					<td><strong>Managing editor</strong></td>
-					<td><strong>:</strong></td>
-					<td>Siapa Yang Mau ; Dialah Namanya</td>
-				</tr>
-				<tr>
-
-				</tr>
-				<tr>
-					<td><strong>Added to OnLi</strong></td>
-					<td><strong>:</strong></td>
-					<td>21 December 2017</td>
-				</tr>
-				<tr>
-					<td><strong>eISBN</strong></td>
-					<td><strong>:</strong></td>
-					<td>123-4-5678-9012-3</td>
-				</tr>
-				<tr>
-					<td><strong>PoD ISBN</strong></td>
-					<td><strong>:</strong></td>
-					<td>456-7-8901-2345-6</td>
-				</tr>
-			</table>
+		<div class="col-sm-6 pt-5">
+			<h5>{{ $books->title }}</h5>
+			<p class="text-justify">{{ $books->description }}</p>
+			
+		</div>
+		<div class="col-lg-3 pt-5 py-3 d-none d-lg-block">
+			<!--button-->
+			<div class="list-group">
+				<button type="button" class="btn list-group-item list-group-item-action"><i class="fa fa-file-pdf pr-3"></i>Download PDF</button>
+				<button type="button" class="btn list-group-item list-group-item-action"><i class="fa fa-bookmark pr-3"></i>Cite this article</button>
+				<button type="button" class="btn list-group-item list-group-item-action"><i class="fa fa-print pr-2"></i> Print</button>
+			</div>
+			<!-- information -->
+			<br>
+			<small>
+				<strong>Added to OnLi:</strong><br>
+				{{ $books->created_at }}<br>
+				<strong>Publisher</strong><br>
+				{{ $books->publisher }}<br>
+				<strong>Publication Year</strong><br>
+				{{ $books->publication_year }}<br>
+				<strong>Edition</strong><br>
+				{{ $books->edition }}<br>
+				<strong>Page(s)</strong><br>
+				{{ $books->pages }}<br>
+				<strong>ISBN</strong><br>
+				{{ $books->publisher }}<br>
+				<strong>Category</strong><br>
+				{{ collect($books->category)->implode(',', '') }}
+			</small>
 		</div>
 	</section>
 </div>

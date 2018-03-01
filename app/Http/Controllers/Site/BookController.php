@@ -18,15 +18,15 @@ class BookController extends Controller
     public function index()
     {
 
-     //    $books = $this->repository->getAll();
-     //    return $books;
+        $books = $this->repository->getAll();
 
-    	// return view('public.home.books', compact('books'));
-    	return view('public.home.books');
+    	return view('public.home.books', compact('books'));
     }
 
     public function show($book)
     {
-    	return view('public.home.book-show');
+        $books = $this->repository->find($book);
+
+    	return view('public.home.book-show', compact('books'));
     }
 }
