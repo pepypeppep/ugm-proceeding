@@ -10,7 +10,7 @@
 		</div>
 		<div class="col-sm-6 pt-5">
 			<h5>{{ $books->title }}</h5>
-			<p class="text-justify">{{ $books->description }}</p>
+			<p class="text-justify">{!! $books->description !!}</p>
 			
 		</div>
 		<div class="col-lg-3 pt-5 py-3 d-none d-lg-block">

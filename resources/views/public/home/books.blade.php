@@ -68,7 +68,7 @@
 				<div class="card-deck">
 				@foreach($books->data as $book)
 					<div class="card book">
-						<a href="{{ route('public.book.show', [$book['id']]) }}"><img class="card-img-top" src="{{ $book['cover'] }}" alt="{{ $book['title'] }}" title="{{ $book['title'] }}"></a>
+						<a href="{{ route('public.book.show', [$book['id']]) }}"><img class="card-img-top" src="../img/books/fig4.jpg" alt="{{ $book['title'] }}" title="{{ $book['title'] }}"></a>
 					</div>
 				@endforeach
 				</div>
