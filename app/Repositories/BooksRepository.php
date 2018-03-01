@@ -47,4 +47,16 @@ class BooksRepository extends GuzzleService
 
         return $this;
     }
+
+    public function storeFile($book, $file)
+    {
+        $this->multipart= array([
+            'name' => 'file',
+            'contents' => fopen($file, 'r'),
+        ]);
+
+        $this->getResponse('POST', $this->uris['base']."/$book/file");
+
+        return $this;
+    }
 }

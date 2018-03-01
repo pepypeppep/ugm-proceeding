@@ -32,6 +32,21 @@
           {!! $book->description !!}
         @endempty
       </div>
+      <div class="mb-4">
+        <h4 class="text-primary">File</h4>
+        @empty ($book->data['file'])
+          <span class="mb-2">The file hasn't uploaded</span><br>
+        @else
+          <a class="btn btn-success" href="{{ $book->download }}">Download file</a>
+        @endempty
+        <label class="btn btn-primary btn-file m-0">
+          Upload file
+          <form id="changeCoverForm" method="POST" action="{{ route('book.store.file', $book->id) }}" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <input type="file" name="file" style="display: none;" onchange="this.form.submit()">
+          </form>
+        </label>
+      </div>
     </div>
   </div>
 </div>
