@@ -11,7 +11,7 @@
 		</div>
 		<div class="col-sm-9 pt-5">
 			<h5>{{ $proceeding->name }}</h5>
-			<p class="text-justify">{{ $proceeding->introduction }}</p>
+			{!! $proceeding->introduction !!}
 			<table class="small">
 				<tr>
 					<td><strong>Date of conference</strong></td>

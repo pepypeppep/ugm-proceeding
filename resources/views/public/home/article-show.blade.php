@@ -17,8 +17,7 @@
           <small><sup>{{ $author['id'] }}</sup>{{ collect($author['affiliation'])->implode('name', '') }}</small><br>
         @endforeach
         <h5 class="pt-3">Abstract</h5>
-        <p>{{ $article->data['abstract'] }}
-        </p>
+        {!! $article->data['abstract'] !!}
         <h5>Keywords</h5>
         <p>{{ $article->keywords->implode(', ') }}</p>
       </div>
