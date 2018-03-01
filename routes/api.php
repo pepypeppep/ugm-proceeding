@@ -45,6 +45,7 @@ Route::group(['prefix' => 'books'], function(){
 		Route::post('/', 'Api\BookController@store');
 		Route::post('/{book}/author', 'Api\BookController@storeAuthor');
 		Route::post('/{book}/file', 'Api\BookController@storeFile');
+		Route::post('/{book}/cover', 'Api\BookController@storeCover');
 	});
 });
 
