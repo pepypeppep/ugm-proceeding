@@ -25,8 +25,8 @@ class BookController extends Controller
 
     public function show($book)
     {
-        $books = $this->repository->find($book);
+        $book = $this->repository->find($book);
 
-    	return view('public.home.book-show', compact('books'));
+    	return view('public.home.book-show', compact('book'));
     }
 }
