@@ -20,9 +20,9 @@
 		<li class="nav-item">
 			<a class="nav-link" href="{{ route('public.proceeding.index') }}">Proceedings</a>
 		</li>
-		<li class="nav-item">
+		{{-- <li class="nav-item">
 			<a class="nav-link" href="#">Articles</a>
-		</li>
+		</li> --}}
 		<li class="nav-item">
 			<a class="nav-link" href="{{ route('public.book.index') }}">Books</a>
 		</li>
