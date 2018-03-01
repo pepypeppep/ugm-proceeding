@@ -3,7 +3,7 @@
     <div class="col-md-3 mb-4">
       <div class="sticky-top sticky-nav">
         <h4 class="text-primary">Cover image</h4>
-        @if (empty($book->data['front_cover']))
+        @if (empty($book->data['cover']))
           <div class="text-center text-muted py-5">
             <i class="fa fa-camera fa-4x"></i> <br>
             <span>No image available</span>
@@ -13,10 +13,10 @@
         @endif
         <label class="btn btn-primary btn-block btn-file">
           Upload cover 
-         {{--  <form id="changeCoverForm" method="POST" action="{{ route('book.cover', [$book->id]) }}" enctype="multipart/form-data">
+          <form id="changeCoverForm" method="POST" action="{{ route('book.store.cover', [$book->id]) }}" enctype="multipart/form-data">
             {{ csrf_field() }}
-            <input type="file" name="front_cover" style="display: none;" onchange="this.form.submit()">
-          </form> --}}
+            <input type="file" name="cover" style="display: none;" onchange="this.form.submit()">
+          </form>
         </label>
       </div>
     </div>
