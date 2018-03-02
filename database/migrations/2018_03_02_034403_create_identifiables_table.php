@@ -17,7 +17,7 @@ class CreateIdentifiablesTable extends Migration
             $table->increments('id');
             $table->integer('identifier_id')->unsigned();
             $table->integer('identifiable_id')->unsigned();
-            $table->integer('identifiable_type')->unsigned();
+            $table->string('identifiable_type', 30);
             $table->string('code', 50)->nullable();
             $table->timestamps();
         });
