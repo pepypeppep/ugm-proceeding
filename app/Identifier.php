@@ -20,4 +20,22 @@ class Identifier extends Model
     public function books(){
         return $this->morphedByMany('App\Book', 'identifiable');
     }
+
+    /*CUSTOM METHOD*/
+    public function getIdentifierId($model = null)
+    {
+        $method = 'get'.$model.'IdentifierName';
+
+        return $this->whereIn('type', $this->{$method}())->get()->pluck('id');
+    }
+
+    public function getProceedingIdentifierName(){
+        return [
+            'online_issn',
+            'print_issn',
+            'online_isbn',
+            'print_isbn',
+        ];
+    }
+        
 }
