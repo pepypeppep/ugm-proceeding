@@ -33,7 +33,7 @@ class Proceeding extends Model
     }
 
     public function identifiers(){
-        return $this->morphToMany('App\Identifier', 'identifiable');
+        return $this->morphToMany('App\Identifier', 'identifiable')->withPivot(['code']);
     }
 
     /*
@@ -46,37 +46,6 @@ class Proceeding extends Model
      */
     public function getStatusAttribute(){
         return empty($this->published_at) ? 'draft' : 'published';
-    }
-
-    /**
-     * Generate the identifiers
-     * @return array 
-     */
-    public function getIdentifiersAttribute(){
-        $identifiers = collect(array());
-
-        if (!empty($this->issn)) {
-            $identifiers->push([
-                'type' => 'issn',
-                'id' => $this->issn,
-            ]);
-        }
-
-        if (!empty($this->print_isbn)) {
-            $identifiers->push([
-                'type' => 'print_isbn',
-                'id' => $this->print_isbn,
-            ]);
-        }
-
-        if (!empty($this->online_isbn)) {
-            $identifiers->push([
-                'type' => 'online_isbn',
-                'id' => $this->online_isbn,
-            ]);
-        }
-
-        return $identifiers;
     }
 
     /**

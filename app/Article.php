@@ -41,23 +41,6 @@ class Article extends Model
         return explode(',', $this->keywords);
     }
     
-    /**
-     * get article's identifiers. Merged from proceeding's and article's identifier
-     * @return string ISSN, ISBN, DOI
-     */
-    public function getIdentifiers(){
-        $articleIdentifiers = $this->article_identifier()->get(['type', 'code'])->mapWithKeys(function ($item)
-        {
-           return [[
-            'type' => $item['type'],
-            'id' => $item['code'],
-           ],];
-        });
-        
-        $identifiers = collect([$this->proceeding->identifiers, $articleIdentifiers])->collapse();
-
-        return $identifiers;
-    }
      /**
       * Generate file link and type
       * @return array PDF|DOAJ|SCOPUS
