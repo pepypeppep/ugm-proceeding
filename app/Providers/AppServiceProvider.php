@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Article;
+use App\Book;
+use App\Observers\ArticleObserver;
+use App\Observers\BookObserver;
 use App\Observers\ProceedingObserver;
 use App\Proceeding;
 use App\Repositories\ProceedingsRepository;
@@ -22,11 +26,14 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('public.layouts.latest-proceeding', function ($view) {
             $repository = new ProceedingsRepository;
+            
             $view->with('latestProceedings', $repository->get()->data->take(4));
         });
 
-        /*OBSERVER*/
+        /*OBSERVERS*/
         Proceeding::observe(ProceedingObserver::class);
+        Article::observe(ArticleObserver::class);
+        Book::observe(BookObserver::class);
     }
 
     /**
