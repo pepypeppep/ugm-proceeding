@@ -30,7 +30,7 @@ class Article extends Model
     }
 
     public function identifiers(){
-        return $this->morphToMany('App\Identifier', 'identifiable');
+        return $this->morphToMany('App\Identifier', 'identifiable')->withPivot('code');
     }
 
     /*
