@@ -22,6 +22,11 @@ class Identifier extends Model
     }
 
     /*CUSTOM METHOD*/
+    /**
+     * Get identifier related model ID
+     * @param  string $model Eloquent model name
+     * @return array array of id
+     */
     public function getIdentifierId($model = null)
     {
         $method = 'get'.$model.'IdentifierName';
@@ -30,6 +35,21 @@ class Identifier extends Model
     }
 
     public function getProceedingIdentifierName(){
+        return [
+            'online_issn',
+            'print_issn',
+            'online_isbn',
+            'print_isbn',
+        ];
+    }
+
+    public function getArticleIdentifierName(){
+        return [
+            'doi',
+        ];
+    }
+
+    public function getBookIdentifierName(){
         return [
             'online_issn',
             'print_issn',
