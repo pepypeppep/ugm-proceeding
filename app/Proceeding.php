@@ -32,6 +32,10 @@ class Proceeding extends Model
         return $this->belongsToMany('App\User', 'proceeding_user', 'proceeding_id', 'user_id');
     }
 
+    public function identifiers(){
+        return $this->morphToMany('App\Identifier', 'identifiable');
+    }
+
     /*
     * CUSTOM ATTRIBUTE SECTION
     */

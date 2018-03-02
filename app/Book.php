@@ -18,6 +18,10 @@ class Book extends Model
         return $this->belongsToMany('App\User');
     }
 
+    public function identifiers(){
+        return $this->morphToMany('App\Identifier', 'identifiable');
+    }
+
     /*CUSTOM METHOD*/
 
     /**

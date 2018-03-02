@@ -21,16 +21,16 @@ class Article extends Model
     	return $this->belongsTo('App\Proceeding');
     }
 
-    public function article_identifier(){
-    	return $this->hasMany('App\ArticleIdentifier');
-    }
-
     public function author(){
     	return $this->hasMany('App\Author');
     }
 
     public function indexation(){
         return $this->hasOne('App\Indexation');
+    }
+
+    public function identifiers(){
+        return $this->morphToMany('App\Identifier', 'identifiable');
     }
 
     /*
