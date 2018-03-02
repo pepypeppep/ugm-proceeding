@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\ProceedingObserver;
+use App\Proceeding;
 use App\Repositories\ProceedingsRepository;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
@@ -22,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
             $repository = new ProceedingsRepository;
             $view->with('latestProceedings', $repository->get()->data->take(4));
         });
+
+        /*OBSERVER*/
+        Proceeding::observe(ProceedingObserver::class);
     }
 
     /**
