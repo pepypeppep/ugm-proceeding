@@ -4,6 +4,7 @@ namespace App\Repositories\Api;
 
 use App\Identifier;
 use App\Proceeding;
+use App\Repositories\Traits\HasUpdateIdentifier;
 use App\Repositories\Traits\ProceedingFilter;
 
 /**
@@ -15,7 +16,7 @@ class ProceedingsRepository extends Repository
 	* Use custom filter
 	* Usually for realtion query that can't be specified directily on search field
 	*/
-	use ProceedingFilter;
+	use ProceedingFilter, HasUpdateIdentifier;
 
 	/**
 	* Search field attribute
@@ -62,24 +63,6 @@ class ProceedingsRepository extends Repository
 	public function updateData($data)
 	{
 		return $this->model->update($data);
-	}
-
-	public function updateIdentifiers($identifiers)
-	{
-		foreach ($identifiers as $item) {
-			$identifier = $this->getIdentifierIdByType($item['type']);
-
-			$this->model->identifiers()->updateExistingPivot($identifier, [
-				'code' => $item['code'],
-			]);
-		}
-
-		return $this->model->identifiers;
-	}
-
-	public function getIdentifierIdByType($type)
-	{
-		return \App\Identifier::where('type', $type)->first()->id;
 	}
 
 }
