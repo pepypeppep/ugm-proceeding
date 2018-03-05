@@ -4,8 +4,8 @@ namespace App\Repositories\Api;
 
 use App\Identifier;
 use App\Proceeding;
-use App\Repositories\Traits\HasUpdateIdentifier;
-use App\Repositories\Traits\ProceedingFilter;
+use App\Repositories\Api\Traits\HasUpdateIdentifier;
+use App\Repositories\Api\Traits\ProceedingFilter;
 
 /**
 * Proceeding repository

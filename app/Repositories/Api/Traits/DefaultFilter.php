@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Traits;
+namespace App\Repositories\Api\Traits;
 
 /**
 * Default filtering and sorting method

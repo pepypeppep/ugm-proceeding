@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Api;
 
-use App\Repositories\Traits\DefaultFilter;
+use App\Repositories\Api\Traits\DefaultFilter;
 
 /**
 * Repository abstract class

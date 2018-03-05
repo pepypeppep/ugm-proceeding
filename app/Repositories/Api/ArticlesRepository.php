@@ -3,8 +3,8 @@
 namespace App\Repositories\Api;
 
 use App\Article;
-use App\Repositories\Traits\ArticleFilter;
-use App\Repositories\Traits\HasUpdateIdentifier;
+use App\Repositories\Api\Traits\ArticleFilter;
+use App\Repositories\Api\Traits\HasUpdateIdentifier;
 
 /**
 * Articles repository
