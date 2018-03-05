@@ -133,4 +133,11 @@ class ProceedingsRepository extends GuzzleService
 
         return $checkLists->search(false) === false;
     }
+
+    public function getIdentifierName($type)
+    {
+        $name = explode("_", $type);
+
+        return ucfirst($name[0]).' '.strtoupper($name[1]);
+    }
 }
