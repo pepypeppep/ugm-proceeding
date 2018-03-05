@@ -98,7 +98,7 @@
             <div class="pl-3">
               <h4 class="m-0">Identifiers</h4>
               @foreach ($proceeding->identifiers as $identifier)
-              <span>{{ $identifier['type'] }}: {{ $identifier['id'] }}</span>
+              <span>{{ $identifier['type'] }}: {{ $identifier['code'] }}</span>
               @if (!$loop->last)
               <br>
               @endif

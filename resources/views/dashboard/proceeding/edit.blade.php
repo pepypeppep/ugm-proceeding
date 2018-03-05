@@ -84,30 +84,17 @@
 							<div class="form-separator mt-5">
 								<h5>Identifiers</h5>
 							</div>
-							{{-- FIELD ONLINE ISBN IDENTIFIER --}}
-							<div class="form-group row">
-							  <div class="col-sm-6">
-							    <label for="isbn">Online ISBN</label>
-							    <input name="online_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('online_isbn')) is-invalid @endif" id="onlineIsbn" value="{{ $isbn['online'] }}">
-							    <div class="invalid-feedback">{{ $errors->first('online_isbn') }}</div>
-							  </div>
-							</div>
-							{{-- FIELD PRINT ISBN IDENTIFIER --}}
-							<div class="form-group row">
-							  <div class="col-sm-6">
-							    <label for="isbn">Print ISBN</label>
-							    <input name="print_isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('print_isbn')) is-invalid @endif" id="printIsbn" value="{{ $isbn['print'] }}">
-							    <div class="invalid-feedback">{{ $errors->first('print_isbn') }}</div>
-							  </div>
-							</div>
-							{{-- FIELD ISSN IDENTIFIER --}}
-							<div class="form-group row">
-							  <div class="col-sm-6">
-							    <label for="issn">ISSN</label>
-							    <input name="issn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('issn')) is-invalid @endif" id="issn" value="{{ $issn }}">
-							    <div class="invalid-feedback">{{ $errors->first('issn') }}</div>
-							  </div>
-							</div>
+							{{-- FIELD IDENTIFIER --}}
+							@foreach ($proceeding->identifiers as $identifier)
+								<div class="form-group row">
+								  <div class="col-sm-6">
+								    <label for="isbn">{{ $proceeding->getIdentifierName($identifier['type']) }}</label>
+								    <input type="hidden" name="identifiers[{{ $loop->index }}][type]" value="{{ $identifier['type'] }}">
+								    <input name="identifiers[{{ $loop->index }}][code]" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('identifiers.'.$loop->index.'.code')) is-invalid @endif" id="onlineIsbn" value="{{ $identifier['code'] }}">
+								    <div class="invalid-feedback">Please enter the correct {{ $proceeding->getIdentifierName($identifier['type']) }}</div>
+								  </div>
+								</div>
+							@endforeach
 							{{-- SUBMIT --}}
 							<div class="form-group row mt-5">
 							  <div class="col-sm-12 text-right">

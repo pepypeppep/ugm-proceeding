@@ -50,11 +50,8 @@ class ProceedingController extends Controller
     public function edit($proceeding)
     {
         $proceeding = $this->repository->find($proceeding);
-        $issn = optional($proceeding->identifiers->where('type', 'issn')->first())['id'];
-        $isbn['online'] = optional($proceeding->identifiers->where('type', 'online_isbn')->first())['id'];
-        $isbn['print'] = optional($proceeding->identifiers->where('type', 'print_isbn')->first())['id'];
 
-        return view('dashboard.proceeding.edit', compact('proceeding', 'isbn', 'issn'));
+        return view('dashboard.proceeding.edit', compact('proceeding'));
     }
 
     public function update($proceeding)
