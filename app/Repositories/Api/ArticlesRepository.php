@@ -4,13 +4,14 @@ namespace App\Repositories\Api;
 
 use App\Article;
 use App\Repositories\Traits\ArticleFilter;
+use App\Repositories\Traits\HasUpdateIdentifier;
 
 /**
 * Articles repository
 */
 class ArticlesRepository extends Repository
 {
-	use ArticleFilter;
+	use ArticleFilter, HasUpdateIdentifier;
 
 	protected $fields = [
 		'keyword' => 'like',
@@ -74,12 +75,16 @@ class ArticlesRepository extends Repository
 			]);
 		}
 
+		$this->setModel($article);
+
 		// create identifiers based on doi
 		if (!empty($request->doi)) {
-			$article->article_identifier()->create([
+			$identifiers = array([
 				'type' => 'doi',
 				'code' => $request->doi,
 			]);
+
+			$this->updateIdentifiers($identifiers);
 		}
 
 		return $article->load('author');

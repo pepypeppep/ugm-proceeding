@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Identifiers as IdentifiersResource;
 use App\Http\Resources\Proceedings as ProceedingsResource;
 use App\Http\Resources\ProceedingsCollection;
 use App\Proceeding;
 use App\Repositories\Api\ProceedingsRepository as Repository;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ProceedingController extends Controller
 {
@@ -201,9 +203,13 @@ class ProceedingController extends Controller
      *              @SWG\Property(property="conference_start", type="date", example="2017-10-26"),
      *              @SWG\Property(property="conference_end", type="date", example="2017-10-27"),
      *              @SWG\Property(property="introduction", type="date", example="How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."),
-     *              @SWG\Property(property="print_isbn", type="integer", example="9783161484100"),
-     *              @SWG\Property(property="online_isbn", type="integer", example="9783161484100"),
-     *              @SWG\Property(property="issn", type="integer", example="20149360"),
+     *              @SWG\Property(property="identifiers", type="array",
+     *                  @SWG\Items(
+     *                      type="object",
+     *                      @SWG\Property(property="type", type="string", example="online_isbn"),
+     *                      @SWG\Property(property="code", type="string", example="123344213123"),
+     *                  )
+     *              ),
      *          ),      
      *      ),
      *      @SWG\Response(
@@ -213,7 +219,7 @@ class ProceedingController extends Controller
      *      security={{"Bearer":{}}}
      * )
      */
-    public function update(Proceeding $proceeding)
+    public function update(Proceeding $proceeding, Repository $repository)
     {
         $data = request()->validate([
             'name' => 'required|string',
@@ -222,12 +228,16 @@ class ProceedingController extends Controller
             'conference_start' => 'required|date',
             'conference_end' => 'required|date',
             'introduction' => 'nullable|string|max:2500',
-            'print_isbn' => 'nullable|digits:13',
-            'online_isbn' => 'nullable|digits:13',
-            'issn' => 'nullable|digits:8',
+            'identifiers' => 'nullable|array',
+            'identifiers.*.type' => [
+                'string',
+                'nullable',
+                Rule::in($proceeding->identifiers->first()->getProceedingIdentifierName())
+            ],
+            'identifiers.*.code' => 'string|nullable',
         ]);
 
-        $proceeding->update($data);
+        $proceeding = $repository->update(collect($data), $proceeding);
 
         return new ProceedingsResource($proceeding);
     }

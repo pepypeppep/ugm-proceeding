@@ -34,9 +34,9 @@ class Repository
 		$this->fields = collect($fields);
 	}
 
-	public function setModel($model)
+	public function setModel($model, $property = 'model')
 	{
-		$this->model = $model;
+		$this->$property = $model;
 
 		return $this;
 	}

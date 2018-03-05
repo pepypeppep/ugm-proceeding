@@ -22,7 +22,7 @@ class Articles extends Resource
             'date_added' => $this->created_at->format('j F Y'),
             'downloads' => $this->downloads,
             'end_page' => $this->end_page,
-            'identifiers' => $this->getIdentifiers(),
+            'identifiers' => Identifiers::collection($this->identifiers),
             'indexed' => $this->indexed,
             'file' => $this->getFile(),
             'keywords' => $this->setKeywords(),
