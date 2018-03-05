@@ -37,19 +37,16 @@
         <div class="mb-3">
           <h4 class="text-primary">Article info</h4>
           <div class="row">
-            @foreach($article->data['identifiers'] as $identifiers)
+            @foreach($article->data['identifiers'] as $identifier)
               <div class="col-sm-6 col-md-2">
                 <table>
                   <tr>
                     <th>
-                      @if($identifiers['type']=='print_isbn'){{ 'PRINT ISBN' }}
-                      @elseif($identifiers['type']=='online_isbn'){{ 'ONLINE ISBN' }}
-                      @else{{ 'DOI' }}
-                      @endif
+                      {{ $article->getIdentifierName($identifier['type']) }}
                     </th>
                   </tr>
                   <tr>
-                    <td>{{ $identifiers['id'] }}</td>
+                    <td>{{ $identifier['code'] }}</td>
                   </tr>
                 </table>
               </div>
