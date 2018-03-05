@@ -6,7 +6,7 @@
 <div class="container pt-5 py-3">
 	<section class="row">
 		<div class="col-sm-3 pt-5 d-none d-lg-block">
-			<img class="card-img-top" src="{{ $book->cover }}" alt="{{ $book->title }}" title="Proceeding of the 2nd International Conference on South East Asia Studies">
+			<img class="card-img-top" src="{{ $book->cover }}" alt="{{ $book->title }}" title="{{ $book->title }}">
 		</div>
 		<div class="col-sm-6 pt-5">
 			<h5>{{ $book->title }}</h5>

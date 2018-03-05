@@ -21,16 +21,16 @@ class Article extends Model
     	return $this->belongsTo('App\Proceeding');
     }
 
-    public function article_identifier(){
-    	return $this->hasMany('App\ArticleIdentifier');
-    }
-
     public function author(){
     	return $this->hasMany('App\Author');
     }
 
     public function indexation(){
         return $this->hasOne('App\Indexation');
+    }
+
+    public function identifiers(){
+        return $this->morphToMany('App\Identifier', 'identifiable')->withPivot('code');
     }
 
     /*
@@ -41,23 +41,6 @@ class Article extends Model
         return explode(',', $this->keywords);
     }
     
-    /**
-     * get article's identifiers. Merged from proceeding's and article's identifier
-     * @return string ISSN, ISBN, DOI
-     */
-    public function getIdentifiers(){
-        $articleIdentifiers = $this->article_identifier()->get(['type', 'code'])->mapWithKeys(function ($item)
-        {
-           return [[
-            'type' => $item['type'],
-            'id' => $item['code'],
-           ],];
-        });
-        
-        $identifiers = collect([$this->proceeding->identifiers, $articleIdentifiers])->collapse();
-
-        return $identifiers;
-    }
      /**
       * Generate file link and type
       * @return array PDF|DOAJ|SCOPUS

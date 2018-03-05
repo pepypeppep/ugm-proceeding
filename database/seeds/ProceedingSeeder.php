@@ -25,9 +25,6 @@ class ProceedingSeeder extends Seeder
 	        		$a->author()
 	        			->createMany(factory(App\Author::class, rand(1, 5))->make()->toArray());
 
-        			$a->article_identifier()
-	        			->save(factory(App\ArticleIdentifier::class)->make());
-
                     if (collect([false, true, false])->random()) {
                         $a->indexation()
                         ->save(factory(App\Indexation::class)->make());

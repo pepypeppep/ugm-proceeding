@@ -52,7 +52,7 @@ class Proceedings extends Resource
             'front_cover' => $this->front_cover_url,
             'back_cover' => $this->back_cover_url,
             'status' => $this->status,
-            'identifiers' => $this->identifiers,
+            'identifiers' => Identifiers::collection($this->identifiers),
             'location' => $this->location,
             'organizer' => $this->organizer,
             'subjects' => Subjects::collection($this->subject),

@@ -11,7 +11,7 @@
 		</div>
 		<div class="col-sm-9 pt-5">
 			<h5>{{ $proceeding->name }}</h5>
-			<p class="text-justify">{{ $proceeding->introduction }}</p>
+			{!! $proceeding->introduction !!}
 			<table class="small">
 				<tr>
 					<td><strong>Date of conference</strong></td>
@@ -84,31 +84,5 @@
 	</div>
 	@endforeach
 </section>
-<!--bookshelf-->
-<div class="jumbotron-book">
-	<section class="container p-5">
-		<div class="row">
-			<div class="col-sm-4 pb-5">
-				<h4 class="text-uppercase">Latest proceedings</h4>
-				<p>View the latest published proceedings from our international and national conferences.</p>
-				<a href="{{ route('public.proceeding.index') }}">
-					<button type="button m-sm-0" class="btn btn-none-primary">View all
-						<i class="fa fa-chevron-circle-right pl-3"></i>
-					</button>
-				</a>
-			</div>
-			<div class="container col-sm-8">
-				<div class="card-deck">
-					{{-- @foreach($proceedings->data->take(4) as $proceeding)
-					<div class="card">
-						<a href="./docs/201707.html">
-							<img class="card-img-top" src="{{ $proceeding['front_cover'] }}" alt="{{ $proceeding['alias'] }}" title="{{ $proceeding['name'] }}">
-						</a>
-					</div>
-					@endforeach --}}
-				</div>
-			</div>
-		</div>
-	</section>
-</div>
+@include('public.layouts.latest-proceeding')
 @endsection
