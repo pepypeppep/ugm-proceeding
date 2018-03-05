@@ -29,7 +29,7 @@ class Books extends Resource
             'publisher' => $this->publisher,
             'file' => $this->when(optional(auth('api')->user())->isSuperAdmin(), $this->file),
             'authors' => BookAuthors::collection($this->author),
-            'identifiers' => $this->identifiers,
+            'identifiers' => Identifiers::collection($this->identifiers),
             'download' => $this->getDownloadLink(),
             'created_at' => $this->created_at->toDateTimeString(),
             'updated_at' => $this->updated_at->toDateTimeString(),
