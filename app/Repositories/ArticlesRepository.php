@@ -2,11 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\HasIdentifiers;
 use App\Services\GuzzleService;
 
 
 class ArticlesRepository extends GuzzleService
 {	
+	use HasIdentifiers;
+	
 	protected $uris = [
 		'base' => 'articles',
 	];

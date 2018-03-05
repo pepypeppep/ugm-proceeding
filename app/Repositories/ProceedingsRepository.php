@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\HasIdentifiers;
 use App\Services\GuzzleService;
 
 /**
@@ -9,6 +10,7 @@ use App\Services\GuzzleService;
 */
 class ProceedingsRepository extends GuzzleService
 {
+    use HasIdentifiers;
 	
 	protected $uris = [
 		'base' => 'proceedings',
@@ -144,10 +146,4 @@ class ProceedingsRepository extends GuzzleService
         return $status->search(true) !== false;
     }
 
-    public function getIdentifierName($type)
-    {
-        $name = explode("_", $type);
-
-        return ucfirst($name[0]).' '.strtoupper($name[1]);
-    }
 }
