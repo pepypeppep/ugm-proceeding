@@ -125,13 +125,23 @@ class ProceedingsRepository extends GuzzleService
     {
         $checkLists = collect([
             !empty($proceeding->data['introduction']),
-            $proceeding->identifiers->isNotEmpty(),
+            $this->checkIdentifiers($proceeding->identifiers),
             $proceeding->subjects->isNotEmpty(),
             !empty($proceeding->data['front_cover']),
             $proceeding->articles->isNotEmpty(),
         ]);
 
         return $checkLists->search(false) === false;
+    }
+
+    public function checkIdentifiers($identifiers)
+    {
+        $status = $identifiers->map(function ($item)
+        {
+            return !empty($item['code']);
+        });
+
+        return $status->search(true) !== false;
     }
 
     public function getIdentifierName($type)

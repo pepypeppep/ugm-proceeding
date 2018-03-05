@@ -87,24 +87,26 @@
       <div class="row bordered-bottom justify-content-between py-4">
         <div class="col-md-10">
           <div class="d-flex align-items-start">
-            @empty ($proceeding->data['identifiers'])
-            <i class="fas fa-times-circle fa-2x fa-fw text-danger"></i>
-            <div class="pl-3">
-              <h4 class="m-0">Identifiers</h4>
-              <span>We can find any identifiers on this proceeding. Please add some identifiers by clicking the next button</span>
-            </div>
+            @if ($proceeding->checkIdentifiers($proceeding->identifiers))
+              <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
+              <div class="pl-3">
+                <h4 class="m-0">Identifiers</h4>
+                @foreach ($proceeding->identifiers as $identifier)
+                  @isset ($identifier['code'])
+                    <span>{{ $proceeding->getIdentifierName($identifier['type']) }}: {{ $identifier['code'] }}</span>
+                  @endisset
+                  @if (!$loop->last)
+                    <br>
+                  @endif
+                @endforeach
+              </div>
             @else
-            <i class="fas fa-check-circle fa-2x fa-fw text-primary"></i>
-            <div class="pl-3">
-              <h4 class="m-0">Identifiers</h4>
-              @foreach ($proceeding->identifiers as $identifier)
-              <span>{{ $identifier['type'] }}: {{ $identifier['code'] }}</span>
-              @if (!$loop->last)
-              <br>
-              @endif
-              @endforeach
-            </div>
-            @endempty
+              <i class="fas fa-times-circle fa-2x fa-fw text-danger"></i>
+              <div class="pl-3">
+                <h4 class="m-0">Identifiers</h4>
+                <span>We can find any identifiers on this proceeding. Please add some identifiers by clicking the next button</span>
+              </div>
+            @endif
           </div>
         </div>
         <div class="col-md-1 pt-md-0 pt-3">
