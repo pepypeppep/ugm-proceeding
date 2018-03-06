@@ -23,6 +23,7 @@ class ProceedingController extends Controller
 
     	return view('dashboard.proceeding.index', compact('proceedings'));
     }
+
     public function show($proceeding, SubjectsRepository $subjects)
     {
         $proceeding = $this->repository->find($proceeding);
@@ -49,10 +50,8 @@ class ProceedingController extends Controller
     public function edit($proceeding)
     {
         $proceeding = $this->repository->find($proceeding);
-        $issn = optional($proceeding->identifiers->where('type', 'issn')->first())['id'];
-        $isbn = optional($proceeding->identifiers->where('type', 'isbn')->first())['id'];
 
-        return view('dashboard.proceeding.edit', compact('proceeding', 'isbn', 'issn'));
+        return view('dashboard.proceeding.edit', compact('proceeding'));
     }
 
     public function update($proceeding)
@@ -74,5 +73,12 @@ class ProceedingController extends Controller
         $proceeding = $this->repository->updateCover(request()->file('front_cover'), $proceeding);
 
         return redirect(route('proceeding.show', [$proceeding->id, 'tab' => 'details']))->with('success', 'Cover has been updated!');
+    }
+
+    public function publish()
+    {
+        $proceeding = $this->repository->publish(request()->all());
+
+        return redirect(route('proceeding.show', $proceeding->id))->with('success', 'Proceeding has sucessfuly published!');
     }
 }

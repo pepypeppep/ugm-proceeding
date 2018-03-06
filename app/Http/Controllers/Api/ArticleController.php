@@ -222,4 +222,54 @@ class ArticleController extends Controller
         return new Articles($repository->create($request));
     }
 
+    /**
+     * @SWG\Put(
+     *      path="/articles/{articleId}",
+     *      tags={"articles"},
+     *      operationId="updateArticle",
+     *      summary="Update exsisting article",
+     *      produces={"application/json"},
+     *      consumes={"application/json"},
+     *      @SWG\Parameter(
+     *         description="Article's id",
+     *         in="path",
+     *         name="articleId",
+     *         required=true,
+     *         type="integer"
+     *     ),
+     *     @SWG\Parameter(
+     *          name="body",
+     *          in="body",
+     *          description="Author object that needs to be updated",
+     *          required=true,
+     *          @SWG\Schema(
+     *              @SWG\Property(property="abstract", type="string", example="Lorem ipsum dolores amet"),
+     *              @SWG\Property(property="title", type="string", example="Lorem ipsum dolores amet"),
+     *              @SWG\Property(property="start_page", type="integer", example=2),
+     *              @SWG\Property(property="end_page", type="integer", example=2),
+     *              @SWG\Property(property="keywords", type="string", example="Lorem, Ipsum, Amet"),
+     *              @SWG\Property(property="doi", type="string", example="doi.org/10.1037/arc0000014"),
+     *          ),      
+     *      ),
+     *      @SWG\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *      ),
+     *      security={{"Bearer":{}}}
+     * )
+     */
+    public function update(Article $article, Repository $repository)
+    {
+        $request = request()->validate([
+            'abstract' => 'required|string',
+            'doi' => 'required|string',
+            'end_page' => 'required|integer',
+            'keywords' => 'required|string',
+            'start_page' => 'required|integer',
+            'title' => 'required|string',
+        ]);
+
+        return new Articles($repository->update($article, $request));
+    }
+
 }

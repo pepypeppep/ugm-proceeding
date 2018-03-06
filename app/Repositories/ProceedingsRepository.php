@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\HasIdentifiers;
 use App\Services\GuzzleService;
 
 /**
@@ -9,6 +10,7 @@ use App\Services\GuzzleService;
 */
 class ProceedingsRepository extends GuzzleService
 {
+    use HasIdentifiers;
 	
 	protected $uris = [
 		'base' => 'proceedings',
@@ -100,4 +102,48 @@ class ProceedingsRepository extends GuzzleService
 
 		return $this;
 	}
+
+    public function publish($json)
+    {
+        $this->json = $json;
+
+        $this->getResponse('POST', $this->uris['base']."/publish");
+
+        return $this;
+    }
+
+    /*CUSTOM METHOD*/
+
+    public function getStatusColor($status)
+    {
+        if ($status === 'published') {
+            return 'primary';
+        }
+
+        return 'secondary';
+    }
+
+    public function readyToPublish($proceeding)
+    {
+        $checkLists = collect([
+            !empty($proceeding->data['introduction']),
+            $this->checkIdentifiers($proceeding->identifiers),
+            $proceeding->subjects->isNotEmpty(),
+            !empty($proceeding->data['front_cover']),
+            $proceeding->articles->isNotEmpty(),
+        ]);
+
+        return $checkLists->search(false) === false;
+    }
+
+    public function checkIdentifiers($identifiers)
+    {
+        $status = $identifiers->map(function ($item)
+        {
+            return !empty($item['code']);
+        });
+
+        return $status->search(true) !== false;
+    }
+
 }

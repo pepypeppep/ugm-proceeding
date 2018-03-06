@@ -10,7 +10,7 @@ class Proceeding extends Model
 {
 	use SoftDeletes;
 
-    protected $dates = ['deleted_at', 'conference_start', 'conference_end'];
+    protected $dates = ['deleted_at', 'conference_start', 'conference_end', 'published_at'];
     protected $guarded = ['id'];
 
     /**
@@ -32,6 +32,10 @@ class Proceeding extends Model
         return $this->belongsToMany('App\User', 'proceeding_user', 'proceeding_id', 'user_id');
     }
 
+    public function identifiers(){
+        return $this->morphToMany('App\Identifier', 'identifiable')->withPivot(['code']);
+    }
+
     /*
     * CUSTOM ATTRIBUTE SECTION
     */
@@ -42,30 +46,6 @@ class Proceeding extends Model
      */
     public function getStatusAttribute(){
         return empty($this->published_at) ? 'draft' : 'published';
-    }
-
-    /**
-     * Generate the identifiers
-     * @return array 
-     */
-    public function getIdentifiersAttribute(){
-        $identifiers = collect(array());
-
-        if (!empty($this->issn)) {
-            $identifiers->push([
-                'type' => 'issn',
-                'id' => $this->issn,
-            ]);
-        }
-
-        if (!empty($this->isbn)) {
-            $identifiers->push([
-                'type' => 'isbn',
-                'id' => $this->isbn,
-            ]);
-        }
-
-        return $identifiers;
     }
 
     /**

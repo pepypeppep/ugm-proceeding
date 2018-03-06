@@ -1,0 +1,277 @@
+/*!
+ * OnLi Project
+ * Copyright 2018 OnLi Team
+ * Added by Rafieiy (https://github.com/davieiycode)
+ */
+
+.btn-none-primary {
+  color: #007bff;
+  background-color: transparent;
+  background-image: none;
+  border-color: transparent;
+}
+
+.btn-none-primary:hover {
+  color: #fff;
+  background-color: #007bff;
+  border-color: transparent;
+}
+
+.btn-none-primary:focus, .btn-none-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.btn-none-primary.disabled, .btn-none-primary:disabled {
+  color: #007bff;
+  background-color: transparent;
+}
+
+.btn-none-primary:not([disabled]):not(.disabled):active, .btn-none-primary:not([disabled]):not(.disabled).active, .show>.btn-none-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.jumbotron-head {
+  padding-right: 0;
+  padding-left: 0;
+  background: url("../img/webkit/jumbohead.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  height: 100vh;
+}
+
+.jumbotron-book {
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #e9ecef;
+  border-radius: 0;
+}
+
+.jumbotron-gold {
+  padding-right: 0;
+  padding-left: 0;
+  background-color: rgb(253, 213, 95);
+  border-radius: 0;
+}
+
+.jumbotron-blue {
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #3b77a4;
+  border-radius: 0;
+}
+
+.bg-blue {
+  background-color: #3b77a4 !important;
+}
+
+a.bg-blue:focus, a.bg-blue:hover {
+  background-color: #dae0e5 !important;
+}
+
+.navbar-primary .navbar-brand {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-primary .navbar-brand:hover, .navbar-primary .navbar-brand:focus {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-primary .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-primary .navbar-nav .nav-link:hover, .navbar-primary .navbar-nav .nav-link:focus {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.navbar-primary .navbar-nav .nav-link.disabled {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.navbar-primary .navbar-nav .show > .nav-link,
+.navbar-primary .navbar-nav .active > .nav-link,
+.navbar-primary .navbar-nav .nav-link.show,
+.navbar-primary .navbar-nav .nav-link.active {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-primary .navbar-toggler {
+  color: rgba(0, 0, 0, 0.5);
+  border-color: transparent;
+}
+
+.navbar-primary .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.navbar-primary .navbar-text {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar-primary .navbar-text a {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar-primary .navbar-text a:hover, .navbar-primary .navbar-text a:focus {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.book {
+  border:none;
+}
+
+.book:hover {
+  position: relative;
+  transform: rotateY(30deg);
+  perspective: 100px;
+  border-left: lightslategrey solid 30px;
+  border-radius: 5px;
+  float: left;
+  transition: all 250ms ease-out;
+  box-shadow: 0px 2px 1px 20px rgba(black, 0.3);
+  margin-left: -10px;
+}
+
+.card-deck {
+  padding-bottom: 25px;
+}
+
+.form-control-dark {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #fff;
+  background-color: #6c757d;
+  background-clip: padding-box;
+  border: 1px solid #495057;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-dark::-ms-expand {
+  background-color: transparent;
+  border: 0;
+}
+
+.form-control-dark:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #ced4da;
+}
+
+.form-control-dark:disabled, .form-control-dark[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+select.form-control-dark:not([size]):not([multiple]) {
+  height: calc(2.25rem + 2px);
+}
+
+select.form-control-dark:focus::-ms-value {
+  color: #495057;
+  background-color: #fff;
+}
+
+.form-control-dark-file,
+.form-control-dark-range {
+  display: block;
+  width: 100%;
+}
+
+.col-form-label {
+  padding-top: calc(0.375rem + 1px);
+  padding-bottom: calc(0.375rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+.col-form-label-lg {
+  padding-top: calc(0.5rem + 1px);
+  padding-bottom: calc(0.5rem + 1px);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.col-form-label-sm {
+  padding-top: calc(0.25rem + 1px);
+  padding-bottom: calc(0.25rem + 1px);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.form-control-dark-plaintext {
+  display: block;
+  width: 100%;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+.form-control-dark-plaintext.form-control-dark-sm, .input-group-sm > .form-control-dark-plaintext.form-control-dark,
+.input-group-sm > .input-group-prepend > .form-control-dark-plaintext.input-group-text,
+.input-group-sm > .input-group-append > .form-control-dark-plaintext.input-group-text,
+.input-group-sm > .input-group-prepend > .form-control-dark-plaintext.btn,
+.input-group-sm > .input-group-append > .form-control-dark-plaintext.btn, .form-control-dark-plaintext.form-control-dark-lg, .input-group-lg > .form-control-plaintext.form-control,
+.input-group-lg > .input-group-prepend > .form-control-dark-plaintext.input-group-text,
+.input-group-lg > .input-group-append > .form-control-dark-plaintext.input-group-text,
+.input-group-lg > .input-group-prepend > .form-control-dark-plaintext.btn,
+.input-group-lg > .input-group-append > .form-control-dark-plaintext.btn {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-control-dark-sm, .input-group-sm > .form-control-dark,
+.input-group-sm > .input-group-prepend > .input-group-text,
+.input-group-sm > .input-group-append > .input-group-text,
+.input-group-sm > .input-group-prepend > .btn,
+.input-group-sm > .input-group-append > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+select.form-control-dark-sm:not([size]):not([multiple]), .input-group-sm > select.form-control-dark:not([size]):not([multiple]),
+.input-group-sm > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > .input-group-append > select.input-group-text:not([size]):not([multiple]),
+.input-group-sm > .input-group-prepend > select.btn:not([size]):not([multiple]),
+.input-group-sm > .input-group-append > select.btn:not([size]):not([multiple]) {
+  height: calc(1.8125rem + 2px);
+}
+
+.form-control-dark-lg, .input-group-lg > .form-control-dark,
+.input-group-lg > .input-group-prepend > .input-group-text,
+.input-group-lg > .input-group-append > .input-group-text,
+.input-group-lg > .input-group-prepend > .btn,
+.input-group-lg > .input-group-append > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+select.form-control-dark-lg:not([size]):not([multiple]), .input-group-lg > select.form-control-dark:not([size]):not([multiple]),
+.input-group-lg > .input-group-prepend > select.input-group-text:not([size]):not([multiple]),
+.input-group-lg > .input-group-append > select.input-group-text:not([size]):not([multiple]),
+.input-group-lg > .input-group-prepend > select.btn:not([size]):not([multiple]),
+.input-group-lg > .input-group-append > select.btn:not([size]):not([multiple]) {
+  height: calc(2.875rem + 2px);
+}
+
+.mh-body{
+  min-height: 81vh;
+}
+
+/*# sourceMappingURL=bootstrap.css.map */

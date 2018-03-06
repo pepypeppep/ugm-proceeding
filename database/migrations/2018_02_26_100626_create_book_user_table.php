@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleIdentifiersTable extends Migration
+class CreateBookUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateArticleIdentifiersTable extends Migration
      */
     public function up()
     {
-        Schema::create('article_identifiers', function (Blueprint $table) {
+        Schema::create('book_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('article_id')->unsigned();
-            $table->string('type', 10);
-            $table->string('code', 50);
+            $table->integer('book_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateArticleIdentifiersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('article_identifiers');
+        Schema::dropIfExists('book_user');
     }
 }

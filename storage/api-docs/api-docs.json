@@ -79,6 +79,72 @@
                         "description": "Proceeding not found"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Update exsisting article",
+                "operationId": "updateArticle",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "Article's id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Author object that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "abstract": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum dolores amet"
+                                },
+                                "title": {
+                                    "type": "string",
+                                    "example": "Lorem ipsum dolores amet"
+                                },
+                                "start_page": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "end_page": {
+                                    "type": "integer",
+                                    "example": 2
+                                },
+                                "keywords": {
+                                    "type": "string",
+                                    "example": "Lorem, Ipsum, Amet"
+                                },
+                                "doi": {
+                                    "type": "string",
+                                    "example": "doi.org/10.1037/arc0000014"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
             }
         },
         "/articles": {
@@ -242,6 +308,298 @@
                 }
             }
         },
+        "/authors/{authorId}": {
+            "put": {
+                "tags": [
+                    "authors"
+                ],
+                "summary": "Update existing author",
+                "operationId": "updateAuthors",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "authorId",
+                        "in": "path",
+                        "description": "ID of proceeding to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Author object that needs to be updated",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "example": "Wildan Ainurrahman"
+                                },
+                                "email": {
+                                    "type": "string",
+                                    "example": "wildan@gmail.com"
+                                },
+                                "affiliation": {
+                                    "type": "string",
+                                    "example": "BPP UGM"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/books/": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Get all books",
+                "description": "Return collection of books",
+                "operationId": "getAllProceedings",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/books/{bookId}": {
+            "get": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Get book by ID",
+                "description": "Return single record of book",
+                "operationId": "getProceedingById",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of book to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/books": {
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Create a new Book",
+                "description": "",
+                "operationId": "createBook",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Book object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "title": {
+                                    "type": "string",
+                                    "example": "Menuju Negara Maju: Apakah Indonesia bergerak ke arah yang benar?"
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "example": "Indonesia termasuk dalam negara 20 besar perekonomian dunia yakni pendapatan Domestik Bruto terbesar ke-16 menggunakan standar current US$ dan negara dengan total PDB terbesat ke-10 menurut perhitungan alternatif menggunakan Purchasing Power Parity (PPP) (Worldbank, 2013). Indonesia juga telah berhasil keluar dari kelompok negara-negara berpendapatan bawah menjadi negara berpendapatan menengah. Namu, sebagian pakar mengatakan kemungkinan Indonesia masuk dalam jebakan pendapatan menengah (middle income trap). Buku ini bertujuan untuk memberikan gambaran tentang perkembangan capaian indikator sosial ekonomi Indonesia untuk melakukan lompatan atau catch up untuk mengejar negara-negara maju."
+                                },
+                                "category": {
+                                    "type": "string",
+                                    "example": "Economy"
+                                },
+                                "edition": {
+                                    "type": "integer",
+                                    "example": 1
+                                },
+                                "pages": {
+                                    "type": "integer",
+                                    "example": 151
+                                },
+                                "publication_year": {
+                                    "type": "integer",
+                                    "example": 2015
+                                },
+                                "publisher": {
+                                    "type": "string",
+                                    "example": "UGM Press"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/books/{bookId}/author": {
+            "post": {
+                "tags": [
+                    "books"
+                ],
+                "summary": "Add an author to book",
+                "description": "",
+                "operationId": "addBookAuthor",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "bookId",
+                        "in": "path",
+                        "description": "ID of book to return",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Book object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "user_email": {
+                                    "type": "string",
+                                    "example": "ugm.proceeding@mail.com"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/articles/{articleId}/file": {
+            "post": {
+                "tags": [
+                    "articles"
+                ],
+                "summary": "Update article file",
+                "description": "",
+                "operationId": "updateArticleFile",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "articleId",
+                        "in": "path",
+                        "description": "Article's id",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "file_type",
+                        "in": "formData",
+                        "description": "File type values of the article",
+                        "required": true,
+                        "type": "string",
+                        "default": "pdf",
+                        "enum": [
+                            "pdf",
+                            "scopus",
+                            "doaj"
+                        ]
+                    },
+                    {
+                        "name": "file_link",
+                        "in": "formData",
+                        "description": "File link value. Required if file type not pdf",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file_pdf",
+                        "in": "formData",
+                        "description": "Upload pdf file",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
         "/institutions/": {
             "get": {
                 "tags": [
@@ -347,6 +705,20 @@
                         "description": "you can sort the data based on id, name, alias, and date. Don't forget to put the direction after the field. ex: name.asc, id.desc",
                         "required": false,
                         "type": "string"
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Status of the proceeding",
+                        "required": false,
+                        "type": "string",
+                        "default": "all",
+                        "enum": [
+                            "published",
+                            "draft",
+                            "trashed",
+                            "all"
+                        ]
                     }
                 ],
                 "responses": {
@@ -481,13 +853,21 @@
                                     "type": "date",
                                     "example": "How puzzling all these changes are! I'm never sure what I'm going to shrink any further: she felt unhappy."
                                 },
-                                "isbn": {
-                                    "type": "integer",
-                                    "example": "9783161484100"
-                                },
-                                "issn": {
-                                    "type": "integer",
-                                    "example": "20149360"
+                                "identifiers": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "type": {
+                                                "type": "string",
+                                                "example": "online_isbn"
+                                            },
+                                            "code": {
+                                                "type": "string",
+                                                "example": "123344213123"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
                                 }
                             }
                         }
@@ -602,6 +982,48 @@
                 "responses": {
                     "200": {
                         "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "Bearer": []
+                    }
+                ]
+            }
+        },
+        "/proceedings/publish": {
+            "post": {
+                "tags": [
+                    "proceedings"
+                ],
+                "summary": "Publish existing proceeding",
+                "description": "",
+                "operationId": "publishProceeding",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Proceeding object that needs to be added",
+                        "required": true,
+                        "schema": {
+                            "properties": {
+                                "proceeding_id": {
+                                    "type": "integer",
+                                    "example": 3
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
                     }
                 },
                 "security": [
@@ -870,6 +1292,10 @@
         {
             "name": "articles",
             "description": "All articles operations"
+        },
+        {
+            "name": "books",
+            "description": "All book operations"
         },
         {
             "name": "user",

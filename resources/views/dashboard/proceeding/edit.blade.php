@@ -73,25 +73,28 @@
 							    <div class="invalid-feedback">{{ $errors->first('conference_end') }}</div>
 							  </div>
 							</div>
+							{{-- FIELD ORGANIZER --}}
+							<div class="form-group row">
+							  <div class="col-sm-6">
+							    <label for="location">Conference's location</label>
+							    <input name="location" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('location')) is-invalid @endif" id="location" value="{{ $proceeding->location }}" required>
+							    <div class="invalid-feedback">{{ $errors->first('location') }}</div>
+							  </div>
+							</div>
 							<div class="form-separator mt-5">
 								<h5>Identifiers</h5>
 							</div>
-							{{-- FIELD ISBN IDENTIFIER --}}
-							<div class="form-group row">
-							  <div class="col-sm-6">
-							    <label for="isbn">ISBN</label>
-							    <input name="isbn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('isbn')) is-invalid @endif" id="isbn" value="{{ $isbn }}">
-							    <div class="invalid-feedback">{{ $errors->first('isbn') }}</div>
-							  </div>
-							</div>
-							{{-- FIELD ISSN IDENTIFIER --}}
-							<div class="form-group row">
-							  <div class="col-sm-6">
-							    <label for="issn">ISSN</label>
-							    <input name="issn" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('issn')) is-invalid @endif" id="issn" value="{{ $issn }}">
-							    <div class="invalid-feedback">{{ $errors->first('issn') }}</div>
-							  </div>
-							</div>
+							{{-- FIELD IDENTIFIER --}}
+							@foreach ($proceeding->identifiers as $identifier)
+								<div class="form-group row">
+								  <div class="col-sm-6">
+								    <label for="isbn">{{ $proceeding->getIdentifierName($identifier['type']) }}</label>
+								    <input type="hidden" name="identifiers[{{ $loop->index }}][type]" value="{{ $identifier['type'] }}">
+								    <input name="identifiers[{{ $loop->index }}][code]" type="text" class="form-control mb-2 mb-sm-0 @if($errors->has('identifiers.'.$loop->index.'.code')) is-invalid @endif" id="onlineIsbn" value="{{ $identifier['code'] }}">
+								    <div class="invalid-feedback">Please enter the correct {{ $proceeding->getIdentifierName($identifier['type']) }}</div>
+								  </div>
+								</div>
+							@endforeach
 							{{-- SUBMIT --}}
 							<div class="form-group row mt-5">
 							  <div class="col-sm-12 text-right">

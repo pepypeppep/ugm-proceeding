@@ -1,7 +1,7 @@
 <div class="tab-pane fade  @if(request('tab') == 'articles') {{ 'show active' }} @endif" id="nav-articles" role="tabpanel" aria-labelledby="nav-articles-tab">
   <div class="row pt-4">
     <div class="col-md-5 mb-2">
-      <form class="form-inline" method="GET" action="/proceedings/{{ $proceeding->id }}">
+      <form class="form-inline" method="GET" action="{{ route('proceeding.show', [$proceeding->id]) }}">
         <div class="input-group">
           <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for..." value="{{ request('keyword') }}" name="keyword">
           <div class="input-group-prepend">
@@ -37,7 +37,7 @@
       @foreach ($proceeding->articles as $article)
         <div class="row article-item">
           <div class="col-md-8">
-            <h5 class="text-primary m-0">{{ $article['title'] }}</h5>
+            <h5 class="text-primary m-0"><a href="{{ route('article.show', ['article' => $article['id']]) }}">{{ $article['title'] }}</a></h5>
             <span class="text-muted">
               {{ collect($article['authors'])->implode('name','; ') }}
             <br><small>Last updated: {{ \Carbon\Carbon::parse($article['updated_at'])->diffForHumans() }}</small></span>

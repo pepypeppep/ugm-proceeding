@@ -19,8 +19,6 @@ class CreateProceedingsTable extends Migration
             $table->string('alias', 100)->nullable();
             $table->string('front_cover', 250)->nullable();
             $table->string('back_cover', 250)->nullable();
-            $table->string('isbn', 13)->nullable();
-            $table->string('issn', 8)->nullable();
             $table->string('organizer', 100)->nullable();
             $table->text('introduction')->nullable();
             $table->string('location')->nullable();

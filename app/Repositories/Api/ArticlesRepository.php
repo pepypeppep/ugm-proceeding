@@ -3,14 +3,15 @@
 namespace App\Repositories\Api;
 
 use App\Article;
-use App\Repositories\Traits\ArticleFilter;
+use App\Repositories\Api\Traits\ArticleFilter;
+use App\Repositories\Api\Traits\HasUpdateIdentifier;
 
 /**
 * Articles repository
 */
 class ArticlesRepository extends Repository
 {
-	use ArticleFilter;
+	use ArticleFilter, HasUpdateIdentifier;
 
 	protected $fields = [
 		'keyword' => 'like',
@@ -22,7 +23,7 @@ class ArticlesRepository extends Repository
 	
 	function __construct(Article $article)
 	{
-		$this->model = $article;
+		$this->setModel($article);
 	}
 
 	/**
@@ -66,8 +67,7 @@ class ArticlesRepository extends Repository
 		// upload file if article is not indexed 
 		// or create indexation if article is indexed
 		if ($request->file_type == 'pdf') {
-			$path = $request->file('file_pdf')->store('proceedings/'.$article->proceeding_id.'/articles');
-			$article->update(['file' => $path]);
+			$article->uploadAndUpdateFile($request->file('file_pdf'));
 		} else {
 			$article->indexation()->create([
 				'type' => $request->file_type,
@@ -75,14 +75,57 @@ class ArticlesRepository extends Repository
 			]);
 		}
 
+		$this->setModel($article);
+
 		// create identifiers based on doi
 		if (!empty($request->doi)) {
-			$article->article_identifier()->create([
+			$identifiers = array([
 				'type' => 'doi',
 				'code' => $request->doi,
 			]);
+
+			$this->updateIdentifiers($identifiers);
 		}
 
 		return $article->load('author');
+	}
+
+	public function update($article, $request)
+	{
+		$request = collect($request);
+
+		$article->update($request->except('doi')->all());
+
+		$article->article_identifier()->first()->update([
+			'type' => 'doi',
+			'code' => $request['doi'],
+		]);
+
+		return $article;
+	}
+
+	/**
+	 * Update indexation on existing Article
+	 * @param  Eloquent $article
+	 * @param  Request $request
+	 * @return boolean
+	 */
+	public function updateIndexation($article, $request)
+	{
+		if ($request->file_type == 'pdf') {
+			$article->removeOldFile();
+			$article->uploadAndUpdateFile($request->file('file_pdf'));
+
+			$article->indexation->delete();
+		} else {
+			$article->indexation()->create([
+				'type' => $request->file_type,
+				'link' => $request->file_link,
+			]);
+
+			$article->update(['file' => null]);
+		}
+		
+		return true;
 	}
 }

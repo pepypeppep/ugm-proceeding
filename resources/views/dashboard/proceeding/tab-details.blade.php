@@ -125,8 +125,8 @@
             </tr>
             @foreach($proceeding->identifiers as $identifier)
               <tr>
-                <th class="w-25">Electronic {{ $identifier['type'] }}</th>
-                <td>{{ $identifier['id'] }}</td>
+                <th class="w-25">{{ $proceeding->getIdentifierName($identifier['type']) }}</th>
+                <td>{{ $identifier['code'] }}</td>
               </tr>
             @endforeach
             <tr>

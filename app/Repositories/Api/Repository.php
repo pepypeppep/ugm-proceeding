@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Api;
 
-use App\Repositories\Traits\DefaultFilter;
+use App\Repositories\Api\Traits\DefaultFilter;
 
 /**
 * Repository abstract class
@@ -32,6 +32,13 @@ class Repository
 	function __construct()
 	{
 		$this->fields = collect($fields);
+	}
+
+	public function setModel($model, $property = 'model')
+	{
+		$this->$property = $model;
+
+		return $this;
 	}
 
 	public function filterSort($query)

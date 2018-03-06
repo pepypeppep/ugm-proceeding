@@ -2,14 +2,30 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Traits\HasIdentifiers;
 use App\Services\GuzzleService;
 
 
 class ArticlesRepository extends GuzzleService
 {	
+	use HasIdentifiers;
+	
 	protected $uris = [
 		'base' => 'articles',
 	];
+
+	public $img = [
+		'scopus' => '/img/logos/scopus-logo.png',
+		'doaj' => '/img/logos/Clarivate_Analytics.png'
+	];
+
+	public function get()
+	{
+
+		$this->getResponse('GET', $this->uris['base']);
+
+		return $this;
+	}
 
 	public function store($request)
 	{
@@ -49,6 +65,22 @@ class ArticlesRepository extends GuzzleService
 
 		$this->multipart = $multipart->toArray();
 		$this->getResponse('POST', $this->uris['base']);
+
+		return $this;
+	}
+
+	public function find($id)
+	{
+		$this->getResponse('GET', $this->uris['base']."/$id");
+
+		return $this;
+	}
+
+	public function update($request, $id)
+	{
+
+		$this->json = $request;
+		$this->getResponse('PUT', $this->uris['base']."/$id");
 
 		return $this;
 	}

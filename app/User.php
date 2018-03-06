@@ -48,5 +48,9 @@ class User extends Authenticatable
     public function proceeding(){
         return $this->belongsToMany('App\Proceeding');
     }
+
+    public function book(){
+        return $this->belongsToMany('App\Book');
+    }
     
 }

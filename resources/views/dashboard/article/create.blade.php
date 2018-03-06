@@ -6,7 +6,7 @@
 <section class="header py-5">
   <div class="row justify-content-between">
     <div class="col-md-6 mb-3 mb-md-0">
-      <h2 class="m-0">Create Articles</h2>
+      <h2 class="m-0">Create  New Article</h2>
       <a href="{{ route('proceeding.show', [$proceeding->id, 'tab' => 'articles']) }}" class="text-primary" style="font-size: 0.9rem"><i class="fas fa-angle-left fa-fw"></i>Back to proceedings</a>
     </div>
   </div>
@@ -55,6 +55,7 @@
                 <label for="keywords" class="col-sm-2 col-form-label">Keywords</label>
                 <div class="col-md-8 col-12">
                   <input type="text" name="keywords" class="form-control @if($errors->has('keywords')) is-invalid @endif" value="{{ request()->old('keywords') }}">
+                  <small class="form-text text-muted">Seperate each keyword with comma. Ex: Microbiology, Molecular biology</small>
                   <div class="invalid-feedback">{{ $errors->first('keywords') }}</div>
                 </div>
               </div>
@@ -108,7 +109,7 @@
               <div class="form-separator mt-4 sticky-top sticky-nav bg-white">
                 <div class="d-flex justify-content-between align-items-baseline author-custom">
                   <h5 >Author #1</h5>
-                  <button onClick="addAuthor()" type="button" class="btn btn-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
+                  <button onClick="addAuthor()" type="button" class="btn btn-outline-primary mb-2"><i class="fa fa-plus fa-fw"></i>Add Author</button>
                 </div>
               </div>
               <div class="form-group row authors1">
@@ -139,9 +140,9 @@
                 </div>
               </div>
             </div>
-            <div class="card-footer bg-white" style="border: none;">
+            <div class="card-footer bg-white mt-5">
               <div class="text-right">
-                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-primary btn-block" type="submit">Save article</button>
               </div>
             </div>
           </div>
@@ -221,7 +222,7 @@
       }
 
       affiliations.forEach(appendItems)
-      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="affiliation['+index+']" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="affiliation['+index+']" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
+      $('#affiliationsGroup'+index).append('<div class="form-check"><input class="form-check-input" name="authors['+index+'][affiliation]" type="radio" id="radioOther'+index+'" onChange="toggleInput('+index+')"><label class="form-check-label" for="radioOther'+index+'">Other<input type="text" placeholder="Other" name="authors['+index+'][affiliation]" class="form-control mt-2" id="inputOther'+index+'" disabled="true"></label></div>');
   }
 
   function toggleCorresponding(id){

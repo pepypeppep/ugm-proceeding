@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\ArticlesRepository;
+use App\Repositories\AuthorsRepository;
 use App\Repositories\ProceedingsRepository;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
     protected $repository;
+    protected $proceeding;
 
     function __construct(ArticlesRepository $repository, ProceedingsRepository $proceeding)
     {
@@ -20,7 +22,7 @@ class ArticleController extends Controller
     public function create($proceeding)
     {
         $proceeding = $this->proceeding->find($proceeding);
-    	$lastArticle = $proceeding->articles->sortBy('created_at')->first();
+    	$lastArticle = $proceeding->articles->sortByDesc('created_at')->first();
     	
         return view('dashboard.article.create', compact('lastArticle', 'proceeding'));
     } 
@@ -30,6 +32,27 @@ class ArticleController extends Controller
         $article = $this->repository->store(request()->all());
 
         return redirect(route('proceeding.show', [$article->proceeding['id'], 'tab' => 'articles', 'sort' => 'created_at.desc']))->with('success', 'You have successfully created an article!');
+    }
+
+    public function show($article)
+    {
+        $article = $this->repository->find($article);
+
+        return view('dashboard.article.show', compact('article'));
+    }
+
+    public function edit($article)
+    {
+        $article = $this->repository->find($article);
+
+        return view('dashboard.article.edit', compact('article'));
+    }
+
+    public function update($article)
+    {
+        $article = $this->repository->update(request()->all(), $article);
+
+        return redirect(route('article.show', [$article->id]));
     }
 
 }
